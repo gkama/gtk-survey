@@ -17,13 +17,16 @@ namespace survey.data
         public string Name { get; set; }
 
         [JsonProperty("type")]
-        public Type Type { get; set; }
+        public int Type { get; set; }
+
+        [JsonProperty("question_text")]
+        public string Text { get; set; }
 
         [JsonProperty("responses")]
-        public IList<IResponse> Responses { get; set; } = new List<IResponse>();
+        public ICollection<Response> Responses { get; set; } = new List<Response>();
     }
 
-    public struct Type
+    public struct QuestionType
     {
         public int OpenEnded;       //Open ended answers
         public int MultipleChoice;  //Multiple choice defined by the user

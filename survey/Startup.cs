@@ -28,6 +28,8 @@ namespace survey
         public void ConfigureServices(IServiceCollection services)
         {
             //DI
+            services.AddSingleton<FakeManager>();
+            services.AddScoped<ISurveyRepository, SurveyRepository>();
             services.AddScoped<ISurveyGenerator, SurveyGenerator>();
 
             services.AddDbContext<SurveyContext>(o => o.UseInMemoryDatabase(nameof(SurveyContext)));
@@ -45,12 +47,16 @@ namespace survey
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            services.GetRequiredService<FakeManager>()
+               .UseFakeContext()
+               .Wait();
 
             app.UseHealthChecks("/ping");
             app.UseMvc();

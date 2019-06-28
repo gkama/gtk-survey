@@ -9,7 +9,6 @@ namespace survey.data
         int Id { get; set; }
         int QuestionId { get; set; }
         Guid PublicKey { get; set; }
-        int Count { get; set; }
         string ResponseText { get; set; }
     }
 }

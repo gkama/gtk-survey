@@ -10,6 +10,8 @@ namespace survey.data
         int Id { get; set; }
         Guid PublicKey { get; set; }
         string Name { get; set; }
-        IList<IResponse> Responses { get; set; }
+        int Type { get; set; }
+        string Text { get; set; }
+        ICollection<Response> Responses { get; set; }
     }
 }

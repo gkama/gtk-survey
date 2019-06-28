@@ -13,11 +13,18 @@ namespace survey.Controllers
     [ApiController]
     public class SurveyController : ControllerBase
     {
+        public readonly ISurveyRepository repo;
+
+        public SurveyController(ISurveyRepository repo)
+        {
+            this.repo = repo;
+        }
+
         [Route("get")]
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<object>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(repo.GetQuestions());
         }
     }
 }
