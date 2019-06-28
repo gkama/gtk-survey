@@ -14,6 +14,7 @@ namespace survey.data
 
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
+        public virtual DbSet<QuestionTypeAnswer> QuestionTypeAnswers { get; set; }
         public virtual DbSet<Response> Responses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +35,16 @@ namespace survey.data
             });
 
             modelBuilder.Entity<QuestionType>(e =>
+            {
+                e.HasKey(x => x.Id);
+
+                e.HasMany(x => x.Answers)
+                    .WithOne()
+                    .HasForeignKey(x => x.TypeId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<QuestionTypeAnswer>(e =>
             {
                 e.HasKey(x => x.Id);
             });

@@ -22,5 +22,9 @@ namespace survey.data
 
         [JsonProperty("name")]
         public string Name { get; set; }
+
+
+        [JsonProperty("answers")]
+        public ICollection<QuestionTypeAnswer> Answers { get; set; } = new List<QuestionTypeAnswer>();
     }
 }
