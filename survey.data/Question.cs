@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace survey.data
 {
-    public class Question
+    public class Question : IQuestion<Question>
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

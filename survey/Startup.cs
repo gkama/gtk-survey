@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 using survey.data;
+using survey.services;
 
 namespace survey
 {
@@ -26,6 +27,9 @@ namespace survey
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //DI
+            services.AddScoped<ISurveyGenerator, SurveyGenerator>();
+
             services.AddDbContext<SurveyContext>(o => o.UseInMemoryDatabase(nameof(SurveyContext)));
 
             services.AddLogging();
