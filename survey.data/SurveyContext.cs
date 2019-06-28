@@ -56,6 +56,7 @@ namespace survey.data
                 e.HasKey(x => x.Id);
             });
 
+            //TODO: change Response to only map to a survey
             modelBuilder.Entity<Response>(e =>
             {
                 e.HasKey(x => x.Id);
