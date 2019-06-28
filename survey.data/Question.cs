@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace survey.data
 {
-    public class Question : IQuestion<Question>, IPublicKeyId
+    public class Question : IQuestion<QuestionType>, IPublicKeyId
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -13,14 +13,18 @@ namespace survey.data
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
 
+        [JsonProperty("type_id")]
+        public int TypeId { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("type")]
-        public int Type { get; set; }
-
         [JsonProperty("question_text")]
         public string Text { get; set; }
+
+
+        [JsonProperty("type")]
+        public QuestionType Type { get; set; }
 
         [JsonProperty("responses")]
         public ICollection<Response> Responses { get; set; } = new List<Response>();
