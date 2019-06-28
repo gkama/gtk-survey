@@ -17,6 +17,10 @@ namespace survey.data
         public async Task UseFakeContext()
         {
             await context
+                .Surveys
+                .AddRangeAsync(GetFakeSurveys());
+
+            await context
                 .Questions
                 .AddRangeAsync(GetFakeQuestions());
 
@@ -35,6 +39,19 @@ namespace survey.data
             await context.SaveChangesAsync();
         }
 
+        public IEnumerable<Survey> GetFakeSurveys()
+        {
+            return new List<Survey>()
+            {
+                new Survey
+                {
+                    Id = 1001,
+                    Name = "Test survey",
+                    PublicKey = Guid.NewGuid()
+                }
+            };
+        }
+
         public IEnumerable<Question> GetFakeQuestions()
         {
             return new List<Question>()
@@ -42,18 +59,20 @@ namespace survey.data
                 new Question
                 {
                     Id = 1,
-                    PublicKey = Guid.NewGuid(),
                     Name = "Q1",
+                    Text = "Are you awesome?",
+                    PublicKey = Guid.NewGuid(),
+                    SurveyId = 1001,
                     TypeId = 1,
-                    Text = "Are you awesome?"
                 },
                 new Question
                 {
                     Id = 2,
-                    PublicKey = Guid.NewGuid(),
                     Name = "Q2",
-                    TypeId = 2,
-                    Text = "How are you today?"
+                    Text = "How are you today?",
+                    PublicKey = Guid.NewGuid(),
+                    SurveyId = 1001,
+                    TypeId = 2
                 }
             };
         }
@@ -134,7 +153,7 @@ namespace survey.data
                 },
                 new Response
                 {
-                    Id = 2,
+                    Id = 3,
                     Count = 578,
                     PublicKey = Guid.NewGuid(),
                     QuestionId = 2,
@@ -142,7 +161,7 @@ namespace survey.data
                 },
                 new Response
                 {
-                    Id = 2,
+                    Id = 4,
                     Count = 214,
                     PublicKey = Guid.NewGuid(),
                     QuestionId = 2,
