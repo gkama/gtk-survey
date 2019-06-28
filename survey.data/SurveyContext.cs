@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ namespace survey.data
             : base(options)
         { }
 
+        public virtual DbSet<Survey> Surveys { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
         public virtual DbSet<QuestionTypeAnswer> QuestionTypeAnswers { get; set; }
@@ -19,6 +21,11 @@ namespace survey.data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Survey>(e =>
+            {
+                e.HasKey(x => x.Id);
+            });
+
             modelBuilder.Entity<Question>(e =>
             {
                 e.HasKey(x => x.Id);
@@ -52,6 +59,16 @@ namespace survey.data
             modelBuilder.Entity<Response>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.HasOne(x => x.Survey)
+                    .WithOne()
+                    .HasForeignKey<Response>(x => x.SurveyId)
+                    .IsRequired();
+
+                e.HasOne(x => x.Question)
+                    .WithOne()
+                    .HasForeignKey<Response>(x => x.QuestionId)
+                    .IsRequired();
             });
         }
     }

@@ -67,28 +67,28 @@ namespace survey.data
                     Id = 1,
                     QuestionId = 1,
                     PublicKey = Guid.NewGuid(),
-                    ResponseText = "Yes"
+                    Text = "Yes"
                 },
                 new Response
                 {
                     Id = 2,
                     QuestionId = 1,
                     PublicKey = Guid.NewGuid(),
-                    ResponseText = "No"
+                    Text = "No"
                 },
                 new Response
                 {
                     Id = 3,
                     QuestionId = 2,
                     PublicKey = Guid.NewGuid(),
-                    ResponseText = "Good"
+                    Text = "Good"
                 },
                 new Response
                 {
                     Id = 4,
                     QuestionId = 2,
                     PublicKey = Guid.NewGuid(),
-                    ResponseText = "Awesome! Thanks for asking"
+                    Text = "Awesome! Thanks for asking"
                 }
             };
         }
