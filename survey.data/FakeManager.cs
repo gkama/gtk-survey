@@ -25,6 +25,10 @@ namespace survey.data
                 .AddRangeAsync(GetFakeQuestionTypes());
 
             await context
+                .QuestionTypeAnswers
+                .AddRangeAsync(GetFakeQuestionTypeAnswers());
+
+            await context
                 .Responses
                 .AddRangeAsync(GetFakeResponses());
 
@@ -104,6 +108,27 @@ namespace survey.data
                     Id = 2,
                     PublicKey = Guid.NewGuid(),
                     Name = "Open ended"
+                }
+            };
+        }
+
+        public IEnumerable<QuestionTypeAnswer> GetFakeQuestionTypeAnswers()
+        {
+            return new List<QuestionTypeAnswer>()
+            {
+                new QuestionTypeAnswer
+                {
+                    Id = 21,
+                    TypeId = 1,
+                    Answer = "Yes",
+                    PublicKey = Guid.NewGuid()
+                },
+                new QuestionTypeAnswer
+                {
+                    Id = 22,
+                    TypeId = 1,
+                    Answer = "No",
+                    PublicKey = Guid.NewGuid()
                 }
             };
         }

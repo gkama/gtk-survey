@@ -34,6 +34,7 @@ namespace survey.services
             return context
                 .Questions
                     .Include(x => x.Type)
+                        .ThenInclude(x => x.Answers)
                     .Include(x => x.Responses)
                 .AsQueryable();
         }
