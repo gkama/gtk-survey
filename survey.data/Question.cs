@@ -10,6 +10,11 @@ namespace survey.data
         public Guid Id { get; set; }
 
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public Type Type { get; set; }
+    }
+
+    public struct Type
+    {
+        public int OpenEnded;
     }
 }
