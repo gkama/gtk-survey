@@ -32,9 +32,5 @@ namespace survey.data
 
         [JsonProperty("type")]
         public QuestionType Type { get; set; }
-
-
-        [JsonProperty("responses")]
-        public ICollection<Response> Responses { get; set; } = new List<Response>();
     }
 }

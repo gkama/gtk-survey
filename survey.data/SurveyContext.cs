@@ -30,11 +30,6 @@ namespace survey.data
             {
                 e.HasKey(x => x.Id);
 
-                e.HasMany(x => x.Responses)
-                    .WithOne()
-                    .HasForeignKey(x => x.QuestionId)
-                    .IsRequired();
-
                 e.HasOne(x => x.Type)
                     .WithMany()
                     .HasForeignKey(x => x.TypeId)

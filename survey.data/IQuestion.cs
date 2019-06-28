@@ -14,6 +14,5 @@ namespace survey.data
         string Text { get; set; }
 
         QuestionType Type { get; set; }
-        ICollection<Response> Responses { get; set; }
     }
 }
