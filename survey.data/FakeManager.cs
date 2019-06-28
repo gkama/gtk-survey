@@ -84,5 +84,24 @@ namespace survey.data
                 }
             };
         }
+
+        public IEnumerable<QuestionType> GetFakeQuestionTypes()
+        {
+            return new List<QuestionType>()
+            {
+                new QuestionType
+                {
+                    Id = 1,
+                    PublicKey = Guid.NewGuid(),
+                    Name = "Yes or No"
+                },
+                new QuestionType
+                {
+                    Id = 2,
+                    PublicKey = Guid.NewGuid(),
+                    Name = "Open ended"
+                }
+            };
+        }
     }
 }

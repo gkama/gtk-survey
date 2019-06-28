@@ -13,7 +13,7 @@ namespace survey.data
         string Name { get; set; }
         string Text { get; set; }
 
-        T Type { get; set; }
+        QuestionType Type { get; set; }
         ICollection<Response> Responses { get; set; }
     }
 }
