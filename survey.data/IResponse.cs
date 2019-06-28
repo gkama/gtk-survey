@@ -4,12 +4,10 @@ using System.Text;
 
 namespace survey.data
 {
-    public interface IQuestion<T>
-        where T : class
+    public interface IResponse
     {
         int Id { get; set; }
+        int Count { get; set; }
         Guid PublicKey { get; set; }
-        string Name { get; set; }
-        IList<object> Responses { get; set; }
     }
 }
