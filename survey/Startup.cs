@@ -28,11 +28,15 @@ namespace survey
         public void ConfigureServices(IServiceCollection services)
         {
             //DI
-            services.AddSingleton<FakeManager>();
+            services.AddScoped<FakeManager>();
             services.AddScoped<ISurveyRepository, SurveyRepository>();
             services.AddScoped<ISurveyGenerator, SurveyGenerator>();
 
-            services.AddDbContext<SurveyContext>(o => o.UseInMemoryDatabase(nameof(SurveyContext)));
+            //Add DbContext
+            if (string.IsNullOrWhiteSpace(Configuration.GetConnectionString("Sql")))
+                services.AddDbContext<SurveyContext>(o => o.UseInMemoryDatabase(nameof(SurveyContext)));
+            else
+                services.AddDbContext<SurveyContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Sql")));
 
             services.AddLogging();
             services.AddHealthChecks();
@@ -52,11 +56,11 @@ namespace survey
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
 
-            services.GetRequiredService<FakeManager>()
-               .UseFakeContext()
-               .Wait();
+                services.GetRequiredService<FakeManager>()
+                    .UseFakeContext()
+                    .Wait();
+            }
 
             app.UseHealthChecks("/ping");
             app.UseMvc();
