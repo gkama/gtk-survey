@@ -20,11 +20,18 @@ namespace survey.Controllers
             this.repo = repo;
         }
 
-        [Route("get")]
+        [Route("all")]
         [HttpGet]
         public ActionResult<IEnumerable<object>> Get()
         {
             return Ok(repo.GetSurveys());
+        }
+
+        [Route("responses")]
+        [HttpGet]
+        public ActionResult<IEnumerable<object>> GetResponses()
+        {
+            return Ok(repo.GetResponses());
         }
     }
 }

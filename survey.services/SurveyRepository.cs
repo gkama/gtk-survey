@@ -29,11 +29,27 @@ namespace survey.services
                 .AsEnumerable();           
         }
 
+        public IEnumerable<IResponse> GetResponses()
+        {
+            return GetResponsesQuery()
+                .AsEnumerable();
+        }
+
         public IQueryable<Survey> GetSurveysQuery()
         {
             return context
                 .Surveys
                     .Include(x => x.Questions)
+                        .ThenInclude(x => x.Type)
+                            .ThenInclude(x => x.Answers)
+                .AsQueryable();
+        }
+
+        public IQueryable<Response> GetResponsesQuery()
+        {
+            return context
+                .Responses
+                    .Include(x => x.Question)
                         .ThenInclude(x => x.Type)
                             .ThenInclude(x => x.Answers)
                 .AsQueryable();
