@@ -23,7 +23,7 @@ namespace survey.services
             this.context = context;
         }
 
-        public IEnumerable<IQuestion<Question>> GetQuestions()
+        public IEnumerable<IQuestion<IQuestionType>> GetQuestions()
         {
             return GetQuestionsQuery()
                 .AsEnumerable();           

@@ -36,7 +36,7 @@ namespace survey.data
                     Id = 1,
                     PublicKey = Guid.NewGuid(),
                     Name = "Q1",
-                    Type = new QuestionType().YesNo,
+                    TypeId = 1,
                     Text = "Are you awesome?"
                 },
                 new Question
@@ -44,7 +44,7 @@ namespace survey.data
                     Id = 2,
                     PublicKey = Guid.NewGuid(),
                     Name = "Q2",
-                    Type = new QuestionType().OpenEnded,
+                    TypeId = 2,
                     Text = "How are you today?"
                 }
             };

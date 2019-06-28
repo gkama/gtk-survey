@@ -5,7 +5,7 @@ using System.Text;
 namespace survey.data
 {
     public interface IQuestion<T>
-        where T : QuestionType
+        where T : IQuestionType
     {
         int Id { get; set; }
         Guid PublicKey { get; set; }

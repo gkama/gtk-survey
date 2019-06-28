@@ -8,6 +8,6 @@ namespace survey.services
 {
     public interface ISurveyRepository
     {
-        IEnumerable<IQuestion<Question>> GetQuestions();
+        IEnumerable<IQuestion<IQuestionType>> GetQuestions();
     }
 }
