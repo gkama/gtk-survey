@@ -21,6 +21,10 @@ namespace survey.data
                 .AddRangeAsync(GetFakeQuestions());
 
             await context
+                .QuestionTypes
+                .AddRangeAsync(GetFakeQuestionTypes());
+
+            await context
                 .Responses
                 .AddRangeAsync(GetFakeResponses());
 

@@ -27,7 +27,7 @@ namespace survey.data
                     .HasForeignKey(x => x.QuestionId)
                     .IsRequired();
 
-                e.HasOne<QuestionType>()
+                e.HasOne(x => x.Type)
                     .WithMany()
                     .HasForeignKey(x => x.TypeId)
                     .IsRequired();
