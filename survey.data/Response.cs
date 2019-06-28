@@ -11,10 +11,16 @@ namespace survey.data
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        [JsonProperty("question_id")]
+        public int QuestionId { get; set; }
+
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
 
         [JsonProperty("count")]
         public int Count { get; set; }
+
+        [JsonProperty("response_text")]
+        public string ResponseText { get; set; }
     }
 }

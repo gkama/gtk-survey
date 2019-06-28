@@ -20,7 +20,7 @@ namespace survey.data
         public Type Type { get; set; }
 
         [JsonProperty("responses")]
-        public IList<object> Responses { get; set; } = new List<object>();
+        public IList<IResponse> Responses { get; set; } = new List<IResponse>();
     }
 
     public struct Type
@@ -28,7 +28,7 @@ namespace survey.data
         public int OpenEnded;       //Open ended answers
         public int MultipleChoice;  //Multiple choice defined by the user
         public int YesNo;           //Yes or No
-        public int Semantic;        //On a scale of 1 to 10
+        public int Semantic;        //On a scale of 1 to 10 (max is 1 to 10)
         public int Likert;          //Strongly agree, Agree, Neither agree nor disagree, Disagree, Strongly disagree
     }
 }

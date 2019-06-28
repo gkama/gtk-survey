@@ -12,6 +12,9 @@ namespace survey.data
             : base(options)
         { }
 
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Response> Responses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

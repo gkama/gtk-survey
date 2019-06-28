@@ -7,7 +7,9 @@ namespace survey.data
     public interface IResponse
     {
         int Id { get; set; }
-        int Count { get; set; }
+        int QuestionId { get; set; }
         Guid PublicKey { get; set; }
+        int Count { get; set; }
+        string ResponseText { get; set; }
     }
 }
