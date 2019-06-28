@@ -24,6 +24,11 @@ namespace survey.data
             modelBuilder.Entity<Survey>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.HasMany(x => x.Questions)
+                    .WithOne()
+                    .HasForeignKey(x => x.SurveyId)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Question>(e =>
@@ -54,11 +59,6 @@ namespace survey.data
             modelBuilder.Entity<Response>(e =>
             {
                 e.HasKey(x => x.Id);
-
-                e.HasOne(x => x.Survey)
-                    .WithOne()
-                    .HasForeignKey<Response>(x => x.SurveyId)
-                    .IsRequired();
 
                 e.HasOne(x => x.Question)
                     .WithOne()

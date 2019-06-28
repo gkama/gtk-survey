@@ -9,10 +9,11 @@ namespace survey.data
     {
         int Id { get; set; }
         Guid PublicKey { get; set; }
-        int TypeId { get; set; }
         string Name { get; set; }
         string Text { get; set; }
-
+        int SurveyId { get; set; }
+        Survey Survey { get; set; }
+        int TypeId { get; set; }
         QuestionType Type { get; set; }
     }
 }

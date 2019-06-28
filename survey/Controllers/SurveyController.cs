@@ -24,7 +24,7 @@ namespace survey.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<object>> Get()
         {
-            return Ok(repo.GetQuestions());
+            return Ok(repo.GetSurveys());
         }
     }
 }

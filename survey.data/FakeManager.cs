@@ -58,41 +58,6 @@ namespace survey.data
             };
         }
 
-        public IEnumerable<Response> GetFakeResponses()
-        {
-            return new List<Response>()
-            {
-                new Response
-                {
-                    Id = 1,
-                    QuestionId = 1,
-                    PublicKey = Guid.NewGuid(),
-                    Text = "Yes"
-                },
-                new Response
-                {
-                    Id = 2,
-                    QuestionId = 1,
-                    PublicKey = Guid.NewGuid(),
-                    Text = "No"
-                },
-                new Response
-                {
-                    Id = 3,
-                    QuestionId = 2,
-                    PublicKey = Guid.NewGuid(),
-                    Text = "Good"
-                },
-                new Response
-                {
-                    Id = 4,
-                    QuestionId = 2,
-                    PublicKey = Guid.NewGuid(),
-                    Text = "Awesome! Thanks for asking"
-                }
-            };
-        }
-
         public IEnumerable<QuestionType> GetFakeQuestionTypes()
         {
             return new List<QuestionType>()
@@ -129,6 +94,59 @@ namespace survey.data
                     TypeId = 1,
                     Answer = "No",
                     PublicKey = Guid.NewGuid()
+                },
+                new QuestionTypeAnswer
+                {
+                    Id = 23,
+                    TypeId = 2,
+                    Answer = "Good",
+                    PublicKey = Guid.NewGuid()
+                },
+                new QuestionTypeAnswer
+                {
+                    Id = 24,
+                    TypeId = 2,
+                    Answer = "Awesome! And you?",
+                    PublicKey = Guid.NewGuid()
+                }
+            };
+        }
+
+        public IEnumerable<Response> GetFakeResponses()
+        {
+            return new List<Response>()
+            {
+                new Response
+                {
+                    Id = 1,
+                    Count = 102,
+                    PublicKey = Guid.NewGuid(),
+                    QuestionId = 1,
+                    QuestionTypeAnswerId = 21
+                },
+                new Response
+                {
+                    Id = 2,
+                    Count = 23,
+                    PublicKey = Guid.NewGuid(),
+                    QuestionId = 1,
+                    QuestionTypeAnswerId = 22
+                },
+                new Response
+                {
+                    Id = 2,
+                    Count = 578,
+                    PublicKey = Guid.NewGuid(),
+                    QuestionId = 2,
+                    QuestionTypeAnswerId = 23
+                },
+                new Response
+                {
+                    Id = 2,
+                    Count = 214,
+                    PublicKey = Guid.NewGuid(),
+                    QuestionId = 2,
+                    QuestionTypeAnswerId = 24
                 }
             };
         }

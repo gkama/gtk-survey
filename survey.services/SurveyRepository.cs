@@ -23,19 +23,19 @@ namespace survey.services
             this.context = context;
         }
 
-        public IEnumerable<IQuestion<IQuestionType>> GetQuestions()
+        public IEnumerable<ISurvey> GetSurveys()
         {
-            return GetQuestionsQuery()
+            return GetSurveysQuery()
                 .AsEnumerable();           
         }
 
-        public IQueryable<Question> GetQuestionsQuery()
+        public IQueryable<Survey> GetSurveysQuery()
         {
             return context
-                .Questions
-                    .Include(x => x.Type)
-                        .ThenInclude(x => x.Answers)
-                    .Include(x => x.Responses)
+                .Surveys
+                    .Include(x => x.Questions)
+                        .ThenInclude(x => x.Type)
+                            .ThenInclude(x => x.Answers)
                 .AsQueryable();
         }
     }
