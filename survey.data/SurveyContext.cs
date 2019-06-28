@@ -21,6 +21,7 @@ namespace survey.data
             modelBuilder.Entity<Question>(e =>
             {
                 e.HasKey(x => x.Id);
+                e.HasKey(x => x.PublicKey);
 
                 e.HasMany(x => x.Responses)
                     .WithOne()
@@ -36,11 +37,13 @@ namespace survey.data
             modelBuilder.Entity<QuestionType>(e =>
             {
                 e.HasKey(x => x.Id);
+                e.HasKey(x => x.PublicKey);
             });
 
             modelBuilder.Entity<Response>(e =>
             {
                 e.HasKey(x => x.Id);
+                e.HasKey(x => x.PublicKey);
             });
         }
     }
