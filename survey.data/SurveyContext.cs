@@ -65,8 +65,7 @@ namespace survey.data
                 e.HasKey(x => x.Id);
             });
 
-            //TODO: change Response to only map to a survey
-            //Map Response to a Question and QuestionTypeAnswer and the Count
+            //TODO: figure out how to map Response
             modelBuilder.Entity<Response>(e =>
             {
                 e.HasKey(x => x.Id);

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
+using Newtonsoft.Json;
+
 using survey.data;
 using survey.services;
 
@@ -45,8 +47,8 @@ namespace survey
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(o =>
                 {
-                    o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                    o.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    o.SerializerSettings.Formatting = Formatting.Indented;
+                    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
         }
 
