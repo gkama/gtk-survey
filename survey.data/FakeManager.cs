@@ -25,6 +25,10 @@ namespace survey.data
                 .AddRangeAsync(GetFakeQuestions());
 
             await context
+                .SurveyQuestions
+                .AddRangeAsync(GetFakeSurveyQuestions());
+
+            await context
                 .QuestionTypes
                 .AddRangeAsync(GetFakeQuestionTypes());
 
@@ -71,6 +75,23 @@ namespace survey.data
                     Text = "How are you today?",
                     PublicKey = Guid.NewGuid(),
                     TypeId = 2
+                }
+            };
+        }
+
+        public IEnumerable<SurveyQuestion> GetFakeSurveyQuestions()
+        {
+            return new List<SurveyQuestion>()
+            {
+                new SurveyQuestion()
+                {
+                    SurveyId = 1001,
+                    QuestionId = 1
+                },
+                new SurveyQuestion()
+                {
+                    SurveyId = 1001,
+                    QuestionId = 2
                 }
             };
         }

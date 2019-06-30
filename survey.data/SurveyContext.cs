@@ -39,7 +39,7 @@ namespace survey.data
 
             modelBuilder.Entity<SurveyQuestion>(e =>
             {
-                e.HasKey(x => x.Id);
+                e.HasKey(x => new { x.SurveyId, x.QuestionId });
 
                 e.HasOne(x => x.Survey)
                     .WithOne()

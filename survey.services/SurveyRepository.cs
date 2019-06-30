@@ -57,6 +57,16 @@ namespace survey.services
                 .AsQueryable();
         }
 
+        public IEnumerable<object> GetSurveyQuestions()
+        {
+            return context.SurveyQuestions
+                .Include(x => x.Survey)
+                .Include(x => x.Question)
+                    .ThenInclude(x => x.Type)
+                .GroupBy(x => x.SurveyId)
+                .ToList();
+        }
+
         public IQueryable<Response> GetResponsesQuery()
         {
             return context.Responses

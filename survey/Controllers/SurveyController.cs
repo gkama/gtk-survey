@@ -27,6 +27,13 @@ namespace survey.Controllers
             return Ok(repo.GetSurveys());
         }
 
+        [Route("questions")]
+        [HttpGet]
+        public IActionResult GetSurveyQuestions()
+        {
+            return Ok(repo.GetSurveyQuestions());
+        }
+
         [Route("responses")]
         [HttpGet]
         public ActionResult<IEnumerable<object>> GetResponses()
