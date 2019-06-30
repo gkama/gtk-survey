@@ -35,20 +35,31 @@ namespace survey.services
                 .AsEnumerable();
         }
 
+        public IEnumerable<object> GetResponses2()
+        {
+            var _responses = new List<object>();
+            var responses = context.Responses.AsEnumerable();
+
+            foreach (var r in responses)
+            {
+                var answer = r.Question
+                    .Type
+                    .Answers
+                    .FirstOrDefault(x => x.Id == r.Id);
+            }
+
+            return _responses.ToList();
+        }
+
         public IQueryable<Survey> GetSurveysQuery()
         {
-            return context
-                .Surveys
-                    .Include(x => x.Questions)
-                        .ThenInclude(x => x.Type)
-                            .ThenInclude(x => x.Answers)
+            return context.Surveys
                 .AsQueryable();
         }
 
         public IQueryable<Response> GetResponsesQuery()
         {
-            return context
-                .Responses
+            return context.Responses
                     .Include(x => x.Question)
                         .ThenInclude(x => x.Type)
                             .ThenInclude(x => x.Answers)

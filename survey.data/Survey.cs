@@ -16,8 +16,5 @@ namespace survey.data
 
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
-
-        [JsonProperty("questions")]
-        public ICollection<Question> Questions { get; set; } = new List<Question>();
     }
 }

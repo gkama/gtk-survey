@@ -9,6 +9,5 @@ namespace survey.data
         int Id { get; set; }
         string Name { get; set; }
         Guid PublicKey { get; set; }
-        ICollection<Question> Questions { get; set; }
     }
 }

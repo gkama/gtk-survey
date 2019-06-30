@@ -62,7 +62,6 @@ namespace survey.data
                     Name = "Q1",
                     Text = "Are you awesome?",
                     PublicKey = Guid.NewGuid(),
-                    SurveyId = 1001,
                     TypeId = 1,
                 },
                 new Question
@@ -71,7 +70,6 @@ namespace survey.data
                     Name = "Q2",
                     Text = "How are you today?",
                     PublicKey = Guid.NewGuid(),
-                    SurveyId = 1001,
                     TypeId = 2
                 }
             };
