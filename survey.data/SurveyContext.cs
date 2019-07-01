@@ -41,13 +41,13 @@ namespace survey.data
             {
                 e.HasKey(x => new { x.SurveyId, x.QuestionId });
 
-                //e.HasOne(x => x.Survey)
-                //    .WithOne()
-                //    .HasForeignKey<SurveyQuestion>(x => x.SurveyId);
-                //
-                //e.HasOne(x => x.Question)
-                //    .WithOne()
-                //    .HasForeignKey<SurveyQuestion>(x => x.QuestionId);
+                e.HasOne(x => x.Survey)
+                    .WithMany()
+                    .HasForeignKey(x => x.SurveyId);
+                
+                e.HasOne(x => x.Question)
+                    .WithMany()
+                    .HasForeignKey(x => x.QuestionId);
             });
 
             modelBuilder.Entity<QuestionType>(e =>
