@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 using Newtonsoft.Json;
 
 using survey.data;
@@ -30,6 +33,13 @@ namespace survey
         public void ConfigureServices(IServiceCollection services)
         {
             //DI
+            services.AddScoped<SurveyGType>();
+            services.AddScoped<QuestionGType>();
+            services.AddScoped<SurveyQuestionGType>();
+            services.AddScoped<QuestionTypeGType>();
+            services.AddScoped<QuestionTypeAnswerGType>();
+            services.AddScoped<ResponseGType>();
+
             services.AddScoped<FakeManager>();
             services.AddScoped<ISurveyRepository, SurveyRepository>();
             services.AddScoped<ISurveyGenerator, SurveyGenerator>();
@@ -43,6 +53,11 @@ namespace survey
             services.AddLogging();
             services.AddMemoryCache();
             services.AddHealthChecks();
+
+            //GraphQL
+            services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+            services.AddGraphQL(o => { o.ExposeExceptions = false; })
+                .AddGraphTypes(ServiceLifetime.Scoped);
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -65,6 +80,9 @@ namespace survey
                     .UseFakeContext()
                     .Wait();
             }
+
+            //app.UseGraphQL<CountrySchema>();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
             app.UseHealthChecks("/ping");
             app.UseMvc();
