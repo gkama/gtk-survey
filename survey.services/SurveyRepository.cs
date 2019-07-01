@@ -32,6 +32,16 @@ namespace survey.services
             return GetSurveysQuery()
                 .AsEnumerable();
         }
+        public async Task<ISurvey> GetSurvey(int Id)
+        {
+            return await GetSurveysQuery()
+                .FirstOrDefaultAsync(x => x.Id == Id);
+        }
+        public async Task<ISurvey> GetSurvey(Guid PublicKey)
+        {
+            return await GetSurveysQuery()
+                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
         private IQueryable<Survey> GetSurveysQuery()
         {
             return context.Surveys
