@@ -29,16 +29,16 @@ namespace survey.Controllers
 
         [Route("id/{id}")]
         [HttpGet]
-        public IActionResult GetSurvey([FromRoute]int id)
+        public async Task<IActionResult> GetSurvey([FromRoute]int id)
         {
-            return Ok(repo.GetSurvey(id));
+            return Ok(await repo.GetSurvey(id));
         }
 
         [Route("publickey/{publickey}")]
         [HttpGet]
-        public IActionResult GetSurvey([FromRoute]Guid publickey)
+        public async Task<IActionResult> GetSurvey([FromRoute]Guid publickey)
         {
-            return Ok(repo.GetSurvey(publickey));
+            return Ok(await repo.GetSurvey(publickey));
         }
 
         [Route("questions")]

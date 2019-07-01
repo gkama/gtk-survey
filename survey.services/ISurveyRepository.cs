@@ -10,8 +10,8 @@ namespace survey.services
     public interface ISurveyRepository
     {
         IEnumerable<ISurvey> GetSurveys();
-        ISurvey GetSurvey(int Id);
-        ISurvey GetSurvey(Guid PublicKey);
+        Task<ISurvey> GetSurvey(int Id);
+        Task<ISurvey> GetSurvey(Guid PublicKey);
         IEnumerable<ISurveyQuestion> GetSurveyQuestions();
         IEnumerable<IResponse> GetResponses();
         Task<IResponse> UpdateResponse(int SurveyId, int QuestionId, string Asnwer);

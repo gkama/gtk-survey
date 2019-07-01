@@ -35,13 +35,15 @@ namespace survey.services
             return GetSurveysQuery()
                 .AsEnumerable();
         }
-        public ISurvey GetSurvey(int Id)
+        public async Task<ISurvey> GetSurvey(int Id)
         {
-            return cache.GetObjectById<Survey>(GetSurveysQuery(), $"{nameof(Survey)}-{Id}", Id);
+            return await GetSurveysQuery()
+                .FirstOrDefaultAsync(x => x.Id == Id);
         }
-        public ISurvey GetSurvey(Guid PublicKey)
+        public async Task<ISurvey> GetSurvey(Guid PublicKey)
         {
-            return cache.GetObjectByPublicKey<Survey>(GetSurveysQuery(), PublicKey.ToString(), PublicKey);
+            return await GetSurveysQuery()
+                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
         }
         private IQueryable<Survey> GetSurveysQuery()
         {
