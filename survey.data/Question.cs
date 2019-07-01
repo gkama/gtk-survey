@@ -24,13 +24,13 @@ namespace survey.data
         [JsonProperty("question_text")]
         public string Text { get; set; }
 
-        [JsonProperty("public_key")]
-        public Guid PublicKey { get; set; }
-
         [JsonProperty("type_id")]
         public int TypeId { get; set; }
 
         [JsonProperty("type")]
         public QuestionType Type { get; set; }
+
+        [JsonProperty("public_key")]
+        public Guid PublicKey { get; set; }
     }
 }

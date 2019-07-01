@@ -14,9 +14,6 @@ namespace survey.data
         [JsonProperty("count")]
         public int Count { get; set; }
 
-        [JsonProperty("public_key")]
-        public Guid PublicKey { get; set; }
-
         [JsonProperty("survey_question_id")]
         public int SurveyQuestionId { get; set; }
 
@@ -28,5 +25,8 @@ namespace survey.data
 
         [JsonProperty("question_type_answer")]
         public QuestionTypeAnswer QuestionTypeAnswer { get; set; }
+
+        [JsonProperty("public_key")]
+        public Guid PublicKey { get; set; }
     }
 }

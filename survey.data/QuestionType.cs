@@ -17,14 +17,13 @@ namespace survey.data
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("public_key")]
-        public Guid PublicKey { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
 
-
         [JsonProperty("answers")]
         public ICollection<QuestionTypeAnswer> Answers { get; set; } = new List<QuestionTypeAnswer>();
+
+        [JsonProperty("public_key")]
+        public Guid PublicKey { get; set; }
     }
 }
