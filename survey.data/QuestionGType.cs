@@ -14,7 +14,7 @@ namespace survey.data
             Field(x => x.Name);
             Field(x => x.Text);
             Field(x => x.TypeId);
-            Field(x => x.PublicKey.ToString());
+            Field(x => x.PublicKey, type: typeof(IdGraphType));
 
             Field<QuestionTypeGType>("type", resolve: context => context.Source.Type);
         }

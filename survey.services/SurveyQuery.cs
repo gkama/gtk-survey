@@ -35,6 +35,10 @@ namespace survey.services
 
                     return repo.GetSurvey(publickey);
                 });
+
+            Field<ListGraphType<SurveyQuestionGType>>(
+                "survey_questions",
+                resolve: context => repo.GetSurveyQuestions());
         }
     }
 }
