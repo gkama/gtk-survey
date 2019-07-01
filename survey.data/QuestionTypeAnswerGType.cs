@@ -13,7 +13,7 @@ namespace survey.data
             Field(x => x.Id);
             Field(x => x.TypeId);
             Field(x => x.Answer);
-            Field(x => x.PublicKey);
+            Field(x => x.PublicKey, type: typeof(IdGraphType));
         }
     }
 }

@@ -39,6 +39,8 @@ namespace survey
             services.AddScoped<QuestionTypeGType>();
             services.AddScoped<QuestionTypeAnswerGType>();
             services.AddScoped<ResponseGType>();
+            services.AddScoped<SurveyQuery>();
+            services.AddScoped<SurveySchema>();
 
             services.AddScoped<FakeManager>();
             services.AddScoped<ISurveyRepository, SurveyRepository>();
@@ -81,7 +83,7 @@ namespace survey
                     .Wait();
             }
 
-            //app.UseGraphQL<CountrySchema>();
+            app.UseGraphQL<SurveySchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
             app.UseHealthChecks("/ping");

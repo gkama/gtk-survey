@@ -13,7 +13,7 @@ namespace survey.data
             Field(x => x.Id);
             Field(x => x.SurveyId);
             Field(x => x.QuestionId);
-            Field(x => x.PublicKey);
+            Field(x => x.PublicKey, type: typeof(IdGraphType));
 
             Field<SurveyGType>("survey", resolve: context => context.Source.Survey);
             Field<QuestionGType>("question", resolve: context => context.Source.Question);

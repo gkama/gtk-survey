@@ -14,7 +14,7 @@ namespace survey.data
             Field(x => x.Count);
             Field(x => x.SurveyQuestionId);
             Field(x => x.QuestionTypeAnswerId);
-            Field(x => x.PublicKey);
+            Field(x => x.PublicKey, type: typeof(IdGraphType));
 
             Field<SurveyQuestionGType>("survey_question", resolve: context => context.Source.SurveyQuestion);
             Field<QuestionTypeAnswerGType>("question_type_answer", resolve: context => context.Source.QuestionTypeAnswer);
