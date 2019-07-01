@@ -75,30 +75,11 @@ namespace survey.services
             return GetResponsesQuery()
                 .AsEnumerable();
         }
-
-        public IEnumerable<object> GetResponses2()
-        {
-            var _responses = new List<object>();
-            var responses = context.Responses.AsEnumerable();
-
-            foreach (var r in responses)
-            {
-                var answer = r.Question
-                    .Type
-                    .Answers
-                    .FirstOrDefault(x => x.Id == r.Id);
-            }
-
-            return _responses.ToList();
-        }
-
-
         private IQueryable<Response> GetResponsesQuery()
         {
             return context.Responses
-                    .Include(x => x.Question)
-                        .ThenInclude(x => x.Type)
-                            .ThenInclude(x => x.Answers)
+                    .Include(x => x.SurveyQuestion)
+                    .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
     }

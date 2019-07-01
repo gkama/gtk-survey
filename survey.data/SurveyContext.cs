@@ -70,9 +70,14 @@ namespace survey.data
             {
                 e.HasKey(x => x.Id);
 
-                e.HasOne(x => x.Question)
-                    .WithOne()
-                    .HasForeignKey<Response>(x => x.QuestionId)
+                e.HasOne(x => x.SurveyQuestion)
+                    .WithMany()
+                    .HasForeignKey(x => new { x.SurveyId, x.QuestionId })
+                    .IsRequired();
+
+                e.HasOne(x => x.QuestionTypeAnswer)
+                    .WithMany()
+                    .HasForeignKey(x => x.QuestionTypeAnswerId)
                     .IsRequired();
             });
         }

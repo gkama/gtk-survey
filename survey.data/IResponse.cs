@@ -8,8 +8,11 @@ namespace survey.data
     {
         int Id { get; set; }
         int Count { get; set; }
-        int QuestionId { get; set; }
-        int QuestionTypeAnswerId { get; set; }
         Guid PublicKey { get; set; }
+        int SurveyId { get; set; }
+        int QuestionId { get; set; }
+        SurveyQuestion SurveyQuestion { get; set; }
+        int QuestionTypeAnswerId { get; set; }
+        QuestionTypeAnswer QuestionTypeAnswer { get; set; }
     }
 }
