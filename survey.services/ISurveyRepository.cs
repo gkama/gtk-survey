@@ -9,7 +9,7 @@ namespace survey.services
     public interface ISurveyRepository
     {
         IEnumerable<ISurvey> GetSurveys();
-        IEnumerable<object> GetSurveyQuestions();
+        IEnumerable<ISurveyQuestion> GetSurveyQuestions();
         IEnumerable<IResponse> GetResponses();
     }
 }

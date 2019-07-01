@@ -57,14 +57,20 @@ namespace survey.services
                 .AsQueryable();
         }
 
-        public IEnumerable<object> GetSurveyQuestions()
+        public IEnumerable<ISurveyQuestion> GetSurveyQuestions()
         {
             return context.SurveyQuestions
                 .Include(x => x.Survey)
                 .Include(x => x.Question)
                     .ThenInclude(x => x.Type)
-                .GroupBy(x => x.SurveyId)
+                .GroupBy(x => x.Survey)
+                .SelectMany(x => x)
                 .ToList();
+        }
+        public IEnumerable<ISurveyQuestion> GetSurveyQuestions(int Id)
+        {
+            return GetSurveyQuestions()
+                .Where(x => x.SurveyId == Id);
         }
 
         public IQueryable<Response> GetResponsesQuery()
