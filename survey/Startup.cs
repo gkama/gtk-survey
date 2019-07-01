@@ -41,6 +41,7 @@ namespace survey
                 services.AddDbContext<SurveyContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Sql")));
 
             services.AddLogging();
+            services.AddMemoryCache();
             services.AddHealthChecks();
 
             services.AddMvc()

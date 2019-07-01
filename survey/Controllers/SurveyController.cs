@@ -27,6 +27,20 @@ namespace survey.Controllers
             return Ok(repo.GetSurveys());
         }
 
+        [Route("id/{id}")]
+        [HttpGet]
+        public IActionResult GetSurvey([FromRoute]int id)
+        {
+            return Ok(repo.GetSurvey(id));
+        }
+
+        [Route("publickey/{publickey}")]
+        [HttpGet]
+        public IActionResult GetSurvey([FromRoute]Guid publickey)
+        {
+            return Ok(repo.GetSurvey(publickey));
+        }
+
         [Route("questions")]
         [HttpGet]
         public IActionResult GetSurveyQuestions()

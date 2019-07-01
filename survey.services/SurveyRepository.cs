@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 using survey.data;
@@ -14,12 +15,14 @@ namespace survey.services
     public class SurveyRepository : ISurveyRepository
     {
         public readonly ILogger log;
+        public readonly IMemoryCache cache;
 
         public readonly SurveyContext context;
 
-        public SurveyRepository(ILogger<SurveyRepository> log, SurveyContext context)
+        public SurveyRepository(ILogger<SurveyRepository> log, IMemoryCache cache, SurveyContext context)
         {
             this.log = log;
+            this.cache = cache;
 
             this.context = context;
         }
@@ -32,15 +35,13 @@ namespace survey.services
             return GetSurveysQuery()
                 .AsEnumerable();
         }
-        public async Task<ISurvey> GetSurvey(int Id)
+        public ISurvey GetSurvey(int Id)
         {
-            return await GetSurveysQuery()
-                .FirstOrDefaultAsync(x => x.Id == Id);
+            return cache.GetObjectById<Survey>(GetSurveysQuery(), $"{nameof(Survey)}-{Id}", Id);
         }
-        public async Task<ISurvey> GetSurvey(Guid PublicKey)
+        public ISurvey GetSurvey(Guid PublicKey)
         {
-            return await GetSurveysQuery()
-                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+            return cache.GetObjectByPublicKey<Survey>(GetSurveysQuery(), PublicKey.ToString(), PublicKey);
         }
         private IQueryable<Survey> GetSurveysQuery()
         {

@@ -17,8 +17,18 @@ namespace survey.data
             {
                 c.SlidingExpiration = TimeSpan.FromSeconds(Constants.DefaultCacheSettings);
 
-                return Query
-                    .FirstOrDefault<T>(x => x.Id == Id);
+                return Query.FirstOrDefault<T>(x => x.Id == Id);
+            });
+        }
+
+        public static T GetObjectByPublicKey<T>(this IMemoryCache Cache, IQueryable<T> Query, string Key, Guid PublicKey)
+            where T : IPublicKeyId
+        {
+            return Cache.GetOrCreate<T>(Key, c =>
+            {
+                c.SlidingExpiration = TimeSpan.FromSeconds(Constants.DefaultCacheSettings);
+
+                return Query.FirstOrDefault<T>(x => x.PublicKey == PublicKey);
             });
         }
     }
