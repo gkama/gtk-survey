@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -74,6 +75,19 @@ namespace survey.services
         {
             return GetResponsesQuery()
                 .AsEnumerable();
+        }
+        public async Task<IResponse> UpdateResponse(int SurveyId, int QuestionId, string Asnwer)
+        {
+            var response = GetResponsesQuery()
+                .FirstOrDefault(x => x.SurveyQuestion.SurveyId == SurveyId &&
+                    x.SurveyQuestion.QuestionId == QuestionId &&
+                    x.QuestionTypeAnswer.Answer == Asnwer);
+
+            response.Count++;
+
+            await context.SaveChangesAsync();
+
+            return response;
         }
         private IQueryable<Response> GetResponsesQuery()
         {

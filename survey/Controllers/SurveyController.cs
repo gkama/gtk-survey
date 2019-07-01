@@ -22,7 +22,7 @@ namespace survey.Controllers
 
         [Route("all")]
         [HttpGet]
-        public ActionResult<IEnumerable<object>> Get()
+        public IActionResult Get()
         {
             return Ok(repo.GetSurveys());
         }
@@ -36,9 +36,16 @@ namespace survey.Controllers
 
         [Route("responses")]
         [HttpGet]
-        public ActionResult<IEnumerable<object>> GetResponses()
+        public IActionResult GetResponses()
         {
             return Ok(repo.GetResponses());
+        }
+
+        [Route("response/update/{surveyid}/{questionid}/{answer}")]
+        [HttpGet]
+        public async Task<IActionResult> UpdateResponse([FromRoute]int surveyid, int questionid, string answer)
+        {
+            return Ok(await repo.UpdateResponse(surveyid, questionid, answer));
         }
     }
 }
