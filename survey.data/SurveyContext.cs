@@ -72,7 +72,7 @@ namespace survey.data
 
                 e.HasOne(x => x.SurveyQuestion)
                     .WithMany()
-                    .HasForeignKey(x => new { x.SurveyId, x.QuestionId })
+                    .HasForeignKey(x => x.SurveyQuestionId)
                     .IsRequired();
 
                 e.HasOne(x => x.QuestionTypeAnswer)

@@ -17,11 +17,8 @@ namespace survey.data
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
 
-        [JsonProperty("survey_id")]
-        public int SurveyId { get; set; }
-
-        [JsonProperty("question_id")]
-        public int QuestionId { get; set; }
+        [JsonProperty("survey_question_id")]
+        public int SurveyQuestionId { get; set; }
 
         [JsonProperty("survey_question")]
         public SurveyQuestion SurveyQuestion { get; set; }

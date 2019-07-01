@@ -107,23 +107,31 @@ namespace survey.data
             {
                 new SurveyQuestion()
                 {
+                    Id = 1,
                     SurveyId = 1001,
-                    QuestionId = 1
+                    QuestionId = 1,
+                    PublicKey = Guid.NewGuid()
                 },
                 new SurveyQuestion()
                 {
+                    Id = 2,
                     SurveyId = 1001,
-                    QuestionId = 2
+                    QuestionId = 2,
+                    PublicKey = Guid.NewGuid()
                 },
                 new SurveyQuestion()
                 {
+                    Id = 3,
                     SurveyId = 2001,
-                    QuestionId = 3
+                    QuestionId = 3,
+                    PublicKey = Guid.NewGuid()
                 },
                 new SurveyQuestion
                 {
+                    Id = 4,
                     SurveyId = 2001,
-                    QuestionId = 4
+                    QuestionId = 4,
+                    PublicKey = Guid.NewGuid()
                 }
             };
         }
@@ -191,7 +199,7 @@ namespace survey.data
                     Id = 1,
                     Count = 102,
                     PublicKey = Guid.NewGuid(),
-                    QuestionId = 1,
+                    SurveyQuestionId = 1,
                     QuestionTypeAnswerId = 21
                 },
                 new Response
@@ -199,7 +207,7 @@ namespace survey.data
                     Id = 2,
                     Count = 23,
                     PublicKey = Guid.NewGuid(),
-                    QuestionId = 1,
+                    SurveyQuestionId = 2,
                     QuestionTypeAnswerId = 22
                 },
                 new Response
@@ -207,7 +215,7 @@ namespace survey.data
                     Id = 3,
                     Count = 578,
                     PublicKey = Guid.NewGuid(),
-                    QuestionId = 2,
+                    SurveyQuestionId = 3,
                     QuestionTypeAnswerId = 23
                 },
                 new Response
@@ -215,7 +223,7 @@ namespace survey.data
                     Id = 4,
                     Count = 214,
                     PublicKey = Guid.NewGuid(),
-                    QuestionId = 2,
+                    SurveyQuestionId = 4,
                     QuestionTypeAnswerId = 24
                 }
             };

@@ -6,8 +6,11 @@ using Newtonsoft.Json;
 
 namespace survey.data
 {
-    public class SurveyQuestion : ISurveyQuestion
+    public class SurveyQuestion : ISurveyQuestion, IPublicKeyId
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("survey_id")]
         public int SurveyId { get; set; }
 
@@ -19,5 +22,8 @@ namespace survey.data
 
         [JsonProperty("question")]
         public Question Question { get; set; }
+
+        [JsonProperty("public_key")]
+        public Guid PublicKey { get; set; }
     }
 }
