@@ -23,12 +23,53 @@ namespace survey.services
             this.context = context;
         }
 
+        /*
+         * Survey
+         */
         public IEnumerable<ISurvey> GetSurveys()
         {
             return GetSurveysQuery()
-                .AsEnumerable();           
+                .AsEnumerable();
+        }
+        private IQueryable<Survey> GetSurveysQuery()
+        {
+            return context.Surveys
+                .AsQueryable();
         }
 
+        /*
+         * Survey Question
+         */
+        public IEnumerable<ISurveyQuestion> GetSurveyQuestions()
+        {
+            return context.SurveyQuestions
+                .Include(x => x.Survey)
+                .Include(x => x.Question)
+                    .ThenInclude(x => x.Type)
+                .GroupBy(x => x.Survey)
+                .SelectMany(x => x)
+                .ToList();
+        }
+        public IEnumerable<ISurveyQuestion> GetSurveyQuestionsBySurveyId(int SurveyId)
+        {
+            return GetSurveyQuestions()
+                .Where(x => x.SurveyId == SurveyId);
+        }
+        public IEnumerable<ISurveyQuestion> GetSurveyQuestionsByQuestionId(int QuestionId)
+        {
+            return GetSurveyQuestions()
+                .Where(x => x.QuestionId == QuestionId);
+        }
+        private IQueryable<SurveyQuestion> GetSurveyQuestionsQuery()
+        {
+            return context.SurveyQuestions
+                .AsQueryable();
+        }
+
+
+        /*
+         * Response
+         */
         public IEnumerable<IResponse> GetResponses()
         {
             return GetResponsesQuery()
@@ -51,29 +92,8 @@ namespace survey.services
             return _responses.ToList();
         }
 
-        public IQueryable<Survey> GetSurveysQuery()
-        {
-            return context.Surveys
-                .AsQueryable();
-        }
 
-        public IEnumerable<ISurveyQuestion> GetSurveyQuestions()
-        {
-            return context.SurveyQuestions
-                .Include(x => x.Survey)
-                .Include(x => x.Question)
-                    .ThenInclude(x => x.Type)
-                .GroupBy(x => x.Survey)
-                .SelectMany(x => x)
-                .ToList();
-        }
-        public IEnumerable<ISurveyQuestion> GetSurveyQuestions(int Id)
-        {
-            return GetSurveyQuestions()
-                .Where(x => x.SurveyId == Id);
-        }
-
-        public IQueryable<Response> GetResponsesQuery()
+        private IQueryable<Response> GetResponsesQuery()
         {
             return context.Responses
                     .Include(x => x.Question)
