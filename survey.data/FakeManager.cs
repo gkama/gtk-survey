@@ -52,6 +52,12 @@ namespace survey.data
                     Id = 1001,
                     Name = "Test survey",
                     PublicKey = Guid.NewGuid()
+                },
+                new Survey
+                {
+                    Id = 2001,
+                    Name = "Survey Test",
+                    PublicKey = Guid.NewGuid()
                 }
             };
         }
@@ -75,6 +81,22 @@ namespace survey.data
                     Text = "How are you today?",
                     PublicKey = Guid.NewGuid(),
                     TypeId = 2
+                },
+                new Question
+                {
+                    Id = 3,
+                    Name = "Q3",
+                    Text = "Are you cool?",
+                    PublicKey = Guid.NewGuid(),
+                    TypeId = 1
+                },
+                new Question
+                {
+                    Id = 4,
+                    Name = "Q4",
+                    Text = "Are you not cool?",
+                    PublicKey = Guid.NewGuid(),
+                    TypeId = 1
                 }
             };
         }
@@ -92,6 +114,16 @@ namespace survey.data
                 {
                     SurveyId = 1001,
                     QuestionId = 2
+                },
+                new SurveyQuestion()
+                {
+                    SurveyId = 2001,
+                    QuestionId = 3
+                },
+                new SurveyQuestion
+                {
+                    SurveyId = 2001,
+                    QuestionId = 4
                 }
             };
         }
