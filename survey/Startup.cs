@@ -48,6 +48,7 @@ namespace survey
                 .AddJsonOptions(o =>
                 {
                     o.SerializerSettings.Formatting = Formatting.Indented;
+                    o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
         }
