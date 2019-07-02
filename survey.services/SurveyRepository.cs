@@ -89,10 +89,10 @@ namespace survey.services
             return GetResponsesQuery()
                 .AsEnumerable();
         }
-        public async Task<IResponse> GetResponsesBySurveyId(int SurveyId)
+        public IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId)
         {
-            return await GetResponsesQuery()
-                .FirstOrDefaultAsync(x => x.SurveyQuestion.SurveyId == SurveyId);
+            return GetResponsesQuery()
+                .Where(x => x.SurveyQuestion.SurveyId == SurveyId);
         }
         public async Task<IResponse> UpdateResponse(int SurveyId, int QuestionId, string Asnwer)
         {

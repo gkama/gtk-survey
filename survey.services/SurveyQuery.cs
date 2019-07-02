@@ -39,6 +39,16 @@ namespace survey.services
             Field<ListGraphType<SurveyQuestionGType>>(
                 "survey_questions",
                 resolve: context => repo.GetSurveyQuestions());
+
+            Field<ListGraphType<ResponseGType>>(
+                "survey_responses",
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "surveyid" }),
+                resolve: context =>
+                {
+                    var surveyid = context.GetArgument<int>("surveyid");
+
+                    return repo.GetResponsesBySurveyId(surveyid);
+                });
         }
     }
 }

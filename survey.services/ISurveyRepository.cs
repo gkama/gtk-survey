@@ -14,6 +14,7 @@ namespace survey.services
         Task<ISurvey> GetSurvey(Guid PublicKey);
         IEnumerable<ISurveyQuestion> GetSurveyQuestions();
         IEnumerable<IResponse> GetResponses();
+        IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);
         Task<IResponse> UpdateResponse(int SurveyId, int QuestionId, string Asnwer);
     }
 }
