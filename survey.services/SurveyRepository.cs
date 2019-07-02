@@ -89,6 +89,11 @@ namespace survey.services
             return GetResponsesQuery()
                 .AsEnumerable();
         }
+        public async Task<IResponse> GetResponsesBySurveyId(int SurveyId)
+        {
+            return await GetResponsesQuery()
+                .FirstOrDefaultAsync(x => x.SurveyQuestion.SurveyId == SurveyId);
+        }
         public async Task<IResponse> UpdateResponse(int SurveyId, int QuestionId, string Asnwer)
         {
             var response = GetResponsesQuery()
