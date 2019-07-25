@@ -86,6 +86,8 @@ namespace survey
             app.UseGraphQL<SurveySchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
+            app.UseSurveyException();
+
             app.UseHealthChecks("/ping");
             app.UseMvc();
         }
