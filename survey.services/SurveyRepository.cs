@@ -450,7 +450,7 @@ namespace survey.services
                 .ToListAsync();
         }
 
-        public async Task<int> GetTotalResponsesCountAsync(int SurveyId)
+        public async Task<int> GetResponsesCountAsync(int SurveyId)
         {
             return await GetResponsesQuery()
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId)

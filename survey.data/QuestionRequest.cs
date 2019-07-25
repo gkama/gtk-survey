@@ -20,4 +20,13 @@ namespace survey.data
         [JsonProperty("question_type_answers")]
         public IEnumerable<string> QuestionTypeAnswers { get; set; } = new List<string>();
     }
+
+    public class SurveyQuestionRequest
+    {
+        [JsonProperty("survey_name")]
+        public string SurveyName { get; set; }
+
+        [JsonProperty("question_requests")]
+        public IEnumerable<QuestionRequest> QuestionRequests { get; set; } = new List<QuestionRequest>();
+    }
 }

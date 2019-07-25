@@ -63,11 +63,18 @@ namespace survey.Controllers
             return Ok(await repo.GetResponsesCustomBySurveyIdAsync(id));
         }
 
+        [Route("{id}/responses/count")]
+        [HttpGet]
+        public async Task<IActionResult> GetResponsesCountAsync([FromRoute]int id)
+        {
+            return Ok(await repo.GetResponsesCountAsync(id));
+        }
+
         [Route("create")]
         [HttpPost]
-        public async Task<IActionResult> CreateSurveyAsync([FromBody]string survey_name, IEnumerable<QuestionRequest> questions)
+        public async Task<IActionResult> CreateSurveyAsync([FromBody]SurveyQuestionRequest request)
         {
-            return Ok(await repo.CreateSurveyAsync(survey_name, questions));
+            return Ok(await repo.CreateSurveyAsync(request.SurveyName, request.QuestionRequests));
         }
 
         [Route("{id}/response/update/{questionid}/{answer}")]
