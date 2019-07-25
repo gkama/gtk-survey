@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
+using survey.data;
 using survey.services;
 
 namespace survey.Controllers
@@ -31,14 +32,14 @@ namespace survey.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSurvey([FromRoute]int id)
         {
-            return Ok(await repo.GetSurvey(id));
+            return Ok(await repo.GetSurveyAsync(id));
         }
 
         [Route("publickey/{publickey}")]
         [HttpGet]
         public async Task<IActionResult> GetSurvey([FromRoute]Guid publickey)
         {
-            return Ok(await repo.GetSurvey(publickey));
+            return Ok(await repo.GetSurveyAsync(publickey));
         }
 
         [Route("questions")]
@@ -55,11 +56,25 @@ namespace survey.Controllers
             return Ok(repo.GetResponses());
         }
 
-        [Route("response/update/{surveyid}/{questionid}/{answer}")]
+        [Route("{id}/responses")]
         [HttpGet]
-        public async Task<IActionResult> UpdateResponse([FromRoute]int surveyid, int questionid, string answer)
+        public async Task<IActionResult> GetResponsesCustomBySurveyIdAsync([FromRoute]int id)
         {
-            return Ok(await repo.UpdateResponse(surveyid, questionid, answer));
+            return Ok(await repo.GetResponsesCustomBySurveyIdAsync(id));
+        }
+
+        [Route("create")]
+        [HttpPost]
+        public async Task<IActionResult> CreateSurveyAsync([FromBody]string survey_name, IEnumerable<QuestionRequest> questions)
+        {
+            return Ok(await repo.CreateSurveyAsync(survey_name, questions));
+        }
+
+        [Route("{id}/response/update/{questionid}/{answer}")]
+        [HttpGet]
+        public async Task<IActionResult> UpdateResponse([FromRoute]int id, int questionid, string answer)
+        {
+            return Ok(await repo.UpdateResponseAsync(id, questionid, answer));
         }
     }
 }

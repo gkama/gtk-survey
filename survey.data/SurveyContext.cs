@@ -25,6 +25,8 @@ namespace survey.data
             modelBuilder.Entity<Survey>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.Property(x => x.Name).HasMaxLength(300);
             });
 
             modelBuilder.Entity<Question>(e =>
@@ -35,6 +37,9 @@ namespace survey.data
                     .WithMany()
                     .HasForeignKey(x => x.TypeId)
                     .IsRequired();
+
+                e.Property(x => x.Name).HasMaxLength(300);
+                e.Property(x => x.Text).HasMaxLength(1000);
             });
 
             modelBuilder.Entity<SurveyQuestion>(e =>
@@ -58,14 +63,17 @@ namespace survey.data
                     .WithOne()
                     .HasForeignKey(x => x.TypeId)
                     .IsRequired();
+
+                e.Property(x => x.Name).HasMaxLength(300);
             });
 
             modelBuilder.Entity<QuestionTypeAnswer>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.Property(x => x.Answer).HasMaxLength(1000);
             });
 
-            //TODO: figure out how to map Response
             modelBuilder.Entity<Response>(e =>
             {
                 e.HasKey(x => x.Id);

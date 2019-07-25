@@ -16,24 +16,24 @@ namespace survey.services
                 "surveys",
                 resolve: context => repo.GetSurveys());
 
-            Field<SurveyGType>(
+            FieldAsync<SurveyGType>(
                 "survey_by_id",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }),
-                resolve: context =>
+                resolve: async context =>
                 {
                     var id = context.GetArgument<int>("id");
 
-                    return repo.GetSurvey(id);
+                    return await repo.GetSurveyAsync(id);
                 });
 
-            Field<SurveyGType>(
+            FieldAsync<SurveyGType>(
                 "survey_by_publickey",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "publickey" }),
-                resolve: context =>
+                resolve: async context =>
                 {
                     var publickey = context.GetArgument<Guid>("publickey");
 
-                    return repo.GetSurvey(publickey);
+                    return await repo.GetSurveyAsync(publickey);
                 });
 
             Field<ListGraphType<SurveyQuestionGType>>(
