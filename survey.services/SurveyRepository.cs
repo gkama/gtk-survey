@@ -437,7 +437,8 @@ namespace survey.services
         {
             return await GetResponsesQuery()
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
-                .Select(x => new {
+                .Select(x => new
+                {
                     survey_id = x.SurveyQuestion.Survey.Id,
                     survey_name = x.SurveyQuestion.Survey.Name,
                     question_id = x.SurveyQuestion.Question.Id,
@@ -445,7 +446,7 @@ namespace survey.services
                     question_text = x.SurveyQuestion.Question.Text,
                     answer_id = x.QuestionTypeAnswer.Id,
                     answer = x.QuestionTypeAnswer.Answer,
-                    count = x.Count
+                    answer_count = x.Count
                 })
                 .ToListAsync();
         }
@@ -464,8 +465,18 @@ namespace survey.services
             return new
             {
                 survey_id = SurveyId,
-                response_sum = await query.SumAsync(x => x.Count),
-                questions_id = await query.Select(x => x.SurveyQuestion.QuestionId).ToListAsync()
+                answer_sum = await query.SumAsync(x => x.Count),
+                questions = await query.Select(x => new
+                {
+                    id = x.SurveyQuestion.QuestionId,
+                    name = x.SurveyQuestion.Question.Name,
+                    text = x.SurveyQuestion.Question.Text,
+                    answer = new
+                    {
+                        answer = x.QuestionTypeAnswer.Answer,
+                        answer_count = x.Count
+                    }
+                }).ToListAsync()
             };
         }
 
