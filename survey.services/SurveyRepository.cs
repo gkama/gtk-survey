@@ -456,6 +456,18 @@ namespace survey.services
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
                 .SumAsync(x => x.Count);
         }
+        public async Task<object> GetResponsesStatsAsync(int SurveyId)
+        {
+            var query = GetResponsesQuery()
+                .Where(x => x.SurveyQuestion.SurveyId == SurveyId);
+
+            return new
+            {
+                survey_id = SurveyId,
+                response_sum = await query.SumAsync(x => x.Count),
+                questions_id = await query.Select(x => x.SurveyQuestion.QuestionId).ToListAsync()
+            };
+        }
 
         public async Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Asnwer)
         {

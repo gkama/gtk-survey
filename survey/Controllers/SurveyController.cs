@@ -70,6 +70,13 @@ namespace survey.Controllers
             return Ok(await repo.GetResponsesCountAsync(id));
         }
 
+        [Route("{id}/responses/stats")]
+        [HttpGet]
+        public async Task<IActionResult> GetResponsesStatsAsync([FromRoute]int id)
+        {
+            return Ok(await repo.GetResponsesStatsAsync(id));
+        }
+
         [Route("create")]
         [HttpPost]
         public async Task<IActionResult> CreateSurveyAsync([FromBody]SurveyQuestionRequest request)
