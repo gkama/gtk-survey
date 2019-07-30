@@ -49,6 +49,16 @@ namespace survey.services
 
                     return repo.GetResponsesBySurveyId(surveyid);
                 });
+
+            FieldAsync<QuestionGType>(
+                "question_type",
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "name" }),
+                resolve: async context =>
+                {
+                    var name = context.GetArgument<string>("name");
+
+                    return await repo.GetQuestionTypeAsync(name);
+                });
         }
     }
 }
