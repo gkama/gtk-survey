@@ -50,7 +50,7 @@ namespace survey.services
                     return repo.GetResponsesBySurveyId(surveyid);
                 });
 
-            FieldAsync<QuestionGType>(
+            FieldAsync<QuestionTypeGType>(
                 "question_type",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "name" }),
                 resolve: async context =>
