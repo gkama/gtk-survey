@@ -15,14 +15,12 @@ namespace survey.services
     public class SurveyRepository : ISurveyRepository
     {
         public readonly ILogger log;
-        public readonly IMemoryCache cache;
 
         public readonly SurveyContext context;
 
-        public SurveyRepository(ILogger<SurveyRepository> log, IMemoryCache cache, SurveyContext context)
+        public SurveyRepository(ILogger<SurveyRepository> log, SurveyContext context)
         {
             this.log = log;
-            this.cache = cache;
 
             this.context = context;
         }
@@ -500,6 +498,23 @@ namespace survey.services
                 throw new SurveyException(HttpStatusCode.InternalServerError, 
                     $"error while updating the response. exception={e.ToString()}");
             }
+        }
+
+
+        /*
+         * General
+         */
+        //public async Task<object> GetItemAsync<T>(int Id) where T : IPublicKeyId
+        //{
+        //    return null;
+        //}
+
+        public bool EntityChanged<T>(T Entity) where T : class
+        {
+            return context.ChangeTracker
+                .Entries()
+                .FirstOrDefault(x => x == Entity)
+                .State == EntityState.Modified;
         }
     }
 }
