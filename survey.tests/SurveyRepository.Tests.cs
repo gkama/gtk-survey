@@ -40,6 +40,7 @@ namespace survey.tests
         [InlineData(4)]
         public async Task ContextQuestionExist(int id)
         {
+            //Asserts
             Assert.True(await context.Questions
                 .FirstOrDefaultAsync(x => x.Id == id) != null);
         }
@@ -49,9 +50,27 @@ namespace survey.tests
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
-        public void EntityChanged_Question_False(int id)
+        public async Task EntityChanged_Question_False(int id)
         {
-            Assert.False(repo.EntityChanged(context.Questions.FirstOrDefault(x => x.Id == id)));
+            //Asserts
+            Assert.False(repo.EntityChanged(await context.Questions
+                .FirstOrDefaultAsync(x => x.Id == id)));
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        public async Task EntityChanged_Question_True(int id)
+        {
+            var question = await context.Questions
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            question.Name = $"Updating name to {id}";
+
+            //Asserts
+            Assert.True(repo.EntityChanged(question));
         }
     }
 }
