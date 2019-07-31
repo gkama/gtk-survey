@@ -24,5 +24,7 @@ namespace survey.services
         Task<int> GetResponsesCountAsync(int SurveyId);
         Task<object> GetResponsesStatsAsync(int SurveyId);
         Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Asnwer);
+
+        bool EntityChanged<T>(T Entity) where T : class;
     }
 }

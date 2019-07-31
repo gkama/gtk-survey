@@ -504,11 +504,6 @@ namespace survey.services
         /*
          * General
          */
-        //public async Task<object> GetItemAsync<T>(int Id) where T : IPublicKeyId
-        //{
-        //    return null;
-        //}
-
         public bool EntityChanged<T>(T Entity) where T : class
         {
             return context.ChangeTracker
