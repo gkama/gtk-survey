@@ -508,7 +508,7 @@ namespace survey.services
         {
             return context.ChangeTracker
                 .Entries()
-                .FirstOrDefault(x => x == Entity)
+                .FirstOrDefault(x => x.Entity == Entity)
                 .State == EntityState.Modified;
         }
     }

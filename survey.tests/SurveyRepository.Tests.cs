@@ -44,10 +44,14 @@ namespace survey.tests
                 .FirstOrDefaultAsync(x => x.Id == id) != null);
         }
 
-        [Fact]
-        public void EntityChanged()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        public void EntityChanged_Question_False(int id)
         {
-            Assert.False(repo.EntityChanged(context.Questions.FirstOrDefault(x => x.Id == 1)));
+            Assert.False(repo.EntityChanged(context.Questions.FirstOrDefault(x => x.Id == id)));
         }
     }
 }
