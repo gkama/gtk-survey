@@ -12,6 +12,7 @@ namespace survey.data
         string Name { get; set; }
         string Text { get; set; }
         DateTime CreationDate { get; set; }
+        DateTime LastUpdated { get; set; }
         int TypeId { get; set; }
         QuestionType Type { get; set; }
     }

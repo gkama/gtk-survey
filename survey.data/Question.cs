@@ -27,6 +27,9 @@ namespace survey.data
         [JsonProperty("creation_date")]
         public DateTime CreationDate { get; set; }
 
+        [JsonProperty("last_updated")]
+        public DateTime LastUpdated { get; set; }
+
         [JsonProperty("type_id")]
         public int TypeId { get; set; }
 

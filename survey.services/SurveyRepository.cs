@@ -143,6 +143,7 @@ namespace survey.services
                     Text = Text,
                     TypeId = Type.Id,
                     CreationDate = DateTime.Now,
+                    LastUpdated = DateTime.Now,
                     PublicKey = Guid.NewGuid()
                 };
 
@@ -171,6 +172,7 @@ namespace survey.services
                         Text = Text,
                         TypeId = qtype.Id,
                         CreationDate = DateTime.Now,
+                        LastUpdated = DateTime.Now,
                         PublicKey = Guid.NewGuid()
                     };
 
