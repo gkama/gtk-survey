@@ -24,6 +24,9 @@ namespace survey.data
         [JsonProperty("question_text")]
         public string Text { get; set; }
 
+        [JsonProperty("creation_date")]
+        public DateTime CreationDate { get; set; }
+
         [JsonProperty("type_id")]
         public int TypeId { get; set; }
 

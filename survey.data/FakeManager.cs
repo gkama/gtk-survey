@@ -51,12 +51,20 @@ namespace survey.data
                 {
                     Id = 1001,
                     Name = "Test survey",
+                    CreationDate = DateTime.Now.AddDays(-3),
+                    CreatedBy = "Georgi",
+                    LastUpdated = DateTime.Now.AddDays(-2),
+                    LastUpdatedBy = "Jim",
                     PublicKey = Guid.NewGuid()
                 },
                 new Survey
                 {
                     Id = 2001,
                     Name = "Survey Test",
+                    CreationDate = DateTime.Now.AddDays(-7),
+                    CreatedBy = "Georgi",
+                    LastUpdated = DateTime.Now.AddDays(-7),
+                    LastUpdatedBy = "Jessie",
                     PublicKey = Guid.NewGuid()
                 }
             };

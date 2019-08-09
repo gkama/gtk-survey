@@ -14,6 +14,18 @@ namespace survey.data
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("creation_date")]
+        public DateTime CreationDate { get; set; }
+
+        [JsonProperty("created_by")]
+        public string CreatedBy { get; set; }
+
+        [JsonProperty("last_updated")]
+        public DateTime LastUpdated { get; set; }
+
+        [JsonProperty("last_updated_by")]
+        public string LastUpdatedBy { get; set; }
+
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
     }
