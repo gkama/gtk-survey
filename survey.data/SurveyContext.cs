@@ -27,6 +27,8 @@ namespace survey.data
                 e.HasKey(x => x.Id);
 
                 e.Property(x => x.Name).HasMaxLength(300);
+                e.Property(x => x.CreatedBy).HasMaxLength(100);
+                e.Property(x => x.LastUpdatedBy).HasMaxLength(100);
             });
 
             modelBuilder.Entity<Question>(e =>
