@@ -314,7 +314,7 @@ namespace survey.services
         {
             var qtypeAnswers = new List<QuestionTypeAnswer>();
 
-            foreach(var a in Answers)
+            foreach (var a in Answers)
                 qtypeAnswers.Add(await AddQuestionTypeAnswerAsync(a, TypeId));
 
             return qtypeAnswers
@@ -495,7 +495,7 @@ namespace survey.services
             }
             catch (Exception e)
             {
-                throw new SurveyException(HttpStatusCode.InternalServerError, 
+                throw new SurveyException(HttpStatusCode.InternalServerError,
                     $"error while updating the response. exception={e.ToString()}");
             }
         }
@@ -508,7 +508,7 @@ namespace survey.services
         {
             return context.ChangeTracker
                 .Entries()
-                .FirstOrDefault(x => x == Entity)
+                .FirstOrDefault(x => x.Entity == Entity)
                 .State == EntityState.Modified;
         }
     }
