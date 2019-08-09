@@ -80,6 +80,7 @@ namespace survey.data
                     Name = "Q1",
                     Text = "Are you awesome?",
                     PublicKey = Guid.NewGuid(),
+                    CreationDate = DateTime.Now,
                     TypeId = 1,
                 },
                 new Question
@@ -88,6 +89,7 @@ namespace survey.data
                     Name = "Q2",
                     Text = "How are you today?",
                     PublicKey = Guid.NewGuid(),
+                    CreationDate = DateTime.Now,
                     TypeId = 2
                 },
                 new Question
@@ -96,6 +98,7 @@ namespace survey.data
                     Name = "Q3",
                     Text = "Are you cool?",
                     PublicKey = Guid.NewGuid(),
+                    CreationDate = DateTime.Now,
                     TypeId = 1
                 },
                 new Question
@@ -104,6 +107,7 @@ namespace survey.data
                     Name = "Q4",
                     Text = "Are you not cool?",
                     PublicKey = Guid.NewGuid(),
+                    CreationDate = DateTime.Now,
                     TypeId = 1
                 }
             };
