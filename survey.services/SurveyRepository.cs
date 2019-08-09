@@ -59,10 +59,13 @@ namespace survey.services
             var survey = new Survey()
             {
                 Name = Name,
+                CreationDate = DateTime.Now,
+                LastUpdated = DateTime.Now,
                 PublicKey = Guid.NewGuid()
             };
 
-            await context.AddAsync(survey);
+            await context.Surveys
+                .AddAsync(survey);
 
             await context.SaveChangesAsync();
 
@@ -110,6 +113,16 @@ namespace survey.services
                 .AsQueryable();
         }
 
+        public async Task<Question> GetQuestionAsync(int Id)
+        {
+            return await GetQuestionsQuery()
+                .FirstOrDefaultAsync(x => x.Id == Id);
+        }
+        public async Task<Question> GetQuestionAsync(Guid PublicKey)
+        {
+            return await GetQuestionsQuery()
+                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
         public async Task<Question> GetQuestionAsync(string Name, string Text, QuestionType Type)
         {
             return await GetQuestionsQuery()
@@ -129,6 +142,7 @@ namespace survey.services
                     Name = Name,
                     Text = Text,
                     TypeId = Type.Id,
+                    CreationDate = DateTime.Now,
                     PublicKey = Guid.NewGuid()
                 };
 
@@ -156,6 +170,7 @@ namespace survey.services
                         Name = Name,
                         Text = Text,
                         TypeId = qtype.Id,
+                        CreationDate = DateTime.Now,
                         PublicKey = Guid.NewGuid()
                     };
 
