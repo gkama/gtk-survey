@@ -34,11 +34,29 @@ namespace survey.tests
          * Survey
          */
         [Theory]
+        [InlineData(1001)]
+        [InlineData(2001)]
+        public async Task Survey_Exists(int id)
+        {
+            var survey = await repo.GetSurveyAsync(id);
+
+            //Asserts
+            Assert.True(survey != null);
+            Assert.True(!string.IsNullOrWhiteSpace(survey.Name));
+            Assert.True(!string.IsNullOrWhiteSpace(survey.PublicKey.ToString()));
+        }
+
+
+
+        /*
+         * Question
+         */
+        [Theory]
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
-        public async Task ContextQuestionExist(int id)
+        public async Task Question_Context_Exists(int id)
         {
             //Asserts
             Assert.True(await context.Questions
@@ -67,6 +85,11 @@ namespace survey.tests
             Assert.True(await repo.GetQuestionAsync(id) == null);
         }
 
+
+
+        /*
+         * General
+         */
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
