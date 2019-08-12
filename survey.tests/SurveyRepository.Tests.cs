@@ -36,9 +36,21 @@ namespace survey.tests
         [Theory]
         [InlineData(1001)]
         [InlineData(2001)]
-        public async Task Survey_Exists(int id)
+        public async Task Survey_Exists_Id(int id)
         {
             var survey = await repo.GetSurveyAsync(id);
+
+            //Asserts
+            Assert.True(survey != null);
+            Assert.True(!string.IsNullOrWhiteSpace(survey.Name));
+            Assert.True(!string.IsNullOrWhiteSpace(survey.PublicKey.ToString()));
+        }
+        [Theory]
+        [InlineData("Test survey")]
+        [InlineData("Survey Test")]
+        public async Task Survey_Exists_Name(string name)
+        {
+            var survey = await repo.GetSurveyAsync(name);
 
             //Asserts
             Assert.True(survey != null);
@@ -68,7 +80,7 @@ namespace survey.tests
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
-        public async Task Question_Exists(int id)
+        public async Task Question_Exists_Id(int id)
         {
             //Asserts
             Assert.True(await repo.GetQuestionAsync(id) != null);
