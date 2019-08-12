@@ -53,6 +53,17 @@ namespace survey.services
             return await GetSurveysQuery()
                 .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
         }
+        public async Task<IEnumerable<Survey>> GetSurveysToday()
+        {
+            return await GetSurveysQuery()
+                .Where(x => x.CreationDate.Day == DateTime.Now.Day)
+                .ToListAsync();
+        }
+        public async Task<int> GetSurveysTodayCount()
+        {
+            return (await GetSurveysToday())
+                .Count();
+        }
 
         public async Task<Survey> AddSurveyAsync(string Name)
         {
