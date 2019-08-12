@@ -50,6 +50,28 @@ namespace survey.tests
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
+        public async Task Question_Exists(int id)
+        {
+            //Asserts
+            Assert.True(await repo.GetQuestionAsync(id) != null);
+        }
+
+        [Theory]
+        [InlineData(5)]
+        [InlineData(6)]
+        [InlineData(7)]
+        [InlineData(8)]
+        public async Task Question_Not_Exists(int id)
+        {
+            //Asserts
+            Assert.True(await repo.GetQuestionAsync(id) == null);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
         public async Task EntityChanged_Question_False(int id)
         {
             //Asserts

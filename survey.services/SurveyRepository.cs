@@ -95,7 +95,8 @@ namespace survey.services
 
             QuestionRequests.ToList().ForEach(async x =>
             {
-                questions.Add(await AddQuestionAsync(x.QuestionName, x.QuestionText, x.QuestionTypeName, x.QuestionTypeAnswers));
+                questions.Add(await AddQuestionAsync(x.QuestionName, x.QuestionText,
+                    x.QuestionTypeName, x.QuestionTypeAnswers));
             });
 
             return await CreateSurveyAsync(SurveyName, questions);
