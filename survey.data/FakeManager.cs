@@ -66,6 +66,16 @@ namespace survey.data
                     LastUpdated = DateTime.Now.AddDays(-7),
                     LastUpdatedBy = "Jessie",
                     PublicKey = Guid.NewGuid()
+                },
+                new Survey
+                {
+                    Id = 3001,
+                    Name = "Survey Test Empty",
+                    CreationDate = DateTime.Now,
+                    CreatedBy = "Georgi",
+                    LastUpdated = DateTime.Now,
+                    LastUpdatedBy = "Georgi",
+                    PublicKey = Guid.NewGuid()
                 }
             };
         }

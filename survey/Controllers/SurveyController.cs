@@ -84,9 +84,23 @@ namespace survey.Controllers
 
         [Route("{id}/response/update/{questionid}/{answer}")]
         [HttpGet]
-        public async Task<IActionResult> UpdateResponse([FromRoute]int id, int questionid, string answer)
+        public async Task<IActionResult> UpdateResponseAsync([FromRoute]int id, int questionid, string answer)
         {
             return Ok(await repo.UpdateResponseAsync(id, questionid, answer));
+        }
+
+        [Route("today")]
+        [HttpGet]
+        public async Task<IActionResult> GetSurveysTodayAsync()
+        {
+            return Ok(await repo.GetSurveysToday());
+        }
+
+        [Route("today/count")]
+        [HttpGet]
+        public async Task<IActionResult> GetSurveysTodayCountAsync()
+        {
+            return Ok(await repo.GetSurveysTodayCount());
         }
     }
 }
