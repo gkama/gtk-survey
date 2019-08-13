@@ -26,7 +26,7 @@ namespace survey.Controllers
             return Ok(repo.GetSurveys());
         }
 
-        [Route("id/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> GetSurvey([FromRoute]int id)
         {

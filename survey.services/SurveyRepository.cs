@@ -550,6 +550,21 @@ namespace survey.services
             return await context.Set<T>()
                 .FirstOrDefaultAsync(x => (x as IPublicKeyId).PublicKey == PublicKey);
         }
+        public async Task<T> FindEntityAsync<T>(object PulicKeyId) where T : class
+        {
+            int Id;
+            Guid PublicKey;
+
+            var IsGuid = Guid.TryParse(PulicKeyId.ToString(), out PublicKey);
+            var IsInt = int.TryParse(PublicKey.ToString(), out Id);
+
+            if (IsGuid)
+                return await FindEntityAsync<T>(PublicKey);
+            else if (IsInt)
+                return await FindEntityAsync<T>(Id);
+            else
+                return null;
+        }
 
         public async Task<Guid> FindEntityPublicKeyAsync<T>(int Id) where T : class
         {

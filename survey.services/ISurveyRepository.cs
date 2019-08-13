@@ -32,6 +32,7 @@ namespace survey.services
         bool EntityChanged<T>(T Entity) where T : class;
         Task<T> FindEntityAsync<T>(int Id) where T : class;
         Task<T> FindEntityAsync<T>(Guid PublicKey) where T : class;
+        Task<T> FindEntityAsync<T>(object PulicKeyId) where T : class;
         Task<Guid> FindEntityPublicKeyAsync<T>(int Id) where T : class;
     }
 }
