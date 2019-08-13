@@ -34,5 +34,6 @@ namespace survey.services
         Task<T> FindEntityAsync<T>(Guid PublicKey) where T : class;
         Task<T> FindEntityAsync<T>(object PulicKeyId) where T : class;
         Task<Guid> FindEntityPublicKeyAsync<T>(int Id) where T : class;
+        object FindEntityAsync(Guid PublicKey);
     }
 }

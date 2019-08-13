@@ -565,6 +565,13 @@ namespace survey.services
             else
                 return null;
         }
+        public object FindEntityAsync(Guid PublicKey)
+        {
+            return (context.GetType()
+                .GetProperties()
+                .Where(x => x.Name == "PublicKey"))
+                    .FirstOrDefault(x => x.GetValue(PublicKey) != null);
+        }
 
         public async Task<Guid> FindEntityPublicKeyAsync<T>(int Id) where T : class
         {
