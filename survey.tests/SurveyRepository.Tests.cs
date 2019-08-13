@@ -148,6 +148,20 @@ namespace survey.tests
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
+        public async Task FindEntityAsync_Question_PublicKey(int id)
+        {
+            var question =  await repo.GetQuestionAsync(id);
+            var entity = await repo.FindEntityAsync<Question>(question.PublicKey);
+
+            //Asserts
+            Assert.True(entity != null);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
         public async Task FindEntityPublicKeyAsync_Question(int id)
         {
             var publicKey = await repo.FindEntityPublicKeyAsync<Question>(id);

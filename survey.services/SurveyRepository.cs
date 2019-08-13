@@ -545,6 +545,11 @@ namespace survey.services
         {
             return await context.FindAsync<T>(Id);
         }
+        public async Task<T> FindEntityAsync<T>(Guid PublicKey) where T : class
+        {
+            return await context.Set<T>()
+                .FirstOrDefaultAsync(x => (x as IPublicKeyId).PublicKey == PublicKey);
+        }
 
         public async Task<Guid> FindEntityPublicKeyAsync<T>(int Id) where T : class
         {
