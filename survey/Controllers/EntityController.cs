@@ -22,11 +22,11 @@ namespace survey.Controllers
             this.repo = repo;
         }
 
-        [Route("{publickeyid}")]
+        [Route("question/{publickeyid}")]
         [HttpGet]
         public async Task<IActionResult> GetEntityAsync([FromRoute]object PublicKeyId)
         {
-            return Ok(await repo.FindEntityAsync<object>(PublicKeyId));
+            return Ok(await repo.FindEntityAsync<Question>(PublicKeyId));
         }
     }
 }

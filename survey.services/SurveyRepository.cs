@@ -556,7 +556,7 @@ namespace survey.services
             Guid PublicKey;
 
             var IsGuid = Guid.TryParse(PulicKeyId.ToString(), out PublicKey);
-            var IsInt = int.TryParse(PublicKey.ToString(), out Id);
+            var IsInt = int.TryParse(PulicKeyId.ToString(), out Id);
 
             if (IsGuid)
                 return await FindEntityAsync<T>(PublicKey);
