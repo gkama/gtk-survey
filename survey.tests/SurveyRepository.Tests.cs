@@ -129,5 +129,18 @@ namespace survey.tests
             //Asserts
             Assert.True(repo.EntityChanged(question));
         }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        public async Task FindEntityAsync_Question(int id)
+        {
+            var entity = await repo.FindEntityAsync<Question>(id);
+
+            //Asserts
+            Assert.True(entity != null);
+        }
     }
 }

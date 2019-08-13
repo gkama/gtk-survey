@@ -30,5 +30,6 @@ namespace survey.services
         Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Asnwer);
 
         bool EntityChanged<T>(T Entity) where T : class;
+        Task<T> FindEntityAsync<T>(int Id) where T : class;
     }
 }

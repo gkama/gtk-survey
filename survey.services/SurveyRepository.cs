@@ -540,5 +540,10 @@ namespace survey.services
                 .FirstOrDefault(x => x.Entity == Entity)
                 .State == EntityState.Modified;
         }
+
+        public async Task<T> FindEntityAsync<T>(int Id) where T : class
+        {
+            return await context.FindAsync<T>(Id);
+        }
     }
 }
