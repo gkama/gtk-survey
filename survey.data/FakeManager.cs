@@ -231,6 +231,14 @@ namespace survey.data
                 new Response
                 {
                     Id = 2,
+                    Count = 200,
+                    PublicKey = Guid.NewGuid(),
+                    SurveyQuestionId = 1,
+                    QuestionTypeAnswerId = 22
+                },
+                new Response
+                {
+                    Id = 3,
                     Count = 23,
                     PublicKey = Guid.NewGuid(),
                     SurveyQuestionId = 2,
@@ -238,7 +246,7 @@ namespace survey.data
                 },
                 new Response
                 {
-                    Id = 3,
+                    Id = 4,
                     Count = 578,
                     PublicKey = Guid.NewGuid(),
                     SurveyQuestionId = 3,
@@ -246,7 +254,7 @@ namespace survey.data
                 },
                 new Response
                 {
-                    Id = 4,
+                    Id = 5,
                     Count = 214,
                     PublicKey = Guid.NewGuid(),
                     SurveyQuestionId = 4,

@@ -27,7 +27,8 @@ namespace survey.services
         Task<IEnumerable<object>> GetResponsesCustomBySurveyIdAsync(int SurveyId);
         Task<int> GetResponsesCountAsync(int SurveyId);
         Task<object> GetResponsesStatsAsync(int SurveyId);
-        Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Asnwer);
+        Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Answer);
+        void UpdateResponse(int SurveyId, int QuestionId, string Answer);
 
         bool EntityChanged<T>(T Entity) where T : class;
         Task<T> FindEntityAsync<T>(int Id) where T : class;

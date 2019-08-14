@@ -509,14 +509,14 @@ namespace survey.services
             };
         }
 
-        public async Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Asnwer)
+        public async Task<IResponse> UpdateResponseAsync(int SurveyId, int QuestionId, string Answer)
         {
             try
             {
                 var response = GetResponsesQuery()
                     .FirstOrDefault(x => x.SurveyQuestion.SurveyId == SurveyId &&
                         x.SurveyQuestion.QuestionId == QuestionId &&
-                        x.QuestionTypeAnswer.Answer == Asnwer);
+                        x.QuestionTypeAnswer.Answer == Answer);
 
                 response.Count++;
 
@@ -527,7 +527,25 @@ namespace survey.services
             catch (Exception e)
             {
                 throw new SurveyException(HttpStatusCode.InternalServerError,
-                    $"error while updating the response. exception={e.ToString()}");
+                    $"error while updating response. exception={e.ToString()}");
+            }
+        }
+        public void UpdateResponse(int SurveyId, int QuestionId, string Answer)
+        {
+            try
+            {
+                GetResponsesQuery()
+                    .FirstOrDefault(x => x.SurveyQuestion.SurveyId == SurveyId &&
+                        x.SurveyQuestion.QuestionId == QuestionId &&
+                        x.QuestionTypeAnswer.Answer == Answer)
+                    .Count++;
+
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while updating response. exception={e.ToString()}");
             }
         }
 

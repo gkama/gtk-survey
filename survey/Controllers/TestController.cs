@@ -21,5 +21,15 @@ namespace survey.Controllers
         {
             this.repo = repo;
         }
+
+        [Route("update/{iterations}")]
+        [HttpGet]
+        public void UpdateResponse([FromRoute]int iterations)
+        {
+            for (int i = 0; i < iterations; i++)
+            {
+                repo.UpdateResponse(2001, 3, "Good");
+            }
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace survey.Controllers
         [HttpGet]
         public async Task<IActionResult> GetResponsesCustomBySurveyIdAsync([FromRoute]int id)
         {
-            return Ok(await repo.GetResponsesCustomBySurveyIdAsync(id));
+            return Ok(await repo.GetResponsesStatsAsync(id));
         }
 
         [Route("{id}/responses/count")]
