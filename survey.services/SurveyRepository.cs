@@ -451,6 +451,12 @@ namespace survey.services
                 .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
+        public IQueryable<Response> GetResponsesQuery(int SurveyId)
+        {
+            return GetResponsesQuery()
+                .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
+                .AsQueryable();
+        }
 
         public IEnumerable<IResponse> GetResponses()
         {
@@ -488,8 +494,7 @@ namespace survey.services
         }
         public async Task<object> GetResponsesStatsAsync(int SurveyId)
         {
-            var query = GetResponsesQuery()
-                .Where(x => x.SurveyQuestion.SurveyId == SurveyId);
+            var query = GetResponsesQuery(SurveyId);
 
             return new
             {
@@ -506,7 +511,8 @@ namespace survey.services
                         answer = x.QuestionTypeAnswer.Answer,
                         answer_count = x.Count
                     }
-                }).ToListAsync()
+                })
+                .ToListAsync()
             };
         }
 
