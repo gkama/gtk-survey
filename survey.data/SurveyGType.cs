@@ -12,6 +12,10 @@ namespace survey.data
         {
             Field(x => x.Id);
             Field(x => x.Name);
+            Field(x => x.CreationDate);
+            Field(x => x.CreatedBy);
+            Field(x => x.LastUpdated);
+            Field(x => x.LastUpdatedBy);
             Field(x => x.PublicKey, type: typeof(IdGraphType));
         }
     }
