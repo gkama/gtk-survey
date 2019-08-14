@@ -453,8 +453,13 @@ namespace survey.services
         }
         public IQueryable<Response> GetResponsesQuery(int SurveyId)
         {
-            return GetResponsesQuery()
+            return context.Responses
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
+                .Include(x => x.SurveyQuestion)
+                    .ThenInclude(x => x.Survey)
+                .Include(x => x.SurveyQuestion)
+                    .ThenInclude(x => x.Question)
+                .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
 
