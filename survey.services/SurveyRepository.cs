@@ -506,8 +506,7 @@ namespace survey.services
                         answer = x.QuestionTypeAnswer.Answer,
                         answer_count = x.Count
                     }
-                }).GroupBy(x => x.id)
-                .ToListAsync()
+                }).ToListAsync()
             };
         }
 

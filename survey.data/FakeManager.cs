@@ -242,7 +242,7 @@ namespace survey.data
                     Count = 23,
                     PublicKey = Guid.NewGuid(),
                     SurveyQuestionId = 2,
-                    QuestionTypeAnswerId = 22
+                    QuestionTypeAnswerId = 23
                 },
                 new Response
                 {
