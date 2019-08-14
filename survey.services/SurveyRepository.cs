@@ -502,10 +502,12 @@ namespace survey.services
                     text = x.SurveyQuestion.Question.Text,
                     answer = new
                     {
+                        answer_id = x.QuestionTypeAnswer.Id,
                         answer = x.QuestionTypeAnswer.Answer,
                         answer_count = x.Count
                     }
-                }).ToListAsync()
+                }).GroupBy(x => x.id)
+                .ToListAsync()
             };
         }
 
