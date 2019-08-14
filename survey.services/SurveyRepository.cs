@@ -71,7 +71,9 @@ namespace survey.services
             {
                 Name = Name,
                 CreationDate = DateTime.Now,
+                CreatedBy = string.Empty,
                 LastUpdated = DateTime.Now,
+                LastUpdatedBy = string.Empty,
                 PublicKey = Guid.NewGuid()
             };
 
