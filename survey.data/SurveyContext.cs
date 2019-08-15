@@ -63,12 +63,12 @@ namespace survey.data
             {
                 e.HasKey(x => x.Id);
 
+                e.Property(x => x.Name).HasMaxLength(300);
+
                 e.HasMany(x => x.Answers)
                     .WithOne()
                     .HasForeignKey(x => x.TypeId)
                     .IsRequired();
-
-                e.Property(x => x.Name).HasMaxLength(300);
             });
 
             modelBuilder.Entity<QuestionTypeAnswer>(e =>

@@ -1,10 +1,12 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Microsoft.EntityFrameworkCore;
 
 using Xunit;
+using Newtonsoft.Json;
 
 using survey.data;
 using survey.services;
@@ -110,7 +112,39 @@ namespace survey.tests
              * 2) Update responses
              * 3) Check responses
              */
-            //var survey = await repo.CreateSurveyAsync()
+            var questionRequests = new List<QuestionRequest>()
+            {
+                new QuestionRequest()
+                {
+                    QuestionName = "GTK Q1",
+                    QuestionText = "On a scale of 1 to 10, how much do you like cheetos?",
+                    QuestionTypeName = "Cheetos 1 to 10",
+                    QuestionTypeAnswers = new List<string>()
+                    {
+                        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+                    }
+                },
+                new QuestionRequest()
+                {
+                    QuestionName = "GTK Q2",
+                    QuestionText = "Do you like spicy food",
+                    QuestionTypeName = "Yes or No",
+                    QuestionTypeAnswers = new List<string>()
+                    {
+                        "Yes", "No"
+                    }
+                },
+                new QuestionRequest()
+                {
+                    QuestionName = "GTK Q3",
+                    QuestionText = "Where are you from?",
+                    QuestionTypeName = "Open ended"
+                }
+            };
+            var reqs = JsonConvert.SerializeObject(questionRequests);
+
+            //Asserts
+            Assert.True(reqs != null);
         }
 
 

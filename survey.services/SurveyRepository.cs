@@ -95,7 +95,7 @@ namespace survey.services
             return survey;
         }
 
-        public async Task<IEnumerable<SurveyQuestion>> CreateSurveyAsync(string SurveyName, IEnumerable<Question> Questions)
+        public async Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<Question> Questions)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace survey.services
 
                 var surveyQuestions = await AddSurveyQuestionAsync(survey.Id, questionIds);
 
-                return surveyQuestions;
+                return survey;
             }
             catch (Exception)
             {
@@ -112,7 +112,7 @@ namespace survey.services
                     $"error while creating survey with survey name={SurveyName} questions count={Questions?.Count()}");
             }
         }
-        public async Task<IEnumerable<SurveyQuestion>> CreateSurveyAsync(string SurveyName, IEnumerable<QuestionRequest> QuestionRequests)
+        public async Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<QuestionRequest> QuestionRequests)
         {
             var questions = new List<Question>();
 
@@ -285,7 +285,6 @@ namespace survey.services
                 questionType = new QuestionType()
                 {
                     Name = Name,
-                    Answers = Answers,
                     PublicKey = Guid.NewGuid()
                 };
 
