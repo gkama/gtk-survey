@@ -510,13 +510,14 @@ namespace survey.services
                     id = x.SurveyQuestion.QuestionId,
                     name = x.SurveyQuestion.Question.Name,
                     text = x.SurveyQuestion.Question.Text,
-                    answer = new
+                    answers = new
                     {
                         answer_id = x.QuestionTypeAnswer.Id,
                         answer = x.QuestionTypeAnswer.Answer,
                         answer_count = x.Count
                     }
-                })
+                }).GroupBy(q => q.id)
+                .Select(q => q.First())
                 .ToListAsync()
             };
         }
