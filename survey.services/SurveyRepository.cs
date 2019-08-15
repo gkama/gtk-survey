@@ -500,25 +500,33 @@ namespace survey.services
         public async Task<object> GetResponsesStatsAsync(int SurveyId)
         {
             var query = GetResponsesQuery(SurveyId);
+            var qDict = new Dictionary<object, object>();
+
+            await query.Select(x => x.SurveyQuestion.Question)
+                .Distinct()
+                .ForEachAsync(async x =>
+            {
+                var answers = await query.Where(y => y.SurveyQuestion.QuestionId == x.Id)
+                    .Select(a => new
+                    {
+                        answer_id = a.QuestionTypeAnswer.Id,
+                        answer = a.QuestionTypeAnswer.Answer,
+                        answer_count = a.Count
+                    }).ToListAsync();
+
+                qDict.Add(new
+                {
+                    id = x.Id,
+                    name = x.Name,
+                    text = x.Text
+                }, answers);
+            });
 
             return new
             {
                 survey_id = SurveyId,
                 answer_sum = await query.SumAsync(x => x.Count),
-                questions = await query.Select(x => new
-                {
-                    id = x.SurveyQuestion.QuestionId,
-                    name = x.SurveyQuestion.Question.Name,
-                    text = x.SurveyQuestion.Question.Text,
-                    answers = new
-                    {
-                        answer_id = x.QuestionTypeAnswer.Id,
-                        answer = x.QuestionTypeAnswer.Answer,
-                        answer_count = x.Count
-                    }
-                }).GroupBy(q => q.id)
-                .Select(q => q.First())
-                .ToListAsync()
+                questions = qDict
             };
         }
 
