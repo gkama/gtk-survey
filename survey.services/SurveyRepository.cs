@@ -523,7 +523,7 @@ namespace survey.services
                     id = x.Id,
                     name = x.Name,
                     text = x.Text,
-                    answers = answers
+                    answers
                 });
             });
 
@@ -531,7 +531,7 @@ namespace survey.services
             {
                 survey_id = SurveyId,
                 answer_sum = await query.SumAsync(x => x.Count),
-                questions = questions
+                questions
             };
         }
 
