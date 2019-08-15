@@ -455,11 +455,6 @@ namespace survey.services
         {
             return context.Responses
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
-                .Include(x => x.SurveyQuestion)
-                    .ThenInclude(x => x.Survey)
-                .Include(x => x.SurveyQuestion)
-                    .ThenInclude(x => x.Question)
-                .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
         public IQueryable<Response> GetResponsesSimplifiedQuery(int SurveyId)
@@ -467,11 +462,12 @@ namespace survey.services
             return context.Responses
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
                 .Include(x => x.SurveyQuestion)
+                    .ThenInclude(x => x.Question)
                 .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
 
-        public IEnumerable<IResponse> GetResponses()
+        public IEnumerable<Response> GetResponses()
         {
             return GetResponsesQuery()
                 .AsEnumerable();
@@ -530,7 +526,6 @@ namespace survey.services
                     answers = answers
                 });
             });
-
 
             return new
             {

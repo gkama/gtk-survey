@@ -22,7 +22,7 @@ namespace survey.services
         IEnumerable<SurveyQuestion> GetSurveyQuestions();
         Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions(int SurveyId);
         Task<QuestionType> GetQuestionTypeAsync(string Name);
-        IEnumerable<IResponse> GetResponses();
+        IEnumerable<Response> GetResponses();
         IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);
         Task<IEnumerable<object>> GetResponsesCustomBySurveyIdAsync(int SurveyId);
         Task<int> GetResponsesCountAsync(int SurveyId);
