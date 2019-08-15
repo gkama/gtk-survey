@@ -105,7 +105,7 @@ namespace survey.tests
          * Full tests
          */
         [Fact]
-        public async Task FullSurvey()
+        public void FullSurvey()
         {
             /*
              * 1) Create survey
