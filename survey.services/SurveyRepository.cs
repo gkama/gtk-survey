@@ -33,6 +33,13 @@ namespace survey.services
             return context.Surveys
                 .Include(x => x.SurveyQuestions)
                     .ThenInclude(x => x.Question)
+                        .ThenInclude(x => x.Type)
+                            .ThenInclude(x => x.Answers)
+                .AsQueryable();
+        }
+        public IQueryable<Survey> GetSurveysSimplifiedQuery()
+        {
+            return context.Surveys
                 .AsQueryable();
         }
 
