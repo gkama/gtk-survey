@@ -100,6 +100,22 @@ namespace survey.tests
 
 
         /*
+         * Full tests
+         */
+        [Fact]
+        public async Task FullSurvey()
+        {
+            /*
+             * 1) Create survey
+             * 2) Update responses
+             * 3) Check responses
+             */
+            //var survey = await repo.CreateSurveyAsync()
+        }
+
+
+
+        /*
          * General
          */
         [Theory]

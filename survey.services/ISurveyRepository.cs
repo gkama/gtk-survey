@@ -19,8 +19,7 @@ namespace survey.services
         Task<IEnumerable<SurveyQuestion>> CreateSurveyAsync(string SurveyName, IEnumerable<QuestionRequest> QuestionRequests);
         Task<Question> GetQuestionAsync(int Id);
         Task<Question> GetQuestionAsync(Guid PublicKey);
-        IEnumerable<SurveyQuestion> GetSurveyQuestions();
-        Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions(int SurveyId);
+        Task<IEnumerable<SurveyQuestion>> GetSurveyQuestionsAsync(int SurveyId);
         Task<QuestionType> GetQuestionTypeAsync(string Name);
         IEnumerable<Response> GetResponses();
         IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);

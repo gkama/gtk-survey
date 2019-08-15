@@ -33,18 +33,19 @@ namespace survey.Controllers
             return Ok(await repo.GetSurveyAsync(id));
         }
 
+
+        [Route("{id}/questions")]
+        [HttpGet]
+        public async Task<IActionResult> GetSurveyQuestionsAsync([FromRoute]int id)
+        {
+            return Ok(await repo.GetSurveyQuestionsAsync(id));
+        }
+
         [Route("publickey/{publickey}")]
         [HttpGet]
         public async Task<IActionResult> GetSurvey([FromRoute]Guid publickey)
         {
             return Ok(await repo.GetSurveyAsync(publickey));
-        }
-
-        [Route("questions")]
-        [HttpGet]
-        public IActionResult GetSurveyQuestions()
-        {
-            return Ok(repo.GetSurveyQuestions());
         }
 
         [Route("responses")]

@@ -31,8 +31,10 @@ namespace survey.services
         public IQueryable<Survey> GetSurveysQuery()
         {
             return context.Surveys
+                .Include(x => x.SurveyQuestions)
                 .AsQueryable();
         }
+
         public IEnumerable<Survey> GetSurveys()
         {
             return GetSurveysQuery()
@@ -370,9 +372,10 @@ namespace survey.services
 
         public IEnumerable<SurveyQuestion> GetSurveyQuestions()
         {
-            return GetSurveyQuestionsQuery();
+            return GetSurveyQuestionsQuery()
+                .AsEnumerable();
         }
-        public async Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions(int SurveyId)
+        public async Task<IEnumerable<SurveyQuestion>> GetSurveyQuestionsAsync(int SurveyId)
         {
             return await GetSurveyQuestionsQuery()
                 .Where(x => x.SurveyId == SurveyId)
@@ -413,7 +416,7 @@ namespace survey.services
         }
         public async Task<IEnumerable<SurveyQuestion>> AddSurveyQuestionAsync(int SurveyId, IEnumerable<int> QuestionIds)
         {
-            var surveyQuestions = (await GetSurveyQuestions(SurveyId)).ToList();
+            var surveyQuestions = (await GetSurveyQuestionsAsync(SurveyId)).ToList();
 
             if (surveyQuestions == null || surveyQuestions?.Count() == 0)
             {

@@ -36,9 +36,14 @@ namespace survey.services
                     return await repo.GetSurveyAsync(publickey);
                 });
 
-            Field<ListGraphType<SurveyQuestionGType>>(
+            FieldAsync<ListGraphType<SurveyQuestionGType>>(
                 "survey_questions",
-                resolve: context => repo.GetSurveyQuestions());
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "surveyid" }),
+                resolve: async context =>
+                {
+                    var surveyid = context.GetArgument<int>("surveyid");
+                    return await repo.GetSurveyQuestionsAsync(surveyid);
+                });
 
             Field<ListGraphType<ResponseGType>>(
                 "survey_responses",

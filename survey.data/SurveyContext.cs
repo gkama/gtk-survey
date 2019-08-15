@@ -29,32 +29,34 @@ namespace survey.data
                 e.Property(x => x.Name).HasMaxLength(300);
                 e.Property(x => x.CreatedBy).HasMaxLength(100);
                 e.Property(x => x.LastUpdatedBy).HasMaxLength(100);
+
+                e.HasMany(x => x.SurveyQuestions)
+                    .WithOne()
+                    .HasForeignKey(x => x.SurveyId)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Question>(e =>
             {
                 e.HasKey(x => x.Id);
 
+                e.Property(x => x.Name).HasMaxLength(300);
+                e.Property(x => x.Text).HasMaxLength(1000);
+
                 e.HasOne(x => x.Type)
                     .WithMany()
                     .HasForeignKey(x => x.TypeId)
                     .IsRequired();
-
-                e.Property(x => x.Name).HasMaxLength(300);
-                e.Property(x => x.Text).HasMaxLength(1000);
             });
 
             modelBuilder.Entity<SurveyQuestion>(e =>
             {
                 e.HasKey(x => x.Id);
 
-                e.HasOne(x => x.Survey)
-                    .WithMany()
-                    .HasForeignKey(x => x.SurveyId);
-                
                 e.HasOne(x => x.Question)
                     .WithMany()
-                    .HasForeignKey(x => x.QuestionId);
+                    .HasForeignKey(x => x.QuestionId)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<QuestionType>(e =>
@@ -89,7 +91,6 @@ namespace survey.data
                     .WithMany()
                     .HasForeignKey(x => x.QuestionTypeAnswerId)
                     .IsRequired();
-                //TODO: add ICollection<Response> in QuestionTypeAnswer
             });
         }
     }
