@@ -500,6 +500,7 @@ namespace survey.services
         public async Task<object> GetResponsesStatsAsync(int SurveyId)
         {
             var query = GetResponsesQuery(SurveyId);
+            var questions = new List<object>();
             var qDict = new Dictionary<object, object>();
 
             await query.Select(x => x.SurveyQuestion.Question)
@@ -514,19 +515,21 @@ namespace survey.services
                         answer_count = a.Count
                     }).ToListAsync();
 
-                qDict.Add(new
+                questions.Add(new
                 {
                     id = x.Id,
                     name = x.Name,
-                    text = x.Text
-                }, answers);
+                    text = x.Text,
+                    answers = answers
+                });
             });
+
 
             return new
             {
                 survey_id = SurveyId,
                 answer_sum = await query.SumAsync(x => x.Count),
-                questions = qDict
+                questions = questions
             };
         }
 
