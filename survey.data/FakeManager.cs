@@ -17,6 +17,10 @@ namespace survey.data
         public async Task UseFakeContext()
         {
             await context
+                .Workspaces
+                .AddRangeAsync(GetFakeWorkspaces());
+
+            await context
                 .Surveys
                 .AddRangeAsync(GetFakeSurveys());
 
@@ -41,6 +45,20 @@ namespace survey.data
                 .AddRangeAsync(GetFakeResponses());
 
             await context.SaveChangesAsync();
+        }
+
+        public IEnumerable<Workspace> GetFakeWorkspaces()
+        {
+            return new List<Workspace>()
+            {
+                new Workspace()
+                {
+                    Id = 999,
+                    Name = "GTK Fake Workspace",
+                    Slug = "gtk-fake",
+                    PublicKey = new Guid("2bc672e5-17d1-4dca-a59c-88413e45bfd4")
+                }
+            };
         }
 
         public IEnumerable<Survey> GetFakeSurveys()
