@@ -26,6 +26,28 @@ namespace survey.services
         }
 
         /*
+         * Workspace
+         */
+        public IQueryable<Workspace> GetWorkspacesQuery()
+        {
+            return context.Workspaces
+                .AsQueryable();
+        }
+
+        public IEnumerable<Workspace> GetWorkspaces()
+        {
+            return GetWorkspacesQuery()
+                .AsEnumerable();
+        }
+        public async Task<Workspace> GetWorkspace(int Id)
+        {
+            return await GetWorkspacesQuery()
+                .FirstOrDefaultAsync(x => x.Id == Id);
+        }
+
+
+
+        /*
          * Survey
          */
         public IQueryable<Survey> GetSurveysQuery()
