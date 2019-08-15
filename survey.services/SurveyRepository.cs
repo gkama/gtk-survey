@@ -462,6 +462,14 @@ namespace survey.services
                 .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
+        public IQueryable<Response> GetResponsesSimplifiedQuery(int SurveyId)
+        {
+            return context.Responses
+                .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
+                .Include(x => x.SurveyQuestion)
+                .Include(x => x.QuestionTypeAnswer)
+                .AsQueryable();
+        }
 
         public IEnumerable<IResponse> GetResponses()
         {
@@ -501,7 +509,6 @@ namespace survey.services
         {
             var query = GetResponsesQuery(SurveyId);
             var questions = new List<object>();
-            var qDict = new Dictionary<object, object>();
 
             await query.Select(x => x.SurveyQuestion.Question)
                 .Distinct()
