@@ -26,6 +26,9 @@ namespace survey.data
         [JsonProperty("question_type_answer")]
         public QuestionTypeAnswer QuestionTypeAnswer { get; set; }
 
+        [JsonProperty("question_type_answers")]
+        public ICollection<QuestionTypeAnswer> QuestionTypeAnswers { get; } = new List<QuestionTypeAnswer>();
+
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
     }
