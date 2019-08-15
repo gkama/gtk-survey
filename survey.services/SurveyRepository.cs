@@ -32,6 +32,7 @@ namespace survey.services
         {
             return context.Surveys
                 .Include(x => x.SurveyQuestions)
+                    .ThenInclude(x => x.Question)
                 .AsQueryable();
         }
 
