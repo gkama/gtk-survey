@@ -89,6 +89,7 @@ namespace survey.data
                     .WithMany()
                     .HasForeignKey(x => x.QuestionTypeAnswerId)
                     .IsRequired();
+                //TODO: add ICollection<Response> in QuestionTypeAnswer
             });
         }
     }
