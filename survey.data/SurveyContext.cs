@@ -28,6 +28,9 @@ namespace survey.data
             {
                 e.HasKey(x => x.Id);
 
+                e.Property(x => x.Name).HasMaxLength(300);
+                e.Property(x => x.Slug).HasMaxLength(100);
+
                 e.HasMany(x => x.Workspaces)
                     .WithOne()
                     .HasForeignKey(x => x.ClientId);
@@ -36,6 +39,9 @@ namespace survey.data
             modelBuilder.Entity<Workspace>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.Property(x => x.Name).HasMaxLength(300);
+                e.Property(x => x.Slug).HasMaxLength(100);
 
                 e.HasOne(x => x.Client)
                     .WithMany()

@@ -17,6 +17,12 @@ namespace survey.data
         [JsonProperty("slug")]
         public string Slug { get; set; }
 
+        [JsonProperty("created")]
+        public DateTime Created { get; set; }
+
+        [JsonProperty("last_updated")]
+        public DateTime LastUpdated { get; set; }
+
         [JsonProperty("client_id")]
         public int? ClientId { get; set; }
 

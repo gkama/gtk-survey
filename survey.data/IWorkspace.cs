@@ -9,6 +9,8 @@ namespace survey.data
         int Id { get; set; }
         string Name { get; set; }
         string Slug { get; set; }
+        DateTime Created { get; set; }
+        DateTime LastUpdated { get; set; }
         Guid PublicKey { get; set; }
         ICollection<Survey> Surveys { get; }
     }
