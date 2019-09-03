@@ -57,6 +57,7 @@ namespace survey.services
                 resolve: async context =>
                 {
                     var surveyid = context.GetArgument<int>("surveyid");
+
                     return await repo.GetSurveyQuestionsAsync(surveyid);
                 });
 
