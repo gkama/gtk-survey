@@ -26,6 +26,10 @@ namespace survey.data
             modelBuilder.Entity<Workspace>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.HasMany(x => x.Surveys)
+                    .WithOne()
+                    .HasForeignKey(x => x.WorkspaceId);
             });
 
             modelBuilder.Entity<Survey>(e =>

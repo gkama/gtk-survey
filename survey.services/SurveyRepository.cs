@@ -39,15 +39,28 @@ namespace survey.services
             return GetWorkspacesQuery()
                 .AsEnumerable();
         }
-        public async Task<Workspace> GetWorkspace(int Id)
+        public async Task<Workspace> GetWorkspaceAsync(int Id)
         {
             return await GetWorkspacesQuery()
                 .FirstOrDefaultAsync(x => x.Id == Id);
         }
-        public async Task<Workspace> GetWorkspace(Guid PublicKey)
+        public async Task<Workspace> GetWorkspaceAsync(Guid PublicKey)
         {
             return await GetWorkspacesQuery()
                 .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
+
+        public async Task<object> GetWorkspaceSimpleStatsAsync(int Id)
+        {
+            var workspace = await GetWorkspaceAsync(Id);
+
+            return new
+            {
+                id = workspace.Id,
+                name = workspace.Name,
+                public_key = workspace.PublicKey,
+                surveys_count = workspace.Surveys.Count()
+            };
         }
 
 
