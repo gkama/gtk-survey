@@ -17,6 +17,10 @@ namespace survey.data
         public async Task UseFakeContext()
         {
             await context
+                .Clients
+                .AddRangeAsync(GetFakeClients());
+
+            await context
                 .Workspaces
                 .AddRangeAsync(GetFakeWorkspaces());
 
