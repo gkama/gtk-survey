@@ -44,6 +44,11 @@ namespace survey.services
             return await GetWorkspacesQuery()
                 .FirstOrDefaultAsync(x => x.Id == Id);
         }
+        public async Task<Workspace> GetWorkspace(Guid PublicKey)
+        {
+            return await GetWorkspacesQuery()
+                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
 
 
 
