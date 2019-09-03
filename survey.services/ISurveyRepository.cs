@@ -9,6 +9,9 @@ namespace survey.services
 {
     public interface ISurveyRepository
     {
+        IEnumerable<Client> GetClients();
+        Task<Client> GetClientAsync(int Id);
+        Task<Client> GetClientAsync(Guid PublicKey);
         IEnumerable<Workspace> GetWorkspaces();
         Task<Workspace> GetWorkspaceAsync(int Id);
         Task<Workspace> GetWorkspaceAsync(Guid PublicKey);

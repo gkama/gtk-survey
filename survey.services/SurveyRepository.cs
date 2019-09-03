@@ -25,6 +25,43 @@ namespace survey.services
             this.context = context;
         }
 
+
+
+        /*
+         * Client
+         */
+        public IQueryable<Client> GetClientsQuery()
+        {
+            return context.Clients
+                .Include(x => x.Workspaces)
+                    .ThenInclude(x => x.Surveys)
+                .AsQueryable();
+        }
+        public IQueryable<Client> GetClientsQuerySimplified()
+        {
+            return context.Clients
+                .Include(x => x.Workspaces)
+                .AsQueryable();
+        }
+
+        public IEnumerable<Client> GetClients()
+        {
+            return GetClientsQuerySimplified()
+                .AsEnumerable();
+        }
+        public async Task<Client> GetClientAsync(int Id)
+        {
+            return await GetClientsQuerySimplified()
+                .FirstOrDefaultAsync(x => x.Id == Id);
+        }
+        public async Task<Client> GetClientAsync(Guid PublicKey)
+        {
+            return await GetClientsQuerySimplified()
+                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
+
+
+
         /*
          * Workspace
          */
