@@ -47,6 +47,23 @@ namespace survey.data
             await context.SaveChangesAsync();
         }
 
+        public IEnumerable<Client> GetFakeClients()
+        {
+            return new List<Client>()
+            {
+                new Client()
+                {
+                    Id = 501,
+                    Name = "Five Hundred and One",
+                    Slug = "five-hundred-and-one",
+                    Created = DateTime.Now.AddDays(-7),
+                    LastUpdated = DateTime.Now.AddDays(-7),
+                    BillingId = 9999,
+                    PublicKey = new Guid("0aa7eacd-75d0-4f80-a875-98d3e096b0f9")
+                }
+            };
+        }
+
         public IEnumerable<Workspace> GetFakeWorkspaces()
         {
             return new List<Workspace>()
@@ -56,7 +73,20 @@ namespace survey.data
                     Id = 999,
                     Name = "GTK Fake Workspace",
                     Slug = "gtk-fake",
+                    Created = DateTime.Now.AddDays(-6),
+                    LastUpdated = DateTime.Now.AddDays(-6),
+                    ClientId = 501,
                     PublicKey = new Guid("2bc672e5-17d1-4dca-a59c-88413e45bfd4")
+                },
+                new Workspace()
+                {
+                    Id = 888,
+                    Name = "GTK Migration US",
+                    Slug = "gtk-migration-us",
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    ClientId = null,
+                    PublicKey = new Guid("6035ac1d-4440-4bdb-976b-98b75666aa8d")
                 }
             };
         }
@@ -73,16 +103,18 @@ namespace survey.data
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now.AddDays(-2),
                     LastUpdatedBy = "Jim",
+                    WorkspaceId = 999,
                     PublicKey = Guid.NewGuid()
                 },
                 new Survey
                 {
                     Id = 2001,
-                    Name = "Survey Test",
+                    Name = "Survey Migration Test",
                     CreationDate = DateTime.Now.AddDays(-7),
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now.AddDays(-7),
                     LastUpdatedBy = "Jessie",
+                    WorkspaceId = 888,
                     PublicKey = Guid.NewGuid()
                 },
                 new Survey
@@ -93,6 +125,7 @@ namespace survey.data
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now,
                     LastUpdatedBy = "Georgi",
+                    WorkspaceId = null,
                     PublicKey = Guid.NewGuid()
                 }
             };
