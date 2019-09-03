@@ -489,10 +489,11 @@ namespace survey.services
                 .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
-        public IQueryable<Response> GetResponsesQuery(int SurveyId)
+        public IQueryable<Response> GetResponsesQuerySimplified()
         {
             return context.Responses
-                .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
+                .Include(x => x.SurveyQuestion)
+                .Include(x => x.QuestionTypeAnswer)
                 .AsQueryable();
         }
         public IQueryable<Response> GetResponsesSimplifiedQuery(int SurveyId)
@@ -502,6 +503,12 @@ namespace survey.services
                 .Include(x => x.SurveyQuestion)
                     .ThenInclude(x => x.Question)
                 .Include(x => x.QuestionTypeAnswer)
+                .AsQueryable();
+        }
+        public IQueryable<Response> GetResponsesQuery(int SurveyId)
+        {
+            return context.Responses
+                .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
                 .AsQueryable();
         }
 
@@ -577,7 +584,7 @@ namespace survey.services
         {
             try
             {
-                var response = GetResponsesQuery()
+                var response = GetResponsesQuerySimplified()
                     .FirstOrDefault(x => x.SurveyQuestion.SurveyId == SurveyId &&
                         x.SurveyQuestion.QuestionId == QuestionId &&
                         x.QuestionTypeAnswer.Answer == Answer);
@@ -598,7 +605,7 @@ namespace survey.services
         {
             try
             {
-                GetResponsesQuery()
+                GetResponsesQuerySimplified()
                     .FirstOrDefault(x => x.SurveyQuestion.SurveyId == SurveyId &&
                         x.SurveyQuestion.QuestionId == QuestionId &&
                         x.QuestionTypeAnswer.Answer == Answer)
