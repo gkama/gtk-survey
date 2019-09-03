@@ -14,8 +14,8 @@ namespace survey.data
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("creation_date")]
-        public DateTime CreationDate { get; set; }
+        [JsonProperty("created")]
+        public DateTime Created { get; set; }
 
         [JsonProperty("created_by")]
         public string CreatedBy { get; set; }

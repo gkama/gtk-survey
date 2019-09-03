@@ -103,7 +103,7 @@ namespace survey.data
                 {
                     Id = 1001,
                     Name = "Test survey",
-                    CreationDate = DateTime.Now.AddDays(-3),
+                    Created = DateTime.Now.AddDays(-3),
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now.AddDays(-2),
                     LastUpdatedBy = "Jim",
@@ -114,7 +114,7 @@ namespace survey.data
                 {
                     Id = 2001,
                     Name = "Survey Migration Test",
-                    CreationDate = DateTime.Now.AddDays(-7),
+                    Created = DateTime.Now.AddDays(-7),
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now.AddDays(-7),
                     LastUpdatedBy = "Jessie",
@@ -125,7 +125,7 @@ namespace survey.data
                 {
                     Id = 3001,
                     Name = "Survey Test Empty",
-                    CreationDate = DateTime.Now,
+                    Created = DateTime.Now,
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now,
                     LastUpdatedBy = "Georgi",
@@ -145,7 +145,7 @@ namespace survey.data
                     Name = "Q1",
                     Text = "Are you awesome?",
                     PublicKey = Guid.NewGuid(),
-                    CreationDate = DateTime.Now,
+                    Created = DateTime.Now,
                     LastUpdated = DateTime.Now,
                     TypeId = 1,
                 },
@@ -155,7 +155,7 @@ namespace survey.data
                     Name = "Q2",
                     Text = "How are you today?",
                     PublicKey = Guid.NewGuid(),
-                    CreationDate = DateTime.Now,
+                    Created = DateTime.Now,
                     LastUpdated = DateTime.Now,
                     TypeId = 2
                 },
@@ -165,7 +165,7 @@ namespace survey.data
                     Name = "Q3",
                     Text = "Are you cool?",
                     PublicKey = Guid.NewGuid(),
-                    CreationDate = DateTime.Now,
+                    Created = DateTime.Now,
                     LastUpdated = DateTime.Now,
                     TypeId = 1
                 },
@@ -175,7 +175,7 @@ namespace survey.data
                     Name = "Q4",
                     Text = "Are you not cool?",
                     PublicKey = Guid.NewGuid(),
-                    CreationDate = DateTime.Now,
+                    Created = DateTime.Now,
                     LastUpdated = DateTime.Now,
                     TypeId = 1
                 }

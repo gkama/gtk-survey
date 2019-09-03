@@ -11,7 +11,7 @@ namespace survey.data
         Guid PublicKey { get; set; }
         string Name { get; set; }
         string Text { get; set; }
-        DateTime CreationDate { get; set; }
+        DateTime Created { get; set; }
         DateTime LastUpdated { get; set; }
         int TypeId { get; set; }
         QuestionType Type { get; set; }

@@ -149,7 +149,7 @@ namespace survey.services
         public async Task<IEnumerable<Survey>> GetSurveysToday()
         {
             return await GetSurveysQuery()
-                .Where(x => x.CreationDate.Day == DateTime.Now.Day)
+                .Where(x => x.Created.Day == DateTime.Now.Day)
                 .ToListAsync();
         }
         public async Task<int> GetSurveysTodayCount()
@@ -163,7 +163,7 @@ namespace survey.services
             var survey = new Survey()
             {
                 Name = Name,
-                CreationDate = DateTime.Now,
+                Created = DateTime.Now,
                 CreatedBy = string.Empty,
                 LastUpdated = DateTime.Now,
                 LastUpdatedBy = string.Empty,
@@ -249,7 +249,7 @@ namespace survey.services
                     Name = Name,
                     Text = Text,
                     TypeId = Type.Id,
-                    CreationDate = DateTime.Now,
+                    Created = DateTime.Now,
                     LastUpdated = DateTime.Now,
                     PublicKey = Guid.NewGuid()
                 };
@@ -278,7 +278,7 @@ namespace survey.services
                         Name = Name,
                         Text = Text,
                         TypeId = qtype.Id,
-                        CreationDate = DateTime.Now,
+                        Created = DateTime.Now,
                         LastUpdated = DateTime.Now,
                         PublicKey = Guid.NewGuid()
                     };

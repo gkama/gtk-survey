@@ -8,7 +8,7 @@ namespace survey.data
     {
         int Id { get; set; }
         string Name { get; set; }
-        DateTime CreationDate { get; set; }
+        DateTime Created { get; set; }
         string CreatedBy { get; set; }
         DateTime LastUpdated { get; set; }
         string LastUpdatedBy { get; set; }

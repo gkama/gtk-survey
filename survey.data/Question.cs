@@ -24,8 +24,8 @@ namespace survey.data
         [JsonProperty("question_text")]
         public string Text { get; set; }
 
-        [JsonProperty("creation_date")]
-        public DateTime CreationDate { get; set; }
+        [JsonProperty("created")]
+        public DateTime Created { get; set; }
 
         [JsonProperty("last_updated")]
         public DateTime LastUpdated { get; set; }
