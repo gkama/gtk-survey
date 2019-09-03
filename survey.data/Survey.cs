@@ -26,10 +26,16 @@ namespace survey.data
         [JsonProperty("last_updated_by")]
         public string LastUpdatedBy { get; set; }
 
-        [JsonProperty("survey_questions")]
-        public ICollection<SurveyQuestion> SurveyQuestions { get; } = new List<SurveyQuestion>();
+        [JsonProperty("workspace_id")]
+        public int? WorkspaceId { get; set; }
+
+        [JsonProperty("workspace")]
+        public Workspace Workspace { get; set; }
 
         [JsonProperty("public_key")]
         public Guid PublicKey { get; set; }
+
+        [JsonProperty("survey_questions")]
+        public ICollection<SurveyQuestion> SurveyQuestions { get; } = new List<SurveyQuestion>();
     }
 }

@@ -40,6 +40,10 @@ namespace survey.data
                     .WithOne()
                     .HasForeignKey(x => x.SurveyId)
                     .IsRequired();
+
+                e.HasOne(x => x.Workspace)
+                    .WithMany()
+                    .HasForeignKey(x => x.WorkspaceId);
             });
 
             modelBuilder.Entity<Question>(e =>

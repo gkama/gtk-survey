@@ -12,6 +12,7 @@ namespace survey.data
         string CreatedBy { get; set; }
         DateTime LastUpdated { get; set; }
         string LastUpdatedBy { get; set; }
+        int? WorkspaceId { get; set; }
         Guid PublicKey { get; set; }
     }
 }
