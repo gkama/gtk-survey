@@ -59,6 +59,12 @@ namespace survey.services
                             .ThenInclude(x => x.Answers)
                 .AsQueryable();
         }
+        public IQueryable<Survey> GetSurveysWithWorkspace()
+        {
+            return context.Surveys
+                .Include(x => x.Workspace)
+                .AsQueryable();
+        }
         public IQueryable<Survey> GetSurveysSimplifiedQuery()
         {
             return context.Surveys
