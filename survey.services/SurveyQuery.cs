@@ -12,6 +12,21 @@ namespace survey.services
     {
         public SurveyQuery(ISurveyRepository repo)
         {
+            Field<ListGraphType<WorkspaceGType>>(
+                "workspaces",
+                resolve: context => repo.GetWorkspaces());
+
+            FieldAsync<WorkspaceGType>(
+                "workspace",
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }),
+                resolve: async context =>
+                {
+                    var id = context.GetArgument<int>("id");
+
+                    return await repo.GetWorkspaceAsync(id);
+                });
+
+
             Field<ListGraphType<SurveyGType>>(
                 "surveys",
                 resolve: context => repo.GetSurveys());
