@@ -13,6 +13,7 @@ namespace survey.data
             : base(options)
         { }
 
+        public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Workspace> Workspaces { get; set; }
         public virtual DbSet<Survey> Surveys { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
@@ -23,9 +24,22 @@ namespace survey.data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Client>(e =>
+            {
+                e.HasKey(x => x.Id);
+
+                e.HasMany(x => x.Workspaces)
+                    .WithOne()
+                    .HasForeignKey(x => x.ClientId);
+            });
+
             modelBuilder.Entity<Workspace>(e =>
             {
                 e.HasKey(x => x.Id);
+
+                e.HasOne(x => x.Client)
+                    .WithMany()
+                    .HasForeignKey(x => x.ClientId);
 
                 e.HasMany(x => x.Surveys)
                     .WithOne()
