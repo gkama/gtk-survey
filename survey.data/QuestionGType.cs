@@ -13,7 +13,7 @@ namespace survey.data
             Field(x => x.Id);
             Field(x => x.Name);
             Field(x => x.Text);
-            Field(x => x.CreationDate);
+            Field(x => x.Created);
             Field(x => x.LastUpdated);
             Field(x => x.TypeId);
             Field(x => x.PublicKey, type: typeof(IdGraphType));
