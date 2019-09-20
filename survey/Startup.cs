@@ -33,6 +33,7 @@ namespace survey
         public void ConfigureServices(IServiceCollection services)
         {
             //DI
+            services.AddScoped<ClientGType>();
             services.AddScoped<WorkspaceGType>();
             services.AddScoped<SurveyGType>();
             services.AddScoped<QuestionGType>();

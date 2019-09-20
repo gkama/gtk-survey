@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 
 using GraphQL.Types;
-
 namespace survey.data
 {
-    public class WorkspaceGType : ObjectGraphType<Workspace>
+    public class ClientGType : ObjectGraphType<Client>
     {
-        public WorkspaceGType()
+        public ClientGType()
         {
             Field(x => x.Id);
             Field(x => x.Name);
             Field(x => x.Slug);
+            Field(x => x.Created);
+            Field(x => x.LastUpdated);
+            Field(x => x.BillingId);
             Field(x => x.PublicKey, type: typeof(IdGraphType));
 
-            Field<SurveyQuestionGType>("surveys", resolve: context => context.Source.Surveys);
+            Field<SurveyQuestionGType>("workspaces", resolve: context => context.Source.Workspaces);
         }
     }
 }
