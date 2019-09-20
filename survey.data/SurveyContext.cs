@@ -43,10 +43,6 @@ namespace survey.data
                 e.Property(x => x.Name).HasMaxLength(300);
                 e.Property(x => x.Slug).HasMaxLength(100);
 
-                e.HasOne(x => x.Client)
-                    .WithMany()
-                    .HasForeignKey(x => x.ClientId);
-
                 e.HasMany(x => x.Surveys)
                     .WithOne()
                     .HasForeignKey(x => x.WorkspaceId);
@@ -66,7 +62,7 @@ namespace survey.data
                     .IsRequired();
 
                 e.HasOne(x => x.Workspace)
-                    .WithMany()
+                    .WithMany(x => x.Surveys)
                     .HasForeignKey(x => x.WorkspaceId);
             });
 

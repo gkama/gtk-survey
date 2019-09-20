@@ -15,7 +15,7 @@ namespace survey.data
             Field(x => x.Slug);
             Field(x => x.PublicKey, type: typeof(IdGraphType));
 
-            Field<SurveyQuestionGType>("surveys", resolve: context => context.Source.Surveys);
+            Field<ListGraphType<SurveyGType>>("surveys", resolve: context => context.Source.Surveys);
         }
     }
 }

@@ -16,7 +16,10 @@ namespace survey.data
             Field(x => x.CreatedBy);
             Field(x => x.LastUpdated);
             Field(x => x.LastUpdatedBy);
+            Field(x => x.WorkspaceId, type: typeof(IdGraphType));
             Field(x => x.PublicKey, type: typeof(IdGraphType));
+
+            Field<WorkspaceGType>("workspace", resolve: context => context.Source.Workspace);
         }
     }
 }
