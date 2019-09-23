@@ -12,9 +12,11 @@ namespace survey.services
         IEnumerable<Client> GetClients();
         Task<Client> GetClientAsync(int Id);
         Task<Client> GetClientAsync(Guid PublicKey);
+
         IEnumerable<Workspace> GetWorkspaces();
         Task<Workspace> GetWorkspaceAsync(int Id);
         Task<Workspace> GetWorkspaceAsync(Guid PublicKey);
+
         IEnumerable<Survey> GetSurveys();
         Task<Survey> GetSurveyAsync(int Id);
         Task<Survey> GetSurveyAsync(string Name);
@@ -23,10 +25,14 @@ namespace survey.services
         Task<int> GetSurveysTodayCount();
         Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<Question> Questions);
         Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<QuestionRequest> QuestionRequests);
+
         Task<Question> GetQuestionAsync(int Id);
         Task<Question> GetQuestionAsync(Guid PublicKey);
         Task<IEnumerable<SurveyQuestion>> GetSurveyQuestionsAsync(int SurveyId);
+
+        IEnumerable<QuestionType> GetQuestionTypes();
         Task<QuestionType> GetQuestionTypeAsync(string Name);
+
         IEnumerable<Response> GetResponses();
         IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);
         Task<IEnumerable<object>> GetResponsesCustomBySurveyIdAsync(int SurveyId);
