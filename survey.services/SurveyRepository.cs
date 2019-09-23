@@ -59,15 +59,25 @@ namespace survey.services
             return await GetClientsQuerySimplified()
                 .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
         }
-        public async Task<Client> GetClientAsync(string Slug)
+        public async Task<Client> GetClientAsync(string Name = null, string Slug = null)
         {
-            return await context.Clients
-                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+            if (Slug != null && Name != null)
+                return await context.Clients
+                    .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase)
+                        && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+            else if (Slug != null && Name == null)
+                return await context.Clients
+                    .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+            else if (Name != null && Slug == null)
+                return await context.Clients
+                    .FirstOrDefaultAsync(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+            else
+                return null;
         }
 
         public async Task AddClientAsync(string Name, string Slug, int? BillingId)
         {
-            var client = await GetClientAsync(Slug);
+            var client = await GetClientAsync(Name, Slug);
         }
 
 
