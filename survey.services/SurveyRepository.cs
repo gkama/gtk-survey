@@ -59,6 +59,16 @@ namespace survey.services
             return await GetClientsQuerySimplified()
                 .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
         }
+        public async Task<Client> GetClientAsync(string Slug)
+        {
+            return await context.Clients
+                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task AddClientAsync(string Name, string Slug, int? BillingId)
+        {
+            var client = await GetClientAsync(Slug);
+        }
 
 
 
