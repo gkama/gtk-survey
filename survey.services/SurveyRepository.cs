@@ -61,23 +61,38 @@ namespace survey.services
         }
         public async Task<Client> GetClientAsync(string Name = null, string Slug = null)
         {
-            if (Slug != null && Name != null)
-                return await context.Clients
-                    .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase)
-                        && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
-            else if (Slug != null && Name == null)
-                return await context.Clients
-                    .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
-            else if (Name != null && Slug == null)
-                return await context.Clients
-                    .FirstOrDefaultAsync(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
-            else
-                return null;
+            if ((await context.Clients
+                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase))) != null)
+                throw new SurveyException(HttpStatusCode.BadRequest, $"a Client with slug='{Slug}' already exists");
+
+            return await context.Clients
+                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase)
+                    && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
         }
 
-        public async Task AddClientAsync(string Name, string Slug, int? BillingId)
+        public async Task<Client> AddClientAsync(string Name, string Slug, int? BillingId)
         {
             var client = await GetClientAsync(Name, Slug);
+
+            if (client == null)
+            {
+                client = new Client()
+                {
+                    Name = Name,
+                    Slug = Slug,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    BillingId = BillingId ?? null,
+                    PublicKey = Guid.NewGuid()
+                };
+
+                await context.Clients
+                    .AddAsync(client);
+
+                await context.SaveChangesAsync();
+            }
+
+            return client;
         }
 
 
