@@ -49,6 +49,22 @@ namespace survey.services
             return GetClientsQuerySimplified()
                 .AsEnumerable();
         }
+        public Client GetClient(string Name, string Slug)
+        {
+            return context.Clients
+                .FirstOrDefault(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase)
+                    && x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+        }
+        public Client GetClientByName(string Name)
+        {
+            return context.Clients
+                .FirstOrDefault(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+        }
+        public Client GetClientBySlug(string Slug)
+        {
+            return context.Clients
+                .FirstOrDefault(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+        }
         public async Task<Client> GetClientAsync(int Id)
         {
             return await GetClientsQuerySimplified()
@@ -59,28 +75,11 @@ namespace survey.services
             return await GetClientsQuerySimplified()
                 .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
         }
-        public async Task<Client> GetClientAsync(string Name = null, string Slug = null)
+        public async Task<Client> GetClientAsync(string Name, string Slug)
         {
-            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Slug))
-                return await context.Clients
+            return await context.Clients
                 .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase)
                     && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
-            else if (string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Slug))
-            {
-                var client = await context.Clients
-                    .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
-
-                if (client == null)
-                    throw new SurveyException(HttpStatusCode.BadRequest, $"Client with slug='{Slug}' already exists");
-                else
-                    return client;
-            }
-            else if (!string.IsNullOrWhiteSpace(Name) && string.IsNullOrWhiteSpace(Slug))
-                return await context.Clients
-                    .FirstOrDefaultAsync(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
-            else
-                return null;
-            
         }
         public async Task<Client> GetClientByNameAsync(string Name)
         {
@@ -119,6 +118,31 @@ namespace survey.services
             }
 
             return client;
+        }
+        public void AddClient(string Name, string Slug, int? BillingId)
+        {
+            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Slug))
+                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a Client with empty or null Name='{Name}' or Slug='{Slug}'");
+
+            var client = GetClient(Name, Slug);
+
+            if (client == null)
+            {
+                client = new Client()
+                {
+                    Name = Name,
+                    Slug = Slug,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    BillingId = BillingId ?? null,
+                    PublicKey = Guid.NewGuid()
+                };
+
+                context.Clients
+                    .Add(client);
+
+                context.SaveChanges();
+            }
         }
 
 
