@@ -145,6 +145,16 @@ namespace survey.services
             }
         }
 
+        public async Task DeleteClientAsync(string Name, string Slug)
+        {
+            context.Clients
+                .Remove(await GetClientAsync(Name, Slug));
+
+            await context.SaveChangesAsync();
+
+            log.LogInformation($"request to DELETE Client with Name='{Name}' and Slug='{Slug}' COMPLETED");
+        }
+
 
 
         /*
