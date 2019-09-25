@@ -61,17 +61,43 @@ namespace survey.services
         }
         public async Task<Client> GetClientAsync(string Name = null, string Slug = null)
         {
-            if ((await context.Clients
-                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase))) != null)
-                throw new SurveyException(HttpStatusCode.BadRequest, $"a Client with slug='{Slug}' already exists");
-
-            return await context.Clients
+            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Slug))
+                return await context.Clients
                 .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase)
                     && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+            else if (string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Slug))
+            {
+                var client = await context.Clients
+                    .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+
+                if (client == null)
+                    throw new SurveyException(HttpStatusCode.BadRequest, $"Client with slug='{Slug}' already exists");
+                else
+                    return client;
+            }
+            else if (!string.IsNullOrWhiteSpace(Name) && string.IsNullOrWhiteSpace(Slug))
+                return await context.Clients
+                    .FirstOrDefaultAsync(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+            else
+                return null;
+            
+        }
+        public async Task<Client> GetClientByNameAsync(string Name)
+        {
+            return await context.Clients
+                .FirstOrDefaultAsync(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+        }
+        public async Task<Client> GetClientBySlugAsync(string Slug)
+        {
+            return await context.Clients
+                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
         }
 
         public async Task<Client> AddClientAsync(string Name, string Slug, int? BillingId)
         {
+            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Slug))
+                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a Client with empty or null Name='{Name}' or Slug='{Slug}'");
+
             var client = await GetClientAsync(Name, Slug);
 
             if (client == null)
