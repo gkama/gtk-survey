@@ -52,13 +52,13 @@ namespace survey.services
         public Client GetClient(string Name, string Slug)
         {
             return context.Clients
-                .FirstOrDefault(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase)
+                .FirstOrDefault(x => x.Name == Name
                     && x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
         }
         public Client GetClientByName(string Name)
         {
             return context.Clients
-                .FirstOrDefault(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(x => x.Name == Name);
         }
         public Client GetClientBySlug(string Slug)
         {
@@ -79,12 +79,12 @@ namespace survey.services
         {
             return await context.Clients
                 .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase)
-                    && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+                    && x.Name == Name);
         }
         public async Task<Client> GetClientByNameAsync(string Name)
         {
             return await context.Clients
-                .FirstOrDefaultAsync(x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefaultAsync(x => x.Name == Name);
         }
         public async Task<Client> GetClientBySlugAsync(string Slug)
         {
@@ -180,6 +180,50 @@ namespace survey.services
         {
             return await GetWorkspacesQuery()
                 .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
+        public async Task<Workspace> GetWorkspaceAsync(string Name, string Slug)
+        {
+            return await context.Workspaces
+                .FirstOrDefaultAsync(x => x.Name == Name
+                    && x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+        }
+        public async Task<Workspace> GetWorkspaceByNameAsync(string Name)
+        {
+            return await context.Workspaces
+                .FirstOrDefaultAsync(x => x.Name == Name);
+        }
+        public async Task<Workspace> GetWorkspaceBySlugAsync(string Slug)
+        {
+            return await context.Workspaces
+                .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task<Workspace> AddWorkspaceAsync(string Name, string Slug, int? ClientId)
+        {
+            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Slug))
+                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a Workspace with empty or null Name='{Name}' or Slug='{Slug}'");
+
+            var workspace = await GetWorkspaceAsync(Name, Slug);
+
+            if (workspace == null)
+            {
+                workspace = new Workspace()
+                {
+                    Name = Name,
+                    Slug = Slug,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    ClientId = ClientId ?? null,
+                    PublicKey = Guid.NewGuid()
+                };
+
+                await context.Workspaces
+                    .AddAsync(workspace);
+
+                await context.SaveChangesAsync();
+            }
+
+            return workspace;
         }
 
         public async Task<object> GetWorkspaceSimpleStatsAsync(int Id)
