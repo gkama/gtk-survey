@@ -197,6 +197,12 @@ namespace survey.services
             return await context.Workspaces
                 .FirstOrDefaultAsync(x => x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
         }
+        public Workspace GetWorkspace(string Name, string Slug)
+        {
+            return context.Workspaces
+                .FirstOrDefault(x => x.Name == Name
+                    && x.Slug.Equals(Slug, StringComparison.OrdinalIgnoreCase));
+        }
 
         public async Task<Workspace> AddWorkspaceAsync(string Name, string Slug, int? ClientId)
         {
@@ -224,6 +230,41 @@ namespace survey.services
             }
 
             return workspace;
+        }
+        public void AddWorkspace(string Name, string Slug, int? ClientId)
+        {
+            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Slug))
+                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a Workspace with empty or null Name='{Name}' or Slug='{Slug}'");
+
+            var workspace = GetWorkspace(Name, Slug);
+
+            if (workspace == null)
+            {
+                workspace = new Workspace()
+                {
+                    Name = Name,
+                    Slug = Slug,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    ClientId = ClientId ?? null,
+                    PublicKey = Guid.NewGuid()
+                };
+
+                context.Workspaces
+                    .Add(workspace);
+
+                context.SaveChanges();
+            }
+        }
+
+        public async Task DeleteWorkspaceAsync(string Name, string Slug)
+        {
+            context.Workspaces
+                .Remove(await GetWorkspaceAsync(Name, Slug));
+
+            await context.SaveChangesAsync();
+
+            log.LogInformation($"request to DELETE Workspace with Name='{Name}' and Slug='{Slug}' COMPLETED");
         }
 
         public async Task<object> GetWorkspaceSimpleStatsAsync(int Id)
