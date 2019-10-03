@@ -15,32 +15,33 @@ QuestionType.cs
 QuestionTypeAnswer.cs
 Response.cs
 
+Workspace
+```csharp
+public class Workspace : IWorkspace, IPublicKeyId
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Slug { get; set; }
+    public DateTime Created { get; set; }
+    public DateTime LastUpdated { get; set; }
+    public int? ClientId { get; set; }
+    public Client Client { get; set; }
+    public Guid PublicKey { get; set; }
+    public ICollection<Survey> Surveys { get; } = new List<Survey>();
+}
+```
+
 Question
 ```csharp
-public class Question : IQuestion<IQuestionType>, IPublicKeyId
+public class Question
 {
-	[JsonProperty("id")]
     public int Id { get; set; }
-
-    [JsonProperty("name")]
     public string Name { get; set; }
-
-    [JsonProperty("questionText")]
     public string Text { get; set; }
-
-    [JsonProperty("created")]
     public DateTime Created { get; set; }
-
-    [JsonProperty("lastUpdated")]
     public DateTime LastUpdated { get; set; }
-
-    [JsonProperty("typeId")]
     public int TypeId { get; set; }
-
-    [JsonProperty("type")]
     public QuestionType Type { get; set; }
-
-    [JsonProperty("publicKey")]
     public Guid PublicKey { get; set; }
 }
 ```
