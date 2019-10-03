@@ -7,20 +7,6 @@ The idea behind this is that these question types can be re-used and shared acro
 The backend database will 
 
 ## Data Types
-Client.cs
-
-Workspace.cs
-
-Survey.cs
-
-Question.cs
-
-QuestionType.cs
-
-QuestionTypeAnswer.cs
-
-Response.cs
-
 ```csharp
 public class Client
 {
@@ -33,7 +19,8 @@ public class Client
     public Guid PublicKey { get; set; }
     public ICollection<Workspace> Workspaces { get; } = new List<Workspace>();
 }
-
+```
+```csharp
 public class Workspace
 {
     public int Id { get; set; }
@@ -46,7 +33,8 @@ public class Workspace
     public Guid PublicKey { get; set; }
     public ICollection<Survey> Surveys { get; } = new List<Survey>();
 }
-
+```
+```csharp
 public class Survey
 {
     public int Id { get; set; }
@@ -60,7 +48,8 @@ public class Survey
     public Guid PublicKey { get; set; }
     public ICollection<SurveyQuestion> SurveyQuestions { get; } = new List<SurveyQuestion>();
 }
-
+```
+```csharp
 public class Question
 {
     public int Id { get; set; }
@@ -72,7 +61,8 @@ public class Question
     public QuestionType Type { get; set; }
     public Guid PublicKey { get; set; }
 }
-
+```
+```csharp
 public class QuestionType
 {
     public int Id { get; set; }
@@ -80,7 +70,8 @@ public class QuestionType
     public Guid PublicKey { get; set; }
     public ICollection<QuestionTypeAnswer> Answers { get; } = new List<QuestionTypeAnswer>();
 }
-
+```
+```csharp
 public class QuestionTypeAnswer
 {
     public int Id { get; set; }
@@ -88,7 +79,8 @@ public class QuestionTypeAnswer
     public string Answer { get; set; }
     public Guid PublicKey { get; set; }
 }
-
+```
+```csharp
 public class Response
 {
     public int Id { get; set; }
