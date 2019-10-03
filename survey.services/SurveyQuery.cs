@@ -46,7 +46,7 @@ namespace survey.services
                 resolve: context => repo.GetSurveys());
 
             FieldAsync<SurveyGType>(
-                "survey_by_id",
+                "surveyById",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }),
                 resolve: async context =>
                 {
@@ -56,7 +56,7 @@ namespace survey.services
                 });
 
             FieldAsync<SurveyGType>(
-                "survey_by_publickey",
+                "surveyByPublickey",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "publickey" }),
                 resolve: async context =>
                 {
@@ -66,7 +66,7 @@ namespace survey.services
                 });
 
             FieldAsync<ListGraphType<SurveyQuestionGType>>(
-                "survey_questions",
+                "surveyQuestions",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "surveyid" }),
                 resolve: async context =>
                 {
@@ -76,7 +76,7 @@ namespace survey.services
                 });
 
             Field<ListGraphType<ResponseGType>>(
-                "survey_responses",
+                "surveyResponses",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "surveyid" }),
                 resolve: context =>
                 {
@@ -86,14 +86,14 @@ namespace survey.services
                 });
 
             Field<ListGraphType<QuestionTypeGType>>(
-                "question_types",
+                "questionTypes",
                 resolve: context =>
                 {
                     return repo.GetQuestionTypes();
                 });
 
             FieldAsync<QuestionTypeGType>(
-                "question_type",
+                "questionType",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "name" }),
                 resolve: async context =>
                 {
