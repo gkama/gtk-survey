@@ -838,7 +838,7 @@ namespace survey.services
             catch (Exception e)
             {
                 throw new SurveyException(HttpStatusCode.InternalServerError,
-                    $"error while updating response. exception={e.ToString()}");
+                    $"error while updating response. surveyid='{SurveyId}' questionid='{QuestionId}' answer='{Answer}'. exception={e.ToString()}");
             }
         }
         public void UpdateResponse(int SurveyId, int QuestionId, string Answer)
