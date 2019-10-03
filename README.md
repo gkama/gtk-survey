@@ -11,16 +11,6 @@ there are a number of data types within the `gtk-survey` ecosystem. They're all 
 that performs all the major CRUD operations. The list below includes the names of the data types
 as well as their full definition
 
-`Client.cs`
-`Workspace.cs`
-`Survey.cs`
-`Question.cs`
-`QuestionType.cs`
-`QuestionTypeAnswer.cs`
-`Response.cs`
-
-<details>
-<summary>data types</summary>
 
 ```csharp
 public class Client
@@ -107,4 +97,3 @@ public class Response
     public Guid PublicKey { get; set; }
 }
 ```
-</details>
