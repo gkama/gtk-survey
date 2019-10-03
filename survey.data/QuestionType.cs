@@ -20,7 +20,6 @@ namespace survey.data
         [JsonProperty("name")]
         public string Name { get; set; }
 
-
         [JsonProperty("publicKey")]
         public Guid PublicKey { get; set; }
 
