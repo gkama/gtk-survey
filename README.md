@@ -7,7 +7,11 @@ The idea behind this is that these question types can be re-used and shared acro
 The backend database will 
 
 ## Data Types
-```csharp
+below are the data types as part of the `gtk-survey` eco system
+
+<p>
+<details>
+<code>
 public class Client
 {
     public int Id { get; set; }
@@ -19,7 +23,7 @@ public class Client
     public Guid PublicKey { get; set; }
     public ICollection<Workspace> Workspaces { get; } = new List<Workspace>();
 }
-```
+</code>
 ```csharp
 public class Workspace
 {
