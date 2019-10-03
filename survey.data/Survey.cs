@@ -17,25 +17,25 @@ namespace survey.data
         [JsonProperty("created")]
         public DateTime Created { get; set; }
 
-        [JsonProperty("created_by")]
+        [JsonProperty("createdBy")]
         public string CreatedBy { get; set; }
 
-        [JsonProperty("last_updated")]
+        [JsonProperty("lastUpdated")]
         public DateTime LastUpdated { get; set; }
 
-        [JsonProperty("last_updated_by")]
+        [JsonProperty("lastUpdatedBy")]
         public string LastUpdatedBy { get; set; }
 
-        [JsonProperty("workspace_id")]
+        [JsonProperty("workspaceId")]
         public int? WorkspaceId { get; set; }
 
         [JsonProperty("workspace")]
         public Workspace Workspace { get; set; }
 
-        [JsonProperty("public_key")]
+        [JsonProperty("publicKey")]
         public Guid PublicKey { get; set; }
 
-        [JsonProperty("survey_questions")]
+        [JsonProperty("surveyQuestions")]
         public ICollection<SurveyQuestion> SurveyQuestions { get; } = new List<SurveyQuestion>();
     }
 }

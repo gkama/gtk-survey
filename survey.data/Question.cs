@@ -21,22 +21,22 @@ namespace survey.data
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("question_text")]
+        [JsonProperty("questionText")]
         public string Text { get; set; }
 
         [JsonProperty("created")]
         public DateTime Created { get; set; }
 
-        [JsonProperty("last_updated")]
+        [JsonProperty("lastUpdated")]
         public DateTime LastUpdated { get; set; }
 
-        [JsonProperty("type_id")]
+        [JsonProperty("typeId")]
         public int TypeId { get; set; }
 
         [JsonProperty("type")]
         public QuestionType Type { get; set; }
 
-        [JsonProperty("public_key")]
+        [JsonProperty("publicKey")]
         public Guid PublicKey { get; set; }
     }
 }

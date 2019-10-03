@@ -8,25 +8,25 @@ namespace survey.data
 {
     public class QuestionRequest
     {
-        [JsonProperty("question_name")]
+        [JsonProperty("questionName")]
         public string QuestionName { get; set; }
 
-        [JsonProperty("question_text")]
+        [JsonProperty("questionText")]
         public string QuestionText { get; set; }
 
-        [JsonProperty("question_type_name")]
+        [JsonProperty("questionTypeName")]
         public string QuestionTypeName { get; set; }
 
-        [JsonProperty("question_type_answers")]
+        [JsonProperty("questionTypeAnswers")]
         public IEnumerable<string> QuestionTypeAnswers { get; set; } = new List<string>();
     }
 
     public class SurveyQuestionRequest
     {
-        [JsonProperty("survey_name")]
+        [JsonProperty("surveyName")]
         public string SurveyName { get; set; }
 
-        [JsonProperty("question_requests")]
+        [JsonProperty("questionRequests")]
         public IEnumerable<QuestionRequest> QuestionRequests { get; set; } = new List<QuestionRequest>();
     }
 }

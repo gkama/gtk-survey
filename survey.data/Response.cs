@@ -14,19 +14,19 @@ namespace survey.data
         [JsonProperty("count")]
         public int Count { get; set; }
 
-        [JsonProperty("survey_question_id")]
+        [JsonProperty("surveyQuestionId")]
         public int SurveyQuestionId { get; set; }
 
-        [JsonProperty("survey_question")]
+        [JsonProperty("surveyQuestion")]
         public SurveyQuestion SurveyQuestion { get; set; }
 
-        [JsonProperty("question_type_answer_id")]
+        [JsonProperty("questionTypeAnswerId")]
         public int QuestionTypeAnswerId { get; set; }
 
-        [JsonProperty("question_type_answer")]
+        [JsonProperty("questionTypeAnswer")]
         public QuestionTypeAnswer QuestionTypeAnswer { get; set; }
 
-        [JsonProperty("public_key")]
+        [JsonProperty("publicKey")]
         public Guid PublicKey { get; set; }
     }
 }

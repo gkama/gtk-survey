@@ -8,10 +8,10 @@ namespace survey.data
 {
     public class SurveyException : ApplicationException
     {
-        [JsonProperty("status_code")]
+        [JsonProperty("statusCode")]
         public int StatusCode { get; set; }
 
-        [JsonProperty("content_type")]
+        [JsonProperty("contentType")]
         public string ContentType { get; set; }
 
         public SurveyException(int StatusCode)

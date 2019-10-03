@@ -20,16 +20,16 @@ namespace survey.data
         [JsonProperty("created")]
         public DateTime Created { get; set; }
 
-        [JsonProperty("last_updated")]
+        [JsonProperty("lastUpdated")]
         public DateTime LastUpdated { get; set; }
 
-        [JsonProperty("client_id")]
+        [JsonProperty("clientId")]
         public int? ClientId { get; set; }
 
         [JsonProperty("client")]
         public Client Client { get; set; }
 
-        [JsonProperty("public_key")]
+        [JsonProperty("publicKey")]
         public Guid PublicKey { get; set; }
 
         [JsonProperty("surveys")]

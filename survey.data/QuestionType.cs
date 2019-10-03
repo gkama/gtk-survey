@@ -20,10 +20,11 @@ namespace survey.data
         [JsonProperty("name")]
         public string Name { get; set; }
 
+
+        [JsonProperty("publicKey")]
+        public Guid PublicKey { get; set; }
+
         [JsonProperty("answers")]
         public ICollection<QuestionTypeAnswer> Answers { get; } = new List<QuestionTypeAnswer>();
-
-        [JsonProperty("public_key")]
-        public Guid PublicKey { get; set; }
     }
 }
