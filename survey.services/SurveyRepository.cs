@@ -841,7 +841,7 @@ namespace survey.services
                     $"error while updating response. surveyid='{SurveyId}' questionid='{QuestionId}' answer='{Answer}'. exception={e.ToString()}");
             }
         }
-        public async Task UpdateResponseBatchAsync(int SurveyId, int QuestionId, string Answer, int Count = 100)
+        public async Task UpdateResponseAsync(int SurveyId, int QuestionId, string Answer, int Count)
         {
             if (Count > 100 || Count < 0)
                 throw new SurveyException(HttpStatusCode.BadRequest,
