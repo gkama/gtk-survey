@@ -7,7 +7,6 @@ The idea behind this is that these question types can be re-used and shared acro
 The backend database will 
 
 ## Data Types
-```csharp
 Client.cs
 Workspace.cs
 Survey.cs
@@ -15,4 +14,33 @@ Question.cs
 QuestionType.cs
 QuestionTypeAnswer.cs
 Response.cs
+
+Question
+```csharp
+public class Question : IQuestion<IQuestionType>, IPublicKeyId
+{
+	[JsonProperty("id")]
+    public int Id { get; set; }
+
+    [JsonProperty("name")]
+    public string Name { get; set; }
+
+    [JsonProperty("questionText")]
+    public string Text { get; set; }
+
+    [JsonProperty("created")]
+    public DateTime Created { get; set; }
+
+    [JsonProperty("lastUpdated")]
+    public DateTime LastUpdated { get; set; }
+
+    [JsonProperty("typeId")]
+    public int TypeId { get; set; }
+
+    [JsonProperty("type")]
+    public QuestionType Type { get; set; }
+
+    [JsonProperty("publicKey")]
+    public Guid PublicKey { get; set; }
+}
 ```
