@@ -841,6 +841,12 @@ namespace survey.services
                     $"error while updating response. surveyid='{SurveyId}' questionid='{QuestionId}' answer='{Answer}'. exception={e.ToString()}");
             }
         }
+        public async Task UpdateResponsesAsync(int Limit = 100)
+        {
+            if (Limit > 100 || Limit < 0)
+                throw new SurveyException(HttpStatusCode.BadRequest,
+                    $"error while updating responses. limit='{Limit}' exceeds maximum limit allowed of 100");
+        }
         public void UpdateResponse(int SurveyId, int QuestionId, string Answer)
         {
             try
