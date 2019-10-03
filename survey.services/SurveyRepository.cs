@@ -841,11 +841,28 @@ namespace survey.services
                     $"error while updating response. surveyid='{SurveyId}' questionid='{QuestionId}' answer='{Answer}'. exception={e.ToString()}");
             }
         }
-        public async Task UpdateResponsesAsync(int Limit = 100)
+        public async Task UpdateResponseBatchAsync(int SurveyId, int QuestionId, string Answer, int Count = 100)
         {
-            if (Limit > 100 || Limit < 0)
+            if (Count > 100 || Count < 0)
                 throw new SurveyException(HttpStatusCode.BadRequest,
-                    $"error while updating responses. limit='{Limit}' exceeds maximum limit allowed of 100");
+                    $"count='{Count}' exceeds maximum limit allowed of 100");
+
+            try
+            {
+                var response = await context.Responses
+                    .FirstOrDefaultAsync(x => x.SurveyQuestion.SurveyId == SurveyId &&
+                        x.SurveyQuestion.QuestionId == QuestionId &&
+                        x.QuestionTypeAnswer.Answer == Answer);
+
+                response.Count += Count;
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while updating response in batch. surveyid='{SurveyId}' questionid='{QuestionId}' answer='{Answer}' count='{Count}'. exception={e.ToString()}");
+            }
         }
         public void UpdateResponse(int SurveyId, int QuestionId, string Answer)
         {
