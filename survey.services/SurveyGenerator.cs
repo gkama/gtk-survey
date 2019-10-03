@@ -10,9 +10,18 @@ namespace survey.services
     {
         public readonly ILogger log;
 
-        public SurveyGenerator(ILogger<SurveyGenerator> log)
+        public ISurveyRepository repo;
+
+        public SurveyGenerator(ILogger<SurveyGenerator> log, ISurveyRepository repo)
         {
             this.log = log;
+
+            this.repo = repo;
+        }
+
+        public void CreateSurvey()
+        {
+
         }
     }
 }
