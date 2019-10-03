@@ -7,11 +7,22 @@ The idea behind this is that these question types can be re-used and shared acro
 The backend database will 
 
 ## Data Types
-below are the data types as part of the `gtk-survey` eco system
+there are a number of data types within the `gtk-survey` ecosystem. They're all encapsulated within the Entity Framework Core context
+that performs all the major CRUD operations. The list below includes the names of the data types
+as well as their full definition
 
-<p>
+`Client.cs`
+`Workspace.cs`
+`Survey.cs`
+`Question.cs`
+`QuestionType.cs`
+`QuestionTypeAnswer.cs`
+`Response.cs`
+
 <details>
-<code>
+<summary>data types</summary>
+
+```csharp
 public class Client
 {
     public int Id { get; set; }
@@ -23,7 +34,7 @@ public class Client
     public Guid PublicKey { get; set; }
     public ICollection<Workspace> Workspaces { get; } = new List<Workspace>();
 }
-</code>
+```
 ```csharp
 public class Workspace
 {
@@ -96,3 +107,4 @@ public class Response
     public Guid PublicKey { get; set; }
 }
 ```
+</details>
