@@ -400,6 +400,11 @@ namespace survey.services
                 .AsQueryable();
         }
 
+        public IEnumerable<Question> GetQuestions()
+        {
+            return GetQuestionsQuery()
+                .AsEnumerable();
+        }
         public async Task<Question> GetQuestionAsync(int Id)
         {
             return await GetQuestionsQuery()
