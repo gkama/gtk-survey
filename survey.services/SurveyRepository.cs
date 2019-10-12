@@ -581,6 +581,11 @@ namespace survey.services
                 .AsQueryable();
         }
 
+        public IEnumerable<QuestionTypeAnswer> GetQuestionTypeAnswers()
+        {
+            return GetQuestionTypeAnswersQuery()
+                .AsEnumerable();
+        }
         public async Task<QuestionTypeAnswer> GetQuestionTypeAnswerAsync(string Answer)
         {
             return await GetQuestionTypeAnswersQuery()

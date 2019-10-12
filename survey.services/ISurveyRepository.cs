@@ -34,6 +34,8 @@ namespace survey.services
         IEnumerable<QuestionType> GetQuestionTypes();
         Task<QuestionType> GetQuestionTypeAsync(string Name);
 
+        IEnumerable<QuestionTypeAnswer> GetQuestionTypeAnswers();
+
         IEnumerable<Response> GetResponses();
         IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);
         Task<IEnumerable<Response>> GetResponsesBySurveyIdAsync(int SurveyId);
