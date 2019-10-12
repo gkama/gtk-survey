@@ -118,6 +118,13 @@ namespace survey.services
 
                     return await repo.GetQuestionTypeAsync(name);
                 });
+
+            Field<ListGraphType<ResponseGType>>(
+                "responses",
+                resolve: context =>
+                {
+                    return repo.GetResponses();
+                });
         }
     }
 }
