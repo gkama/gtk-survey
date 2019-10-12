@@ -36,6 +36,7 @@ namespace survey.services
 
         IEnumerable<Response> GetResponses();
         IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);
+        Task<IEnumerable<Response>> GetResponsesBySurveyIdAsync(int SurveyId);
         Task<IEnumerable<object>> GetResponsesCustomBySurveyIdAsync(int SurveyId);
         Task<int> GetResponsesCountAsync(int SurveyId);
         Task<object> GetResponsesStatsAsync(int SurveyId);

@@ -125,6 +125,16 @@ namespace survey.services
                 {
                     return repo.GetResponses();
                 });
+
+            FieldAsync<ListGraphType<ResponseGType>>(
+                "responsesBySurveyId",
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "surveyid" }),
+                resolve: async context =>
+                {
+                    var surveyid = context.GetArgument<int>("surveyid");
+
+                    return await repo.GetResponsesBySurveyIdAsync(surveyid);
+                });
         }
     }
 }

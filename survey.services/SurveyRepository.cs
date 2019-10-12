@@ -767,6 +767,12 @@ namespace survey.services
             return GetResponsesQuery()
                 .Where(x => x.SurveyQuestion.SurveyId == SurveyId);
         }
+        public async Task<IEnumerable<Response>> GetResponsesBySurveyIdAsync(int SurveyId)
+        {
+            return await context.Responses
+                .Where(x => x.SurveyQuestion.SurveyId == SurveyId)
+                .ToListAsync();
+        }
         public async Task<IEnumerable<object>> GetResponsesCustomBySurveyIdAsync(int SurveyId)
         {
             return await GetResponsesQuery()
