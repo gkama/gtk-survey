@@ -147,10 +147,17 @@ namespace survey.services
 
         public async Task DeleteClientAsync(string Name, string Slug)
         {
-            context.Clients
-                .Remove(await GetClientAsync(Name, Slug));
+            try
+            {
+                context.Clients
+                    .Remove(await GetClientAsync(Name, Slug));
 
-            await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException($"error while deleting client with name={Name} slug={Slug}. error={e.Message}");
+            }
 
             log.LogInformation($"request to DELETE Client with Name='{Name}' and Slug='{Slug}' COMPLETED");
         }
