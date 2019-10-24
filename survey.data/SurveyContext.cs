@@ -17,6 +17,7 @@ namespace survey.data
         public virtual DbSet<Workspace> Workspaces { get; set; }
         public virtual DbSet<Survey> Surveys { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<SurveyCategory> SurveyCategories { get; set; }
         public virtual DbSet<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
         public virtual DbSet<QuestionTypeAnswer> QuestionTypeAnswers { get; set; }
