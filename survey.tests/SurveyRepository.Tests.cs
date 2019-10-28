@@ -63,6 +63,25 @@ namespace survey.tests
 
 
         /*
+         * Survey Categories
+         */
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(9)]
+        public async Task SurveyCategoriesExist(int id)
+        {
+            var surveyCategory = await repo.GetSurveyCategoryAsync(id);
+
+            //Asserts
+            Assert.True(surveyCategory != null);
+            Assert.True(!string.IsNullOrWhiteSpace(surveyCategory.Name));
+        }
+
+
+
+        /*
          * Question
          */
         [Theory]
