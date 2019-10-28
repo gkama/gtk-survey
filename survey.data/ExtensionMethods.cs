@@ -31,5 +31,12 @@ namespace survey.data
                 return Query.FirstOrDefault<T>(x => x.PublicKey == PublicKey);
             });
         }
+
+        public static string RemoveWhitespaceToLower(this string Input)
+        {
+            return new string(Input.Where(c => !Char.IsWhiteSpace(c))
+                .ToArray())
+                .ToLower();
+        }
     }
 }
