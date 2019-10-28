@@ -16,8 +16,8 @@ namespace survey.data
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Workspace> Workspaces { get; set; }
         public virtual DbSet<Survey> Surveys { get; set; }
-        public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<SurveyCategory> SurveyCategories { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
         public virtual DbSet<QuestionTypeAnswer> QuestionTypeAnswers { get; set; }
@@ -65,6 +65,13 @@ namespace survey.data
                 e.HasOne(x => x.Workspace)
                     .WithMany(x => x.Surveys)
                     .HasForeignKey(x => x.WorkspaceId);
+            });
+
+            modelBuilder.Entity<SurveyCategory>(e =>
+            {
+                e.HasKey(x => x.Id);
+
+                e.Property(x => x.Name).HasMaxLength(300);
             });
 
             modelBuilder.Entity<Question>(e =>

@@ -29,6 +29,10 @@ namespace survey.data
                 .AddRangeAsync(GetFakeSurveys());
 
             await context
+                .SurveyCategories
+                .AddRangeAsync(GetFakeSurveyCategories());
+
+            await context
                 .Questions
                 .AddRangeAsync(GetFakeQuestions());
 
@@ -130,6 +134,73 @@ namespace survey.data
                     LastUpdated = DateTime.Now,
                     LastUpdatedBy = "Georgi",
                     WorkspaceId = null,
+                    PublicKey = Guid.NewGuid()
+                }
+            };
+        }
+
+        public IEnumerable<SurveyCategory> GetFakeSurveyCategories()
+        {
+            return new List<SurveyCategory>
+            {
+                new SurveyCategory()
+                {
+                    Id = 1,
+                    Name = "Community",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 2,
+                    Name = "Customer Feedback",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 3,
+                    Name = "Customer Satisfaction",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 4,
+                    Name = "Demographics",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 5,
+                    Name = "Education",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 6,
+                    Name = "Events",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 7,
+                    Name = "Healthcare",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 8,
+                    Name = "Humon Resources",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 9,
+                    Name = "Just for Fun",
+                    PublicKey = Guid.NewGuid()
+                },
+                new SurveyCategory()
+                {
+                    Id = 10,
+                    Name = "Other",
                     PublicKey = Guid.NewGuid()
                 }
             };
