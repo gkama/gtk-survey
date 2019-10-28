@@ -36,6 +36,7 @@ namespace survey
             services.AddScoped<ClientGType>();
             services.AddScoped<WorkspaceGType>();
             services.AddScoped<SurveyGType>();
+            services.AddScoped<SurveyCategoryGType>();
             services.AddScoped<QuestionGType>();
             services.AddScoped<SurveyQuestionGType>();
             services.AddScoped<QuestionTypeGType>();
