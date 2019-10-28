@@ -398,6 +398,28 @@ namespace survey.services
 
 
         /*
+         * Survey Categories
+         */
+        public IQueryable<SurveyCategory> GetSurveyCategoriesQuery()
+        {
+            return context.SurveyCategories
+                .AsQueryable();
+        }
+
+        public IEnumerable<SurveyCategory> GetSurveyCategories()
+        {
+            return GetSurveyCategoriesQuery()
+                .AsEnumerable();
+        }
+
+        public async Task<SurveyCategory> GetSurveyCategoryAsync(int Id)
+        {
+            return await context.SurveyCategories
+                .FirstOrDefaultAsync(x => x.Id == Id);
+        }
+
+
+        /*
          * Questions
          */
         public IQueryable<Question> GetQuestionsQuery()

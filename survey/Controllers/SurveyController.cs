@@ -28,11 +28,24 @@ namespace survey.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<IActionResult> GetSurvey([FromRoute]int id)
+        public async Task<IActionResult> GetSurveyAsync([FromRoute]int id)
         {
             return Ok(await repo.GetSurveyAsync(id));
         }
 
+        [Route("categories")]
+        [HttpGet]
+        public IActionResult GetSurveyCategories()
+        {
+            return Ok(repo.GetSurveyCategories());
+        }
+
+        [Route("category/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetSurveyCategoryAsync([FromRoute]int id)
+        {
+            return Ok(await repo.GetSurveyCategoryAsync(id));
+        }
 
         [Route("{id}/questions")]
         [HttpGet]
