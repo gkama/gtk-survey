@@ -12,6 +12,7 @@ namespace survey.data
         {
             Field(x => x.Id);
             Field(x => x.Name);
+            Field(x => x.NameId);
             Field(x => x.PublicKey, type: typeof(IdGraphType));
 
             Field<ListGraphType<QuestionTypeAnswerGType>>("answers", resolve: context => context.Source.Answers);
