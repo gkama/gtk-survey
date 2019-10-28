@@ -188,7 +188,7 @@ namespace survey.data
                 new SurveyCategory()
                 {
                     Id = 8,
-                    Name = "Humon Resources",
+                    Name = "Human Resources",
                     PublicKey = Guid.NewGuid()
                 },
                 new SurveyCategory()
