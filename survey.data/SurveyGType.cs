@@ -12,9 +12,9 @@ namespace survey.data
         {
             Field(x => x.Id);
             Field(x => x.Name);
-            Field(x => x.Created);
+            Field(x => x.Created, type: typeof(DateTimeGraphType));
             Field(x => x.CreatedBy);
-            Field(x => x.LastUpdated);
+            Field(x => x.LastUpdated, type: typeof(DateTimeGraphType));
             Field(x => x.LastUpdatedBy);
             Field(x => x.WorkspaceId, type: typeof(IdGraphType));
             Field(x => x.PublicKey, type: typeof(IdGraphType));
