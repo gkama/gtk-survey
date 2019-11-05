@@ -57,14 +57,18 @@ namespace survey.data
                 e.Property(x => x.CreatedBy).HasMaxLength(100);
                 e.Property(x => x.LastUpdatedBy).HasMaxLength(100);
 
-                e.HasMany(x => x.SurveyQuestions)
-                    .WithOne()
-                    .HasForeignKey(x => x.SurveyId)
-                    .IsRequired();
+                e.HasOne(x => x.SurveyCategory)
+                    .WithMany()
+                    .HasForeignKey(x => x.SurveyCategoryId);
 
                 e.HasOne(x => x.Workspace)
                     .WithMany(x => x.Surveys)
                     .HasForeignKey(x => x.WorkspaceId);
+
+                e.HasMany(x => x.SurveyQuestions)
+                    .WithOne()
+                    .HasForeignKey(x => x.SurveyId)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<SurveyCategory>(e =>
