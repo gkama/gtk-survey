@@ -295,6 +295,7 @@ namespace survey.services
         public IQueryable<Survey> GetSurveysQuery()
         {
             return context.Surveys
+                .Include(x => x.Category)
                 .Include(x => x.SurveyQuestions)
                     .ThenInclude(x => x.Question)
                         .ThenInclude(x => x.Type)
