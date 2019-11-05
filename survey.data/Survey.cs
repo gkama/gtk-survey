@@ -26,6 +26,12 @@ namespace survey.data
         [JsonProperty("lastUpdatedBy")]
         public string LastUpdatedBy { get; set; }
 
+        [JsonProperty("surveyCategoryId")]
+        public int SurveyCategoryId { get; set; }
+
+        [JsonProperty("surveyCategory")]
+        public SurveyCategory SurveyCategory { get; set; }
+
         [JsonProperty("workspaceId")]
         public int? WorkspaceId { get; set; }
 
