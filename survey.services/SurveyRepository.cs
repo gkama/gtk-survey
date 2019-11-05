@@ -448,6 +448,41 @@ namespace survey.services
             }
         }
 
+        public async Task DeleteSurveyCategoryAsync(int Id)
+        {
+            var surveyCategory = await GetSurveyCategoryAsync(Id);
+
+            try
+            {
+                context.SurveyCategories
+                    .Remove(surveyCategory);
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"couldn't delete survey category with id={Id}. error={e.Message}");
+            }
+        }
+        public async Task DeleteSurveyCategoryAsync(string Name)
+        {
+            var surveyCategory = await GetSurveyCategoryAsync(Name);
+
+            try
+            {
+                context.SurveyCategories
+                    .Remove(surveyCategory);
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"couldn't delete survey category with name={Name}. error={e.Message}");
+            }
+        }
+
 
 
         /*
