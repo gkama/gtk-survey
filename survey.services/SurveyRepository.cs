@@ -418,6 +418,55 @@ namespace survey.services
             return await context.SurveyCategories
                 .FirstOrDefaultAsync(x => x.Id == Id);
         }
+        public async Task<SurveyCategory> GetSurveyCategoryAsync(Guid PublicKey)
+        {
+            return await context.SurveyCategories
+                .FirstOrDefaultAsync(x => x.PublicKey == PublicKey);
+        }
+        public async Task<SurveyCategory> GetSurveyCategoryAsync(string Name)
+        {
+            return await context.SurveyCategories
+                .FirstOrDefaultAsync(x => x.Name == Name);
+        }
+
+        public async Task AddSurveyCategoryAsync(string Name)
+        {
+            var surveyCategory = await GetSurveyCategoryAsync(Name);
+
+            if (surveyCategory == null)
+            {
+                surveyCategory = new SurveyCategory()
+                {
+                    Name = Name,
+                    PublicKey = Guid.NewGuid()
+                };
+
+                await context.SurveyCategories
+                    .AddAsync(surveyCategory);
+
+                await context.SaveChangesAsync();
+            }
+        }
+        public async Task<SurveyCategory> AddSurveyCategoryAsync(string Name)
+        {
+            var surveyCategory = await GetSurveyCategoryAsync(Name);
+
+            if (surveyCategory == null)
+            {
+                surveyCategory = new SurveyCategory()
+                {
+                    Name = Name,
+                    PublicKey = Guid.NewGuid()
+                };
+
+                await context.SurveyCategories
+                    .AddAsync(surveyCategory);
+
+                await context.SaveChangesAsync();
+            }
+
+            return surveyCategory;
+        }
 
 
         /*
