@@ -47,6 +47,22 @@ namespace survey.Controllers
             return Ok(await repo.GetSurveyCategoryAsync(id));
         }
 
+        [Route("category/{name}")]
+        [HttpGet]
+        public async Task<IActionResult> GetSurveyCategoryAsync([FromRoute]string name)
+        {
+            return Ok(await repo.GetSurveyCategoryAsync(name));
+        }
+
+        [Route("category/add/{name}")]
+        [HttpGet]
+        public async Task<IActionResult> AddSurveyCategoryAsync([FromRoute]string name)
+        {
+            await repo.AddSurveyCategoryAsync(name);
+
+            return Ok("success");
+        }
+
         [Route("{id}/questions")]
         [HttpGet]
         public async Task<IActionResult> GetSurveyQuestionsAsync([FromRoute]int id)

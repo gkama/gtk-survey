@@ -28,6 +28,9 @@ namespace survey.services
 
         IEnumerable<SurveyCategory> GetSurveyCategories();
         Task<SurveyCategory> GetSurveyCategoryAsync(int Id);
+        Task<SurveyCategory> GetSurveyCategoryAsync(Guid PublicKey);
+        Task<SurveyCategory> GetSurveyCategoryAsync(string Name);
+        Task AddSurveyCategoryAsync(string Name);
 
         IEnumerable<Question> GetQuestions();
         Task<Question> GetQuestionAsync(int Id);
