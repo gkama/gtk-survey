@@ -19,6 +19,7 @@ namespace survey.data
             Field(x => x.WorkspaceId, type: typeof(IdGraphType));
             Field(x => x.PublicKey, type: typeof(IdGraphType));
 
+            Field<SurveyCategoryGType>("category", resolve: context => context.Source.Category);
             Field<WorkspaceGType>("workspace", resolve: context => context.Source.Workspace);
         }
     }

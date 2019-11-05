@@ -57,9 +57,9 @@ namespace survey.data
                 e.Property(x => x.CreatedBy).HasMaxLength(100);
                 e.Property(x => x.LastUpdatedBy).HasMaxLength(100);
 
-                e.HasOne(x => x.SurveyCategory)
+                e.HasOne(x => x.Category)
                     .WithMany()
-                    .HasForeignKey(x => x.SurveyCategoryId);
+                    .HasForeignKey(x => x.CategoryId);
 
                 e.HasOne(x => x.Workspace)
                     .WithMany(x => x.Surveys)

@@ -111,6 +111,7 @@ namespace survey.data
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now.AddDays(-2),
                     LastUpdatedBy = "Jim",
+                    CategoryId = null,
                     WorkspaceId = 999,
                     PublicKey = Guid.NewGuid()
                 },
@@ -121,6 +122,7 @@ namespace survey.data
                     Created = DateTime.Now.AddDays(-7),
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now.AddDays(-7),
+                    CategoryId = 10,
                     LastUpdatedBy = "Jessie",
                     WorkspaceId = 888,
                     PublicKey = Guid.NewGuid()
@@ -133,6 +135,7 @@ namespace survey.data
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now,
                     LastUpdatedBy = "Georgi",
+                    CategoryId = null,
                     WorkspaceId = null,
                     PublicKey = Guid.NewGuid()
                 }
