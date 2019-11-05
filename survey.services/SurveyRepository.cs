@@ -447,26 +447,7 @@ namespace survey.services
                 await context.SaveChangesAsync();
             }
         }
-        public async Task<SurveyCategory> AddSurveyCategoryAsync(string Name)
-        {
-            var surveyCategory = await GetSurveyCategoryAsync(Name);
 
-            if (surveyCategory == null)
-            {
-                surveyCategory = new SurveyCategory()
-                {
-                    Name = Name,
-                    PublicKey = Guid.NewGuid()
-                };
-
-                await context.SurveyCategories
-                    .AddAsync(surveyCategory);
-
-                await context.SaveChangesAsync();
-            }
-
-            return surveyCategory;
-        }
 
 
         /*
