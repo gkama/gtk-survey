@@ -481,7 +481,7 @@ namespace survey.services
                     catch (Exception e)
                     {
                         throw new SurveyException(HttpStatusCode.InternalServerError,
-                            $"couldn't add survey category with name={Name}. eror={e.Message}");
+                            $"couldn't add survey category with name={Name}. error={e.Message}");
                     }
                 }
             }
