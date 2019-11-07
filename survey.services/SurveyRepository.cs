@@ -471,10 +471,18 @@ namespace survey.services
                         PublicKey = Guid.NewGuid()
                     };
 
-                    await context.SurveyCategories
-                    .AddAsync(surveyCategory);
+                    try
+                    {
+                        await context.SurveyCategories
+                            .AddAsync(surveyCategory);
 
-                    await context.SaveChangesAsync();
+                        await context.SaveChangesAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new SurveyException(HttpStatusCode.InternalServerError,
+                            $"couldn't add survey category with name={Name}. eror={e.Message}");
+                    }
                 }
             }
         }
