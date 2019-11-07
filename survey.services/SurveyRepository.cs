@@ -428,6 +428,16 @@ namespace survey.services
             return await context.SurveyCategories
                 .FirstOrDefaultAsync(x => x.Name == Name);
         }
+        public async Task<IEnumerable<SurveyCategory>> GetSurveyCategoriesAsync(IEnumerable<string> Names)
+        {
+            var surveyCategories = new List<SurveyCategory>();
+
+            foreach (var Name in Names)
+                surveyCategories.Add(await GetSurveyCategoryAsync(Name));
+
+            return surveyCategories
+                .AsEnumerable();
+        }
 
         public async Task AddSurveyCategoryAsync(string Name)
         {
@@ -445,6 +455,27 @@ namespace survey.services
                     .AddAsync(surveyCategory);
 
                 await context.SaveChangesAsync();
+            }
+        }
+        public async Task AddSurveyCategoriesAsync(IEnumerable<string> Names)
+        {
+            var surveyCategories = await GetSurveyCategoriesAsync(Names);
+
+            if (surveyCategories?.Count() == 0)
+            {
+                foreach (var Name in Names)
+                {
+                    var surveyCategory = new SurveyCategory()
+                    {
+                        Name = Name,
+                        PublicKey = Guid.NewGuid()
+                    };
+
+                    await context.SurveyCategories
+                    .AddAsync(surveyCategory);
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
 
