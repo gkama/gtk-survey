@@ -521,6 +521,23 @@ namespace survey.services
                     $"couldn't delete survey category with name={Name}. error={e.Message}");
             }
         }
+        public async Task DeleteSurveyCategoryAsync(Guid PublicKey)
+        {
+            var surveyCategory = await GetSurveyCategoryAsync(PublicKey);
+
+            try
+            {
+                context.SurveyCategories
+                    .Remove(surveyCategory);
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"couldn't delete survey category with public key={PublicKey}. error={e.Message}");
+            }
+        }
 
 
 
