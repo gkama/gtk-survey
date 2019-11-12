@@ -396,6 +396,24 @@ namespace survey.services
             return await CreateSurveyAsync(SurveyName, questions);
         }
 
+        public async Task DeleteSurveyAsync(int Id)
+        {
+            try
+            {
+                var survey = await GetSurveyAsync(Id);
+
+                context.Surveys
+                    .Remove(survey);
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while deleting survey with id={Id}. error={e.Message}");
+            }
+        }
+
 
 
         /*
@@ -631,24 +649,6 @@ namespace survey.services
             {
                 throw new SurveyException(HttpStatusCode.InternalServerError,
                     $"error while adding question with name={Name} text={Text} question type name={QuestionTypeName} and a list of answers. exception={e.ToString()}");
-            }
-        }
-
-        public async Task DeleteSurveyAsync(int Id)
-        {
-            try
-            {
-                var survey = await GetSurveyAsync(Id);
-
-                context.Surveys
-                    .Remove(survey);
-
-                await context.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                throw new SurveyException(HttpStatusCode.InternalServerError,
-                    $"error while deleting survey with id={Id}. error={e.Message}");
             }
         }
 
