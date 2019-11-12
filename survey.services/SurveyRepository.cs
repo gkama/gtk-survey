@@ -413,6 +413,23 @@ namespace survey.services
                     $"error while deleting survey with id={Id}. error={e.Message}");
             }
         }
+        public async Task DeleteSurveyAsync(Guid PublicKey)
+        {
+            try
+            {
+                var survey = await GetSurveyAsync(PublicKey);
+
+                context.Surveys
+                    .Remove(survey);
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while deleting survey with public key={PublicKey}. error={e.Message}");
+            }
+        }
 
 
 
