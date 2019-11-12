@@ -40,6 +40,7 @@ namespace survey.services
         IEnumerable<Question> GetQuestions();
         Task<Question> GetQuestionAsync(int Id);
         Task<Question> GetQuestionAsync(Guid PublicKey);
+        Task DeleteQuestionAsync(int Id);
         Task<IEnumerable<SurveyQuestion>> GetSurveyQuestionsAsync(int SurveyId);
 
         IEnumerable<QuestionType> GetQuestionTypes();

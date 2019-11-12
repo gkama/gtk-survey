@@ -669,6 +669,24 @@ namespace survey.services
             }
         }
 
+        public async Task DeleteQuestionAsync(int Id)
+        {
+            try
+            {
+                var question = await GetQuestionAsync(Id);
+
+                context.Questions
+                    .Remove(question);
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while deleting question with id={Id}. error={e.Message}");
+            }
+        }
+
 
 
         /*
