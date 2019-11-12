@@ -25,6 +25,8 @@ namespace survey.services
         Task<int> GetSurveysTodayCount();
         Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<Question> Questions);
         Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<QuestionRequest> QuestionRequests);
+        Task DeleteSurveyAsync(int Id);
+        Task DeleteSurveyAsync(Guid PublicKey);
 
         IEnumerable<SurveyCategory> GetSurveyCategories();
         Task<SurveyCategory> GetSurveyCategoryAsync(int Id);
