@@ -47,6 +47,7 @@ namespace survey
 
             services.AddScoped<FakeManager>();
             services.AddScoped<ISurveyRepository, SurveyRepository>();
+            services.AddScoped<ISurveyCalculations, ISurveyCalculations>();
             services.AddScoped<ISurveyGenerator, SurveyGenerator>();
 
             //Add DbContext
