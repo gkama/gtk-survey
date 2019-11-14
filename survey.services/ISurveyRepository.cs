@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace survey.services
 {
     public interface ISurveyRepository
     {
+        IQueryable<Client> GetClientsQuery();
         IEnumerable<Client> GetClients();
         Task<Client> GetClientAsync(int Id);
         Task<Client> GetClientAsync(Guid PublicKey);
