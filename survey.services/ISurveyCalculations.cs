@@ -6,6 +6,6 @@ namespace survey.services
 {
     public interface ISurveyCalculations
     {
-        object GetSurveysCountFromDate(DateTime Date);
+        object GetClientsCountFromDate(DateTime Date);
     }
 }

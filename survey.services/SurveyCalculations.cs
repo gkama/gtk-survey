@@ -17,7 +17,7 @@ namespace survey.services
             this.repo = repo;
         }
 
-        public object GetSurveysCountFromDate(DateTime Date)
+        public object GetClientsCountFromDate(DateTime Date)
         {
             return repo.GetClientsQuery()
                 .AsEnumerable()
