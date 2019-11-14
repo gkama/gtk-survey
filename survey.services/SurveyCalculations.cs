@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Microsoft.Extensions.Logging;
+
 namespace survey.services
 {
     public class SurveyCalculations : ISurveyCalculations
     {
-        public readonly ISurveyRepository SurveyRepository;
+        public readonly ILogger log;
+        public readonly ISurveyRepository repo;
 
-        public SurveyCalculations(ISurveyRepository SurveyRepository)
+        public SurveyCalculations(ILogger<SurveyCalculations> log, ISurveyRepository repo)
         {
-            this.SurveyRepository = SurveyRepository;
+            this.log = log;
+            this.repo = repo;
         }
     }
 }

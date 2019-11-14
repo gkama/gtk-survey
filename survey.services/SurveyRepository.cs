@@ -15,13 +15,11 @@ namespace survey.services
     public class SurveyRepository : ISurveyRepository
     {
         public readonly ILogger log;
-
         public readonly SurveyContext context;
 
         public SurveyRepository(ILogger<SurveyRepository> log, SurveyContext context)
         {
             this.log = log;
-
             this.context = context;
         }
 
