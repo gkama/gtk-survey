@@ -17,13 +17,17 @@ namespace survey.services
             this.repo = repo;
         }
 
-        public void GetAverageSurveysAsync(DateTime Date)
+        public object GetSurveysCountFromDate(DateTime Date)
         {
-            var surveys = repo.GetClientsQuery()
+            return repo.GetClientsQuery()
                 .AsEnumerable()
-                .Where(x => x.LastUpdated <= Date);
-
-            var counts = surveys.Count();
+                .Where(x => x.Created > Date)
+                .GroupBy(x => x.Created)
+                .Select(x => new
+                {
+                    date = x.Key,
+                    count = x.Count()
+                });
         }
     }
 }
