@@ -32,5 +32,39 @@ namespace survey.services
                     })
             };
         }
+
+        public object GetGenericCountFromDate<T>(DateTime Date) where T : class
+        {
+            if (typeof(T) == typeof(data.Client))
+                return new
+                {
+                    data = repo.GetClientsQuery()
+                    .AsEnumerable()
+                    .Where(x => x.Created > Date)
+                    .GroupBy(x => x.Created)
+                    .Select(x => new
+                    {
+                        date = x.Key,
+                        count = x.Count()
+                    })
+                };
+            else if (typeof(T) == typeof(data.Workspace))
+            {
+                return new
+                {
+                    data = repo.GetWorkspacesQuery()
+                        .AsEnumerable()
+                        .Where(x => x.Created > Date)
+                        .GroupBy(x => x.Created)
+                        .Select(x => new
+                        {
+                            data = x.Key,
+                            count = x.Count()
+                        })
+                };
+            }
+            else
+                return null;
+        }
     }
 }
