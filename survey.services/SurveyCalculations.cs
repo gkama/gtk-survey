@@ -19,15 +19,18 @@ namespace survey.services
 
         public object GetClientsCountFromDate(DateTime Date)
         {
-            return repo.GetClientsQuery()
-                .AsEnumerable()
-                .Where(x => x.Created > Date)
-                .GroupBy(x => x.Created)
-                .Select(x => new
-                {
-                    date = x.Key,
-                    count = x.Count()
-                });
+            return new
+            {
+                data = repo.GetClientsQuery()
+                    .AsEnumerable()
+                    .Where(x => x.Created > Date)
+                    .GroupBy(x => x.Created)
+                    .Select(x => new
+                    {
+                        date = x.Key,
+                        count = x.Count()
+                    })
+            };
         }
     }
 }
