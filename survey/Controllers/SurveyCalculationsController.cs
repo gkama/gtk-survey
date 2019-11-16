@@ -31,7 +31,7 @@ namespace survey.Controllers
 
         [HttpGet]
         [Route("workspaces/by/date/{date}")]
-        public IActionResult GetWorkspacesByDate([FromRoute]string date)
+        public IActionResult GetWorkspacesByDate([FromRoute]DateTime date)
         {
             return Ok(surveyCalc.GetGenericCountFromDate<data.Workspace>(date));
         }
