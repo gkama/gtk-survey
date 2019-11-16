@@ -28,5 +28,12 @@ namespace survey.Controllers
         {
             return Ok(surveyCalc.GetClientsCountFromDate(DateTime.Now.AddDays(-10)));
         }
+
+        [HttpGet]
+        [Route("workspaces/by/date/{date}")]
+        public IActionResult GetWorkspacesByDate([FromRoute]string date)
+        {
+            return Ok(surveyCalc.GetGenericCountFromDate<data.Workspace>(date));
+        }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Globalization;
 
 using Microsoft.Extensions.Logging;
+
+using survey.data;
 
 namespace survey.services
 {
@@ -33,6 +37,21 @@ namespace survey.services
             };
         }
 
+        public object GetGenericCountFromDate<T>(string Date) where T : class
+        {
+            try
+            {
+                var date = DateTime.ParseExact(Date, "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture);
+            }
+            catch (Exception e)
+            {
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while getting generic count from date={Date}. error={e.Message}");
+            }
+
+            return this.GetGenericCountFromDate<T>(Date);
+        }
         public object GetGenericCountFromDate<T>(DateTime Date) where T : class
         {
             if (typeof(T) == typeof(data.Client))
