@@ -23,10 +23,10 @@ namespace survey.Controllers
         }
 
         [HttpGet]
-        [Route("clients/by/date")]
-        public IActionResult Get()
+        [Route("clients/by/date/{date}")]
+        public IActionResult GetClientsByDate([FromRoute]DateTime date)
         {
-            return Ok(surveyCalc.GetClientsCountFromDate(DateTime.Now.AddDays(-10)));
+            return Ok(surveyCalc.GetGenericCountFromDate<data.Client>(date));
         }
 
         [HttpGet]
