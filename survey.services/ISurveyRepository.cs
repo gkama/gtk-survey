@@ -40,6 +40,7 @@ namespace survey.services
         Task DeleteSurveyCategoryAsync(string Name);
         Task DeleteSurveyCategoryAsync(Guid PublicKey);
 
+        IQueryable<Question> GetQuestionsQuery();
         IEnumerable<Question> GetQuestions();
         Task<Question> GetQuestionAsync(int Id);
         Task<Question> GetQuestionAsync(Guid PublicKey);

@@ -35,5 +35,12 @@ namespace survey.Controllers
         {
             return Ok(surveyCalc.GetGenericCountFromDate<data.Workspace>(date));
         }
+
+        [HttpGet]
+        [Route("questions/by/date/{date}")]
+        public IActionResult GetQuestionsByDate([FromRoute]DateTime date)
+        {
+            return Ok(surveyCalc.GetGenericCountFromDate<Question>(date));
+        }
     }
 }

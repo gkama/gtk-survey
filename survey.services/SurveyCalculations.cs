@@ -61,7 +61,22 @@ namespace survey.services
                         .GroupBy(x => x.Created)
                         .Select(x => new
                         {
-                            data = x.Key,
+                            date = x.Key,
+                            count = x.Count()
+                        })
+                };
+            }
+            else if (typeof(T) == typeof(data.Question))
+            {
+                return new
+                {
+                    data = repo.GetQuestionsQuery()
+                        .AsEnumerable()
+                        .Where(x => x.Created > Date)
+                        .GroupBy(x => x.Created)
+                        .Select(x => new
+                        {
+                            date = x.Key,
                             count = x.Count()
                         })
                 };
