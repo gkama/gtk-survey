@@ -21,6 +21,16 @@ namespace survey.services
             this.repo = repo;
         }
 
+        public IEnumerable<object> GetGenericCountsFromDate<T>(IEnumerable<DateTime> Dates) where T : class
+        {
+            var counts = new List<object>();
+
+            foreach (var d in Dates)
+                counts.Add(GetGenericCountFromDate<T>(d));
+
+            return counts
+                .AsEnumerable();
+        }
         public object GetGenericCountFromDate<T>(string Date) where T : class
         {
             try
