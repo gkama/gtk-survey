@@ -66,6 +66,21 @@ namespace survey.services
                         })
                 };
             }
+            else if (typeof(T) == typeof(data.Survey))
+            {
+                return new
+                {
+                    data = repo.GetSurveysQuery()
+                        .AsEnumerable()
+                        .Where(x => x.Created > Date)
+                        .GroupBy(x => x.Created)
+                        .Select(x => new
+                        {
+                            date = x.Key,
+                            count = x.Count()
+                        })
+                };
+            }
             else if (typeof(T) == typeof(data.Question))
             {
                 return new

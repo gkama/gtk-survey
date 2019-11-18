@@ -20,6 +20,7 @@ namespace survey.services
         Task<Workspace> GetWorkspaceAsync(int Id);
         Task<Workspace> GetWorkspaceAsync(Guid PublicKey);
 
+        IQueryable<Survey> GetSurveysQuery();
         IEnumerable<Survey> GetSurveys();
         Task<Survey> GetSurveyAsync(int Id);
         Task<Survey> GetSurveyAsync(string Name);
