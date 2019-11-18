@@ -97,7 +97,8 @@ namespace survey.services
                 };
             }
             else
-                return null;
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while getting generic count from date. type={typeof(T)} date={Date}");
         }
     }
 }
