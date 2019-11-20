@@ -48,7 +48,7 @@ namespace survey.services
         }
         public object GetGenericCountFromDate<T>(DateTime Date) where T : class
         {
-            if (typeof(T) == typeof(data.Client))
+            if (typeof(T) == typeof(Client))
                 return new
                 {
                     data = repo.GetClientsQuery()
@@ -61,7 +61,7 @@ namespace survey.services
                         count = x.Count()
                     })
                 };
-            else if (typeof(T) == typeof(data.Workspace))
+            else if (typeof(T) == typeof(Workspace))
             {
                 return new
                 {
@@ -76,7 +76,7 @@ namespace survey.services
                         })
                 };
             }
-            else if (typeof(T) == typeof(data.Survey))
+            else if (typeof(T) == typeof(Survey))
             {
                 return new
                 {
@@ -91,7 +91,7 @@ namespace survey.services
                         })
                 };
             }
-            else if (typeof(T) == typeof(data.Question))
+            else if (typeof(T) == typeof(Question))
             {
                 return new
                 {
@@ -124,6 +124,21 @@ namespace survey.services
             else
                 throw new SurveyException(HttpStatusCode.InternalServerError,
                     $"error while getting distinct dates. type={typeof(T)}");
+        }
+
+        public IQueryable<T> GetIQueryable<T>() where T : class
+        {
+            if (typeof(T) == typeof(Client))
+                return (IQueryable<T>)repo.GetClientsQuery();
+            else if (typeof(T) == typeof(Workspace))
+                return (IQueryable<T>)repo.GetWorkspacesQuery();
+            else if (typeof(T) == typeof(Survey))
+                return (IQueryable<T>)repo.GetSurveysQuery();
+            else if (typeof(T) == typeof(Question))
+                return (IQueryable<T>)repo.GetQuestionsQuery();
+            else
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                        $"error while getting IQueryable<T>");
         }
     }
 }
