@@ -110,5 +110,19 @@ namespace survey.services
                 throw new SurveyException(HttpStatusCode.InternalServerError,
                     $"error while getting generic count from date. type={typeof(T)} date={Date}");
         }
+
+        public object GetDistinctDates<T>() where T : class
+        {
+            if (typeof(T) == typeof(data.Client))
+                return new
+                {
+                    data = repo.GetClientsQuery()
+                        .AsEnumerable()
+                        .GroupBy(x => x.Created.Date)
+                };
+            else
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"error while getting distinct dates. type={typeof(T)}");
+        }
     }
 }
