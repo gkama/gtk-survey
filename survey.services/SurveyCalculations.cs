@@ -118,7 +118,8 @@ namespace survey.services
                 {
                     data = repo.GetClientsQuery()
                         .AsEnumerable()
-                        .GroupBy(x => x.Created.Date)
+                        .Select(x => x.Created.Date)
+                        .Distinct()
                 };
             else
                 throw new SurveyException(HttpStatusCode.InternalServerError,
