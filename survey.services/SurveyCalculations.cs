@@ -51,21 +51,21 @@ namespace survey.services
             if (typeof(T) == typeof(Client))
                 return new
                 {
-                    data = repo.GetClientsQuery()
-                    .AsEnumerable()
-                    .Where(x => x.Created > Date)
-                    .GroupBy(x => x.Created)
-                    .Select(x => new
-                    {
-                        date = x.Key,
-                        count = x.Count()
-                    })
+                    data = GetIQueryable<Client>()
+                        .AsEnumerable()
+                        .Where(x => x.Created > Date)
+                        .GroupBy(x => x.Created)
+                        .Select(x => new
+                        {
+                            date = x.Key,
+                            count = x.Count()
+                        })
                 };
             else if (typeof(T) == typeof(Workspace))
             {
                 return new
                 {
-                    data = repo.GetWorkspacesQuery()
+                    data = GetIQueryable<Workspace>()
                         .AsEnumerable()
                         .Where(x => x.Created > Date)
                         .GroupBy(x => x.Created)
@@ -80,7 +80,7 @@ namespace survey.services
             {
                 return new
                 {
-                    data = repo.GetSurveysQuery()
+                    data = GetIQueryable<Survey>()
                         .AsEnumerable()
                         .Where(x => x.Created > Date)
                         .GroupBy(x => x.Created)
@@ -95,7 +95,7 @@ namespace survey.services
             {
                 return new
                 {
-                    data = repo.GetQuestionsQuery()
+                    data = GetIQueryable<Question>()
                         .AsEnumerable()
                         .Where(x => x.Created > Date)
                         .GroupBy(x => x.Created)
@@ -111,6 +111,21 @@ namespace survey.services
                     $"error while getting generic count from date. type={typeof(T)} date={Date}");
         }
 
+        public IQueryable<T> GetIQueryable<T>() where T : class
+        {
+            if (typeof(T) == typeof(Client))
+                return (IQueryable<T>)repo.GetClientsQuery();
+            else if (typeof(T) == typeof(Workspace))
+                return (IQueryable<T>)repo.GetWorkspacesQuery();
+            else if (typeof(T) == typeof(Survey))
+                return (IQueryable<T>)repo.GetSurveysQuery();
+            else if (typeof(T) == typeof(Question))
+                return (IQueryable<T>)repo.GetQuestionsQuery();
+            else
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                        $"error while getting IQueryable<T>. type={typeof(T)}");
+        }
+
         public object GetDistinctDates<T>() where T : class
         {
             if (typeof(T) == typeof(data.Client))
@@ -124,21 +139,6 @@ namespace survey.services
             else
                 throw new SurveyException(HttpStatusCode.InternalServerError,
                     $"error while getting distinct dates. type={typeof(T)}");
-        }
-
-        public IQueryable<T> GetIQueryable<T>() where T : class
-        {
-            if (typeof(T) == typeof(Client))
-                return (IQueryable<T>)repo.GetClientsQuery();
-            else if (typeof(T) == typeof(Workspace))
-                return (IQueryable<T>)repo.GetWorkspacesQuery();
-            else if (typeof(T) == typeof(Survey))
-                return (IQueryable<T>)repo.GetSurveysQuery();
-            else if (typeof(T) == typeof(Question))
-                return (IQueryable<T>)repo.GetQuestionsQuery();
-            else
-                throw new SurveyException(HttpStatusCode.InternalServerError,
-                        $"error while getting IQueryable<T>");
         }
     }
 }
