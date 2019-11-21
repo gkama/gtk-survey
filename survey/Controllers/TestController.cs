@@ -31,5 +31,12 @@ namespace survey.Controllers
                 repo.UpdateResponse(2001, 3, "Good");
             }
         }
+
+        [HttpGet]
+        [Route("exception")]
+        public void ThrowSurveyException()
+        {
+            throw new SurveyException(System.Net.HttpStatusCode.InternalServerError, "testing the survey exception response");
+        }
     }
 }
