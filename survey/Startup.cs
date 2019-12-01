@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 
 using survey.data;
 using survey.services;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace survey
 {
@@ -72,6 +73,18 @@ namespace survey
                     o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+
+            // If using Kestrel:
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
