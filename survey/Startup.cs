@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 using GraphQL;
@@ -51,10 +50,10 @@ namespace survey
             services.AddScoped<ISurveyGenerator, SurveyGenerator>();
 
             //Add DbContext
-            if (string.IsNullOrWhiteSpace(Configuration.GetConnectionString("Sql")))
-                services.AddDbContext<SurveyContext>(o => o.UseInMemoryDatabase(nameof(SurveyContext)));
-            else
+            if (!string.IsNullOrWhiteSpace(Configuration.GetConnectionString("Sql")))
                 services.AddDbContext<SurveyContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Sql")));
+            else
+                services.AddDbContext<SurveyContext>(o => o.UseInMemoryDatabase(nameof(SurveyContext)));
 
             services.AddLogging();
             services.AddMemoryCache();
@@ -66,8 +65,8 @@ namespace survey
                 .AddGraphTypes(ServiceLifetime.Scoped);
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(o =>
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(o =>
                 {
                     o.SerializerSettings.Formatting = Formatting.Indented;
                     o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -76,7 +75,7 @@ namespace survey
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -93,7 +92,6 @@ namespace survey
             app.UseSurveyException();
 
             app.UseHealthChecks("/ping");
-            app.UseMvc();
         }
     }
 }
