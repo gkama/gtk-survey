@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.Extensions.Logging;
 
@@ -126,12 +128,24 @@ namespace survey.services
                         $"error while getting IQueryable<T>. type={typeof(T)}");
         }
 
+        public string GetDistinctDatesAsString<T>() where T : class
+        {
+            return JsonSerializer.Serialize(GetDistinctDates<T>());
+        }
         public object GetDistinctDates<T>() where T : class
         {
-            if (typeof(T) == typeof(data.Client))
+            if (typeof(T) == typeof(Client))
                 return new
                 {
                     data = repo.GetClientsQuery()
+                        .AsEnumerable()
+                        .Select(x => x.Created.Date)
+                        .Distinct()
+                };
+            else if (typeof(T) == typeof(Workspace))
+                return new
+                {
+                    data = repo.GetWorkspacesQuery()
                         .AsEnumerable()
                         .Select(x => x.Created.Date)
                         .Distinct()
