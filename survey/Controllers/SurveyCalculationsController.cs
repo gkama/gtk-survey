@@ -11,8 +11,8 @@ using survey.services;
 
 namespace survey.Controllers
 {
-    [Route("survey/calculations")]
     [ApiController]
+    [Route("survey/calculations")]
     public class SurveyCalculationsController : ControllerBase
     {
         public readonly ISurveyCalculations surveyCalc;

@@ -11,8 +11,8 @@ using survey.services;
 
 namespace survey.Controllers
 {
-    [Route("test")]
     [ApiController]
+    [Route("[controller]")]
     public class TestController : ControllerBase
     {
         public readonly ISurveyRepository repo;
@@ -22,8 +22,8 @@ namespace survey.Controllers
             this.repo = repo;
         }
 
-        [Route("update/{iterations}")]
         [HttpGet]
+        [Route("update/{iterations}")]
         public void UpdateResponse([FromRoute]int iterations)
         {
             for (int i = 0; i < iterations; i++)

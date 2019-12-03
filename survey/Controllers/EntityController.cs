@@ -11,8 +11,8 @@ using survey.services;
 
 namespace survey.Controllers
 {
-    [Route("entity")]
     [ApiController]
+    [Route("entity")]
     public class EntityController : ControllerBase
     {
         public readonly ISurveyRepository repo;
@@ -22,8 +22,8 @@ namespace survey.Controllers
             this.repo = repo;
         }
 
-        [Route("question/{publickeyid}")]
         [HttpGet]
+        [Route("question/{publickeyid}")]
         public async Task<IActionResult> GetEntityAsync([FromRoute]object PublicKeyId)
         {
             return Ok(await repo.FindEntityAsync<Question>(PublicKeyId));
