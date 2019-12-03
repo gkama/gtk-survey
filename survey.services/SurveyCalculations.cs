@@ -137,7 +137,7 @@ namespace survey.services
             if (typeof(T) == typeof(Client))
                 return new
                 {
-                    data = repo.GetClientsQuery()
+                    data = GetIQueryable<Client>()
                         .AsEnumerable()
                         .Select(x => x.Created.Date)
                         .Distinct()
@@ -145,7 +145,23 @@ namespace survey.services
             else if (typeof(T) == typeof(Workspace))
                 return new
                 {
-                    data = repo.GetWorkspacesQuery()
+                    data = GetIQueryable<Workspace>()
+                        .AsEnumerable()
+                        .Select(x => x.Created.Date)
+                        .Distinct()
+                };
+            else if (typeof(T) == typeof(Survey))
+                return new
+                {
+                    data = GetIQueryable<Survey>()
+                        .AsEnumerable()
+                        .Select(x => x.Created.Date)
+                        .Distinct()
+                };
+            else if (typeof(T) == typeof(Question))
+                return new
+                {
+                    data = GetIQueryable<Question>()
                         .AsEnumerable()
                         .Select(x => x.Created.Date)
                         .Distinct()
