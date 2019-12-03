@@ -106,6 +106,12 @@ namespace survey
             app.UseSurveyException();
 
             app.UseHealthChecks("/ping");
+
+            app.UseRouting();
+            app.UseEndpoints(e =>
+            {
+                e.MapControllers();
+            });
         }
     }
 }
