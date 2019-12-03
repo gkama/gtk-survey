@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-
-using Newtonsoft.Json;
 
 using survey.data;
 
@@ -74,8 +74,8 @@ namespace survey
             else
                 problem.Status = StatusCodes.Status500InternalServerError;
 
-            var problemjson = JsonConvert
-                .SerializeObject(problem);
+            var problemjson = JsonSerializer
+                .Serialize(problem);
 
             httpContext.Response.StatusCode = problem.Status ?? StatusCodes.Status500InternalServerError;
             httpContext.Response.ContentType = "application/problem+json";
