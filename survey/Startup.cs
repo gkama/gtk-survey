@@ -65,15 +65,6 @@ namespace survey
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                .AddNewtonsoftJson(o =>
-                {
-                    o.SerializerSettings.Formatting = Formatting.Indented;
-                    o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                });
-
             // If using Kestrel:
             services.Configure<KestrelServerOptions>(options =>
             {
@@ -85,6 +76,16 @@ namespace survey
             {
                 options.AllowSynchronousIO = true;
             });
+
+            services.AddControllers();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(o =>
+                {
+                    o.SerializerSettings.Formatting = Formatting.Indented;
+                    o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
