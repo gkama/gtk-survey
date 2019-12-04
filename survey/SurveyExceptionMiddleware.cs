@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 using survey.data;
 
@@ -18,11 +19,11 @@ namespace survey
     {
         private readonly RequestDelegate _next;
         private readonly ILogger _log;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
         private const string default_message = "An unexpected error has occurred.";
 
-        public SurveyExceptionMiddleware(RequestDelegate next, ILogger<SurveyExceptionMiddleware> log, IHostingEnvironment env)
+        public SurveyExceptionMiddleware(RequestDelegate next, ILogger<SurveyExceptionMiddleware> log, IWebHostEnvironment env)
         {
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _log = log ?? throw new ArgumentNullException(nameof(log));
