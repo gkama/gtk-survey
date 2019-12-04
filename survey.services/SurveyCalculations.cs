@@ -170,5 +170,16 @@ namespace survey.services
                 throw new SurveyException(HttpStatusCode.InternalServerError,
                     $"error while getting distinct dates. type={typeof(T)}");
         }
+
+
+        public double GetAverageResponsesAsync(DateTime Date, bool Equals = true)
+        {
+            return Equals ? repo.GetResponses()
+                .Where(x => x.SurveyQuestion.Survey.Created == Date)
+                .Average(x => x.Count)
+                : repo.GetResponses()
+                .Where(x => x.SurveyQuestion.Survey.Created >= Date)
+                .Average(x => x.Count);
+        }
     }
 }
