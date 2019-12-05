@@ -172,14 +172,14 @@ namespace survey.services
         }
 
 
-        public double GetAverageResponsesAsync(DateTime Date, bool Equals = true)
+        public double GetAverageResponses(DateTime Date, bool Equals = true)
         {
             return Equals ? repo.GetResponses()
-                .Where(x => x.SurveyQuestion.Survey.Created == Date)
-                .Average(x => x.Count)
+                    .Where(x => x.SurveyQuestion.Survey.Created == Date)
+                    .Average(x => x.Count)
                 : repo.GetResponses()
-                .Where(x => x.SurveyQuestion.Survey.Created >= Date)
-                .Average(x => x.Count);
+                    .Where(x => x.SurveyQuestion.Survey.Created >= Date)
+                    .Average(x => x.Count);
         }
     }
 }
