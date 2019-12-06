@@ -113,6 +113,8 @@ namespace survey.services
                     .AddAsync(client);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"added client with name='{Name}', slug='{Slug}', billingid='{BillingId}', created='{client.Created}', lastupdated='{client.LastUpdated}', publickey='{client.PublicKey}'");
             }
 
             return client;
@@ -947,6 +949,8 @@ namespace survey.services
                     .AddRangeAsync(surveyQuestions);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"add survey question with surveyid='{SurveyId}' and questions='{QuestionIds.Count()}'");
             }
 
             return surveyQuestions;
