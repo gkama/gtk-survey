@@ -363,6 +363,32 @@ namespace survey.services
 
             return survey;
         }
+        public async Task<ISurvey> AddSurveyAsync(string Name, string CreatedBy = null)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a Survey with empty or null Name='{Name}'");
+
+            var survey = new Survey()
+            {
+                Name = Name,
+                Created = DateTime.Now,
+                CreatedBy = CreatedBy,
+                LastUpdated = DateTime.Now,
+                LastUpdatedBy = CreatedBy,
+                PublicKey = Guid.NewGuid()
+            };
+
+            await context.Surveys
+                .AddAsync(survey);
+
+            await context.SaveChangesAsync();
+
+            log.LogInformation($"added survey with name='{survey.Name}', created='{survey.Created}', " +
+                $"createdby='{survey.CreatedBy}, lastupdated='{survey.LastUpdated}', " +
+                $"lastupdatedby='{survey.LastUpdatedBy}', publickey='{survey.PublicKey}'");
+
+            return survey;
+        }
 
         public async Task<Survey> CreateSurveyAsync(string SurveyName, IEnumerable<Question> Questions)
         {
