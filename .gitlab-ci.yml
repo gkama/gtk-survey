@@ -1,0 +1,18 @@
+image: docker:stable
+
+services:
+  - docker:dind
+
+stages:
+  - docker build and push
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_MAGE: gkama/gtk-survey:latest
+
+docker build and push:
+  stage: docker build and push
+  script:
+    - docker build -t $DOCKER_MAGE .
+  only:
+    - master
