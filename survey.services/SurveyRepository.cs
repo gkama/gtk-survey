@@ -161,7 +161,7 @@ namespace survey.services
                 throw new SurveyException($"error while deleting client with name={Name} slug={Slug}. error={e.Message}");
             }
 
-            log.LogInformation($"request to DELETE Client with Name='{Name}' and Slug='{Slug}' COMPLETED");
+            log.LogInformation($"deleted client with name='{Name}' and slug='{Slug}'");
         }
 
 
@@ -216,7 +216,7 @@ namespace survey.services
         public async Task<Workspace> AddWorkspaceAsync(string Name, string Slug, int? ClientId)
         {
             if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Slug))
-                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a Workspace with empty or null Name='{Name}' or Slug='{Slug}'");
+                throw new SurveyException(HttpStatusCode.BadRequest, $"cannot add a workspace with empty or null name='{Name}' or slug='{Slug}'");
 
             var workspace = await GetWorkspaceAsync(Name, Slug);
 
@@ -236,6 +236,9 @@ namespace survey.services
                     .AddAsync(workspace);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"add workspace with name='{Name}', slug='{Slug}', clientid='{ClientId}', " +
+                    $"publickey='{workspace.PublicKey}'");
             }
 
             return workspace;
@@ -263,6 +266,9 @@ namespace survey.services
                     .Add(workspace);
 
                 context.SaveChanges();
+
+                log.LogInformation($"add workspace with name='{Name}', slug='{Slug}', clientid='{ClientId}', " +
+                    $"publickey='{workspace.PublicKey}'");
             }
         }
 
@@ -303,6 +309,26 @@ namespace survey.services
                         .ThenInclude(x => x.Type)
                             .ThenInclude(x => x.Answers)
                 .AsQueryable();
+        }
+        public IQueryable<Survey> GetSurveysQuery(DateTime Date, bool Equals = true)
+        {
+            return Equals ?
+                context.Surveys
+                    .Include(x => x.Category)
+                    .Include(x => x.SurveyQuestions)
+                        .ThenInclude(x => x.Question)
+                            .ThenInclude(x => x.Type)
+                                .ThenInclude(x => x.Answers)
+                    .AsQueryable()
+                    .Where(x => x.Created == Date)
+                : context.Surveys
+                    .Include(x => x.Category)
+                    .Include(x => x.SurveyQuestions)
+                        .ThenInclude(x => x.Question)
+                            .ThenInclude(x => x.Type)
+                                .ThenInclude(x => x.Answers)
+                    .AsQueryable()
+                    .Where(x => x.Created > Date);
         }
         public IQueryable<Survey> GetSurveysWithWorkspace()
         {
