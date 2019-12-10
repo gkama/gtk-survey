@@ -429,6 +429,9 @@ namespace survey.services
 
                 var surveyQuestions = await AddSurveyQuestionAsync(survey.Id, questionIds);
 
+                log.LogInformation($"created survey with id='{survey.Id}', surveyname='{SurveyName}', " +
+                    $"category='{survey.Category}', publickey='{survey.PublicKey}', questions='{Questions.Count()}'");
+
                 return survey;
             }
             catch (Exception)
