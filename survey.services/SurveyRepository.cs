@@ -592,6 +592,9 @@ namespace survey.services
                     .Remove(surveyCategory);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"deleted survey category with id='{surveyCategory.Id}', name='{surveyCategory.Name}', " +
+                    $"nameid='{surveyCategory.NameId}', publickey='{surveyCategory.PublicKey}'");
             }
             catch (Exception e)
             {
@@ -609,6 +612,9 @@ namespace survey.services
                     .Remove(surveyCategory);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"deleted survey category with id='{surveyCategory.Id}', name='{surveyCategory.Name}', " +
+                    $"nameid='{surveyCategory.NameId}', publickey='{surveyCategory.PublicKey}'");
             }
             catch (Exception e)
             {
@@ -626,6 +632,9 @@ namespace survey.services
                     .Remove(surveyCategory);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"deleted survey category with id='{surveyCategory.Id}', name='{surveyCategory.Name}', " +
+                    $"nameid='{surveyCategory.NameId}', publickey='{surveyCategory.PublicKey}'");
             }
             catch (Exception e)
             {
