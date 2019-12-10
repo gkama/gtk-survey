@@ -569,6 +569,9 @@ namespace survey.services
                             .AddAsync(surveyCategory);
 
                         await context.SaveChangesAsync();
+
+                        log.LogInformation($"added survey category with id='{surveyCategory.Id}', name='{surveyCategory.Name}', " +
+                            $"nameid='{surveyCategory.NameId}', publickey='{surveyCategory.PublicKey}'");
                     }
                     catch (Exception e)
                     {
