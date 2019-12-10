@@ -698,6 +698,9 @@ namespace survey.services
                     .AddAsync(question);
 
                 await context.SaveChangesAsync();
+
+                log.LogInformation($"added question category with id='{question.Id}', text='{question.Text}', " +
+                    $"typeid='{question.TypeId}', publickey='{question.PublicKey}'");
             }
 
             return question;
@@ -727,6 +730,9 @@ namespace survey.services
                         .AddAsync(question);
 
                     await context.SaveChangesAsync();
+
+                    log.LogInformation($"added question category with id='{question.Id}', text='{question.Text}', " +
+                        $"typeid='{question.TypeId}', publickey='{question.PublicKey}'");
                 }
 
                 return question;
