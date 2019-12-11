@@ -35,6 +35,14 @@ namespace survey.services
                     .ThenInclude(x => x.Surveys)
                 .AsQueryable();
         }
+        public IQueryable<Client> GetClientsQuery(DateTime Created)
+        {
+            return context.Clients
+                .Include(x => x.Workspaces)
+                    .ThenInclude(x => x.Surveys)
+                .Where(x => x.Created == Created)
+                .AsQueryable();
+        }
         public IQueryable<Client> GetClientsQuerySimplified()
         {
             return context.Clients
@@ -174,6 +182,12 @@ namespace survey.services
             return context.Workspaces
                 .AsQueryable();
         }
+        public IQueryable<Workspace> GetWorkspacesQuery(DateTime Created)
+        {
+            return context.Workspaces
+                .Where(x => x.Created == Created)
+                .AsQueryable();
+        }
 
         public IEnumerable<Workspace> GetWorkspaces()
         {
@@ -310,7 +324,7 @@ namespace survey.services
                             .ThenInclude(x => x.Answers)
                 .AsQueryable();
         }
-        public IQueryable<Survey> GetSurveysQuery(DateTime Date, bool Equals = true)
+        public IQueryable<Survey> GetSurveysQuery(DateTime Created, bool Equals = true)
         {
             return Equals ?
                 context.Surveys
@@ -320,7 +334,7 @@ namespace survey.services
                             .ThenInclude(x => x.Type)
                                 .ThenInclude(x => x.Answers)
                     .AsQueryable()
-                    .Where(x => x.Created == Date)
+                    .Where(x => x.Created == Created)
                 : context.Surveys
                     .Include(x => x.Category)
                     .Include(x => x.SurveyQuestions)
@@ -328,7 +342,7 @@ namespace survey.services
                             .ThenInclude(x => x.Type)
                                 .ThenInclude(x => x.Answers)
                     .AsQueryable()
-                    .Where(x => x.Created > Date);
+                    .Where(x => x.Created > Created);
         }
         public IQueryable<Survey> GetSurveysWithWorkspace()
         {
@@ -652,6 +666,13 @@ namespace survey.services
         {
             return context.Questions
                 .Include(x => x.Type)
+                .AsQueryable();
+        }
+        public IQueryable<Question> GetQuestionsQuery(DateTime Created)
+        {
+            return context.Questions
+                .Include(x => x.Type)
+                .Where(x => x.Created == Created)
                 .AsQueryable();
         }
 
