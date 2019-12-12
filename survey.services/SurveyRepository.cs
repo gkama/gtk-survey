@@ -954,6 +954,17 @@ namespace survey.services
                 .SelectMany(x => x)
                 .AsQueryable();
         }
+        public IQueryable<SurveyQuestion> GetSurveyQuestionsQuery(DateTime Created)
+        {
+            return context.SurveyQuestions
+                .Include(x => x.Survey)
+                .Include(x => x.Question)
+                    .ThenInclude(x => x.Type)
+                .GroupBy(x => x.Survey)
+                .SelectMany(x => x)
+                .Where(x => x.Survey.Created == Created)
+                .AsQueryable();
+        }
 
         public IEnumerable<SurveyQuestion> GetSurveyQuestions()
         {
@@ -1039,6 +1050,17 @@ namespace survey.services
                 .Include(x => x.SurveyQuestion)
                     .ThenInclude(x => x.Question)
                 .Include(x => x.QuestionTypeAnswer)
+                .AsQueryable();
+        }
+        public IQueryable<Response> GetResponsesQuery(DateTime Created)
+        {
+            return context.Responses
+                .Include(x => x.SurveyQuestion)
+                    .ThenInclude(x => x.Survey)
+                .Include(x => x.SurveyQuestion)
+                    .ThenInclude(x => x.Question)
+                .Include(x => x.QuestionTypeAnswer)
+                .Where(x => x.SurveyQuestion.Survey.Created == Created)
                 .AsQueryable();
         }
         public IQueryable<Response> GetResponsesQuerySimplified()
