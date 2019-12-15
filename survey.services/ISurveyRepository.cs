@@ -17,6 +17,7 @@ namespace survey.services
 
         IQueryable<Workspace> GetWorkspacesQuery();
         IEnumerable<Workspace> GetWorkspaces();
+        IEnumerable<Workspace> GetWorkspaces(DateTime Created);
         Task<Workspace> GetWorkspaceAsync(int Id);
         Task<Workspace> GetWorkspaceAsync(Guid PublicKey);
 

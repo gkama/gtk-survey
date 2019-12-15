@@ -194,6 +194,11 @@ namespace survey.services
             return GetWorkspacesQuery()
                 .AsEnumerable();
         }
+        public IEnumerable<Workspace> GetWorkspaces(DateTime Created)
+        {
+            return GetWorkspacesQuery(Created)
+                .AsEnumerable();
+        }
         public async Task<Workspace> GetWorkspaceAsync(int Id)
         {
             return await GetWorkspacesQuery()
