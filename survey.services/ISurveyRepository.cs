@@ -56,6 +56,7 @@ namespace survey.services
         IEnumerable<QuestionTypeAnswer> GetQuestionTypeAnswers();
 
         IEnumerable<Response> GetResponses();
+        IEnumerable<Response> GetResponses(DateTime Created);
         IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId);
         Task<IEnumerable<Response>> GetResponsesBySurveyIdAsync(int SurveyId);
         Task<IEnumerable<object>> GetResponsesCustomBySurveyIdAsync(int SurveyId);

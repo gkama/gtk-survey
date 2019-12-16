@@ -1096,6 +1096,11 @@ namespace survey.services
             return GetResponsesQuery()
                 .AsEnumerable();
         }
+        public IEnumerable<Response> GetResponses(DateTime Created)
+        {
+            return GetResponsesQuery(Created)
+                .AsEnumerable();
+        }
         public IEnumerable<IResponse> GetResponsesBySurveyId(int SurveyId)
         {
             return GetResponsesQuery()
