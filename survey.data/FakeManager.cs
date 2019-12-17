@@ -130,7 +130,7 @@ namespace survey.data
                 new Survey
                 {
                     Id = 3001,
-                    Name = "Survey Test Empty",
+                    Name = "Survey test empty",
                     Created = DateTime.Now,
                     CreatedBy = "Georgi",
                     LastUpdated = DateTime.Now,

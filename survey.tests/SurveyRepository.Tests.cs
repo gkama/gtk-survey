@@ -68,7 +68,7 @@ namespace survey.tests
         }
         [Theory]
         [InlineData("Test survey")]
-        [InlineData("Survey Test")]
+        [InlineData("Survey test empty")]
         public async Task Survey_Exists_Name(string name)
         {
             var survey = await repo.GetSurveyAsync(name);
