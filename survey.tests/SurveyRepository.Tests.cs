@@ -37,10 +37,17 @@ namespace survey.tests
         }
 
         [Fact]
-        public void SurveyRepository_SurveyContextNull()
+        public void SurveyContextNull_ThrowsSurveyException()
         {
             //Asserts
             Assert.Throws<SurveyException>(() => new SurveyRepository(mockLogger, null));
+        }
+
+        [Fact]
+        public void ILoggerNull_ThrowsSurveyExceptiom()
+        {
+            //Asserts
+            Assert.Throws<SurveyException>(() => new SurveyRepository(null, context));
         }
 
 
