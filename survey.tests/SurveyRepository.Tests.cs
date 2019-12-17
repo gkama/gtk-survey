@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 using Xunit;
+using Moq;
 using Newtonsoft.Json;
 
 using survey.data;
@@ -15,9 +17,9 @@ namespace survey.tests
 {
     public class SurveyRepositoryTests
     {
-        public readonly SurveyContext context;
-
-        public readonly ISurveyRepository repo;
+        private readonly SurveyContext context;
+        private readonly ISurveyRepository repo;
+        private readonly ILogger<SurveyRepository> mockLogger;
 
         public SurveyRepositoryTests()
         {
@@ -29,8 +31,18 @@ namespace survey.tests
                 .UseFakeContext()
                 .Wait();
 
-            this.repo = new SurveyRepository(null, context);
+            this.mockLogger = Mock.Of<ILogger<SurveyRepository>>();
+
+            this.repo = new SurveyRepository(Mock.Of<ILogger<SurveyRepository>>(), context);
         }
+
+        [Fact]
+        public void SurveyRepository_SurveyContextNull()
+        {
+            //Asserts
+            Assert.Throws<SurveyException>(() => new SurveyRepository(mockLogger, null));
+        }
+
 
         /*
          * Survey
