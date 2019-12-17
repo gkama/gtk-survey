@@ -19,6 +19,13 @@ namespace survey.services
 
         public SurveyRepository(ILogger<SurveyRepository> log, SurveyContext context)
         {
+            if (log == null)
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"{typeof(ILogger<SurveyRepository>)} cannot be null");
+            else if (context == null)
+                throw new SurveyException(HttpStatusCode.InternalServerError,
+                    $"{typeof(SurveyContext)} cannot be null");
+
             this.log = log;
             this.context = context;
         }
