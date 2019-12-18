@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -79,11 +78,10 @@ namespace survey
             services.AddControllers();
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                .AddNewtonsoftJson(o =>
+                .AddJsonOptions(o =>
                 {
-                    o.SerializerSettings.Formatting = Formatting.Indented;
-                    o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    o.JsonSerializerOptions.WriteIndented = true;
+                    o.JsonSerializerOptions.IgnoreNullValues = true;
                 });
         }
 
